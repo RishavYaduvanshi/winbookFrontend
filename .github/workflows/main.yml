@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Authorizing Github action
-        with:
-          token: "${{ secrets.GITHUB_TOKEN }}"
-        uses: oleksiyrudenko/gha-git-credentials@v1
         
       - name: Deploy React code to GitHub Pages
         uses: amitsingh-007/deploy-to-github-pages@v1.2
