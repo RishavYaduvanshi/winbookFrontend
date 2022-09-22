@@ -12,7 +12,7 @@ if(localStorage.getItem('theme') === null){
 }
 
 root.render(
-  <Router>
+  <Router basename={process.env.PUBLIC_URL}>
     <App />
     <AlertContainer floatingTime={3000} />
   </Router>
