@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  frontend:
+    build:
+      context: .
+    image: winbook-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app/frontend
+
+    command: npm run serve
