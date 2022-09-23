@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 import { Box, Stack } from "@mui/material";
 
 
-export const Main = (props, {mode,setMode}) => {
+export const Main = ({mode,setMode}) => {
 
   var theme = localStorage.getItem("theme");
   document.title = "Winbook | Home";

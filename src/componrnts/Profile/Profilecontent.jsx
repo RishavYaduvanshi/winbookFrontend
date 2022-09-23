@@ -15,8 +15,11 @@ import 'react-custom-alert/dist/index.css';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Profilefeed from './Profilefeed';
+import { useNavigate } from 'react-router-dom';
+import { Stack } from '@mui/system';
 
 const Profilecontent = (props) => {
+  const history = useNavigate();
   var s = "";
   const Styledmodal = styled(Modal)({
     display: "flex",
@@ -75,6 +78,9 @@ const Profilecontent = (props) => {
           setcoverphoto(data.cover);
           setname(data.username);
         })
+      }
+      else{
+        history('/NotFound/404');
       }
     })
   }, [props.name]);
@@ -248,7 +254,19 @@ const Profilecontent = (props) => {
       <UserBox>
       <Share />
       </UserBox>
+      <Stack direction="row" spacing={2} justifyContent="space-between">
+      <Box sx={{
+        display:{xs:'none',sm:'block'},
+        width: '10%',
+      }} >
+      </Box>
       <Profilefeed id={id}/>
+      <Box sx={{
+        display:{xs:'none',sm:'block'},
+        width: '10%',
+      }} >
+      </Box>
+      </Stack>
       <Styledmodal
         open={open}
         onClose={e => setOpen(false)}

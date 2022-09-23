@@ -15,16 +15,21 @@ import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import { useNavigate } from 'react-router-dom';
 
+
 const Posts = (props) => {
+  //console.log(props);
+  const [like, setlike] = useState();
+  const [status, setstatus] = useState();
   const [profilephoto,setprofilephoto] = useState();
   const history = useNavigate();
 
   useEffect(() => {
+    setlike(props.ob.liked_cnt);
+    setstatus(props.ob.likedStatus);
     fetch('https://winbookbackend.d3m0n1k.engineer/user/f/'+props.ob.userName+'/',{
       method: 'GET',
       headers: {
         "Accept": "application/json",
-        "Authorization": "Token " + localStorage.getItem('authtoken')
       },
     }).then((response) => {
       if(response.status >= 200 && response.status < 300){
@@ -34,7 +39,7 @@ const Posts = (props) => {
       }
     })
   
-}, [props.ob]);
+}, [props]);
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -51,8 +56,7 @@ const Posts = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [like, setlike] = useState( props.ob.liked_cnt);
-  const [status, setstatus] = useState(props.ob.likedStatus);
+
 
 
   const deletePost = () => {
@@ -95,6 +99,13 @@ const Posts = (props) => {
     history('/'+props.ob.userName+'/');
   }
 
+  const copyFunction = (text) => {
+    navigator.clipboard.writeText(text);
+    setAnchorEl(false);
+    alert({message:'Link copied to clipboard',type:'success'});
+  }
+  var datetime = new Date(props.ob.updated_at);
+  // console.log(like);
   
 
   
@@ -112,13 +123,14 @@ const Posts = (props) => {
       }
       title={<Typography onClick={viewprofile}>{props.ob.userName}</Typography>
       }
-      subheader={props.ob.updated_at.split("T")[0]}
+      subheader={datetime.toLocaleString()}
     />
       <CardMedia
         component="img"
         height="20%"
         image={props.ob.url}
         alt={props.ob.userName}
+        onClick={() => history('/post/'+props.ob.pk+'/')}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
@@ -169,7 +181,7 @@ const Posts = (props) => {
         <Divider />
         <MenuItem >Send via chats</MenuItem>
         <Divider />
-        <MenuItem >Copy Link</MenuItem>
+        <MenuItem onClick={()=> copyFunction(window.location.origin+"/post/"+props.ob.pk+"/")} >Copy Link</MenuItem>
       </Menu>
 {/*Menu Item of post*/}
 

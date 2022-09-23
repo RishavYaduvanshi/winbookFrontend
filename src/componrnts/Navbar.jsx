@@ -241,7 +241,14 @@ const Navbar = ({ mode, setMode }) => {
         <NavLink to={"/home"} style={{color:'white',textDecoration:'none'}}><Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>WinBook</Typography></NavLink>
         {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-         <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent:"right"}}><MoreVertIcon  onClick={toggleDrawer(anchor, true)}/> <Laptop /></Box>
+         <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent:"right"}}><MoreVertIcon  onClick={toggleDrawer(anchor, true)}/> <Laptop onClick={()=>{
+          if(tkn!==null){
+          history('/home');
+          }
+          else{
+            history('/');
+          }
+         }}/></Box>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
