@@ -71,7 +71,7 @@ const Profilecontent = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
-          console.log(data);
+          //console.log(data);
           setbio(data.bio);
           setid(data.id);
           setprofilephoto(data.dp);

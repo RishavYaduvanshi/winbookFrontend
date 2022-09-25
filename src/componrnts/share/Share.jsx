@@ -74,7 +74,7 @@ export default function Share() {
           {/* <Avatar className="shareProfileImg" /> */}
           <img src={localStorage.getItem('profile')} alt="" className="shareProfileImg" />
           <InputBase
-            placeholder="What's in your mind ?"
+            placeholder="What's on your mind ?"
             className="shareInput"
             onChange={handlechange}
           />
