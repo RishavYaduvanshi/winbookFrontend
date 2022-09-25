@@ -2,7 +2,6 @@ import { Box } from '@mui/material'
 import Posts from './Posts'
 import { useEffect, useState} from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
-import {styled} from '@mui/material';
 import React from 'react'
 
 var today = new Date();
@@ -12,14 +11,6 @@ var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
 
 const Feed = () => { 
-
-
-const UserBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  gap: "100px",
-  alignItems: "center",
-justifyContent: "center",
-}));
 
 var [users, setUsers] = useState([]);
 
@@ -42,7 +33,7 @@ useEffect(() => {
 
 
 
-if (users.length===0) return <UserBox><CircularProgress /></UserBox>;
+if (users.length===0) return <Box flex={4} p={2}><CircularProgress/></Box>;
 
  return (
   <Box flex={4} p={2}>

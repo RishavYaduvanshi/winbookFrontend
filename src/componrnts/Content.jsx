@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import  Unauthorized  from './Unauthorized';
 
 
-export const Content = (props, {mode,setMode}) => {
+export const Content = ({mode,setMode}) => {
 
 
   const[logindata,setLogindata] = useState([]);

@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Posts = (props) => {
-  //console.log(props);
+  // console.log(props.ob.user);
   const [like, setlike] = useState();
   const [status, setstatus] = useState();
   const [profilephoto,setprofilephoto] = useState();
@@ -34,12 +34,13 @@ const Posts = (props) => {
     }).then((response) => {
       if(response.status >= 200 && response.status < 300){
         response.json().then((data) => {
+          //console.log(data);
           setprofilephoto(data.dp);
         })
       }
     })
   
-}, [props]);
+}, [props.ob.userName,props.ob.liked_cnt,props.ob.likedStatus]);
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
