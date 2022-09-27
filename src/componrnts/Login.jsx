@@ -16,6 +16,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { InputAdornment } from '@mui/material';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css'; 
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 export const Login = ({mode,setMode}) => {
@@ -27,6 +28,7 @@ export const Login = ({mode,setMode}) => {
 
   const history = useNavigate();  
   const [passwordType, setPasswordType] = React.useState("password");
+  const [state, setstate] = React.useState(false);
   const togglePassword =()=>{
     if(passwordType==="password")
     {
@@ -37,13 +39,13 @@ export const Login = ({mode,setMode}) => {
   }
   
   const handleSubmit = async (event) => {
+    setstate(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const cred  = JSON.stringify({
       username: data.get('email'),
       password: data.get('password'),
     });
-    //console.log(cred);
     fetch('https://winbookbackend.d3m0n1k.engineer/login/', {
       method: 'POST',
       headers: {
@@ -99,6 +101,7 @@ export const Login = ({mode,setMode}) => {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+             {state?<LinearProgress/>:<></>}
               <TextField
                 margin="normal"
                 required
@@ -136,8 +139,10 @@ export const Login = ({mode,setMode}) => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
+                
                 Sign In
               </Button>
+              
               <Grid container>
                 <Grid item xs>
                   <NavLink to={'/forgot'} variant="body2">
