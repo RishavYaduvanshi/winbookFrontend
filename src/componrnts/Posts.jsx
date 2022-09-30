@@ -157,7 +157,7 @@ const Posts = (props) => {
   }
 
   const pull_data1 = (data) => {
-    props.func(data);
+    props.func(false);
   }
 
 

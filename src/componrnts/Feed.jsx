@@ -16,6 +16,7 @@ var [users, setUsers] = useState([]);
 const [status, setstatus] = useState();
 
 const pull_data = (data) => {
+  // console.log("DATA: ",data);
   setstatus(data); 
 }
 
