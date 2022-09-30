@@ -1,7 +1,8 @@
 import { AccountBox, Article, Group, Home, ModeNight, Person, Settings, Storefront } from '@mui/icons-material'
-import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
+import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -52,6 +53,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const Sidebar = ({mode,setMode}) => {
   const history = useNavigate();
+  var Notifications=0;
 
   return (
     <Box 
@@ -98,9 +100,9 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Storefront/>
+              <Badge badgeContent={Notifications} color="error" > <NotificationsIcon/></Badge>
               </ListItemIcon>
-              <ListItemText primary="Market" />
+              <ListItemText primary="Alerts" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

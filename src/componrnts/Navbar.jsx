@@ -1,5 +1,5 @@
 import { Laptop } from '@mui/icons-material';
-import { AppBar, styled, Toolbar, Typography, Box, InputBase, Menu, MenuItem, Switch } from '@mui/material'
+import { AppBar, styled, Toolbar, Typography, Box, InputBase, Menu, MenuItem, Switch, Badge, IconButton } from '@mui/material'
 import { AccountBox, Article, Group, Home, Person, Settings, Storefront,ModeNight } from '@mui/icons-material'
 import React, { useEffect,useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const StyledToolBar = styled(Toolbar)({
   display: "flex",
@@ -77,6 +78,7 @@ const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }));
+var Noticications=0;
 
 const Navbar = ({ mode, setMode }) => {
 
@@ -145,9 +147,9 @@ const Navbar = ({ mode, setMode }) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Storefront/>
+              <Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge>
               </ListItemIcon>
-              <ListItemText primary="Market" />
+              <ListItemText primary="Alerts" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -204,6 +206,13 @@ const Navbar = ({ mode, setMode }) => {
     history("/");
     alert({message:'Logged Out!', type:'info'})
   }
+
+  const logout1 = () => {
+    localStorage.clear();
+    history("/");
+    alert({message:'Logged Out! You can now Log In to a different Account', type:'info'})
+  }
+
   const profile = () => {
     history('/profile');
   }
@@ -261,13 +270,21 @@ const Navbar = ({ mode, setMode }) => {
         <Search>
           <InputBase placeholder='Search...' />
         </Search>
-        <Box sx={{ display: { xs: 'none', sm: 'block' } }}><img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
+        {tkn===null?<Typography variant='span'>Not Logged In</Typography>:
+        <>
+        <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection:"row" }}>
+          <Box>
+            <IconButton sx={{marginRight:"9px", color:"white"}}><Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge></IconButton>
+          </Box>
+          <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
           }}/></Box>
+          </>}
         <UserBox onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
         }}>
-          {tkn===null?<Typography variant='span'>Forgot Password</Typography>:<Box sx={{ display: { xs: 'block', sm: 'none' } }}><img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
+          {tkn===null?<Typography variant='span'>Not Logged In</Typography>:<Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
+            <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
           }}/></Box>}
         </UserBox>
@@ -309,7 +326,7 @@ const Navbar = ({ mode, setMode }) => {
         <img src={profilephoto} alt="profile pic" style={{ width: 30, height: 30, borderRadius: 20}}/> <Typography sx={{marginLeft:"10px"}}>{localStorage.getItem('user')}</Typography>
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem onClick={logout1}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
