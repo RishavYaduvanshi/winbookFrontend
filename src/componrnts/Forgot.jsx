@@ -1,4 +1,4 @@
-import { Typography, Box, TextField, InputAdornment, Button, Card } from '@mui/material'
+import { Typography, Box, TextField, InputAdornment, Button, Card, IconButton } from '@mui/material'
 import MailIcon from '@mui/icons-material/Mail';
 import KeyIcon from '@mui/icons-material/Key';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -8,6 +8,8 @@ import Navbar from './Navbar';
 import { useSearchParams } from 'react-router-dom';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
+import LinearProgress from '@mui/material/LinearProgress';
+
 
 const Forgot = ({ mode, setMode }) => {
   document.title = "Winbook | Forgot Password";
@@ -17,6 +19,7 @@ const Forgot = ({ mode, setMode }) => {
   const [passwordInput1, setPasswordInput1] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [state, setstate] = useState(false);
 
 
   if (auth !== 'undefined' || eml !== 'undefined') {
@@ -43,8 +46,10 @@ const Forgot = ({ mode, setMode }) => {
     setPasswordType("password")
   }
   const resetpass = () => {
+    setstate(true);
     if (passwordInput !== passwordInput1) {
       alert({ message: 'Passwords do not match', type: 'warning' });
+      setstate(false);
       return;
     }
     fetch("https://winbookbackend.d3m0n1k.engineer/forgot/", {
@@ -65,14 +70,20 @@ const Forgot = ({ mode, setMode }) => {
           alert({ message: data.error, type: 'error' });
         } else {
           alert({ message: 'Password reset successful', type: 'success' });
+          setstate(false);
           window.location.href = "/";
         }
       });
   }
   const resetp = (event) => {
+    setstate(true);
     var fd = {};
     fd.email = eml;
-    console.log(JSON.stringify(fd));
+    if(eml===""){
+      alert({ message: 'Please enter your email', type: 'warning' });
+    }
+    else{
+    //console.log(JSON.stringify(fd));
     fetch("https://winbookbackend.d3m0n1k.engineer/forgot/", {
       method: "POST",
       // headers: {
@@ -83,13 +94,15 @@ const Forgot = ({ mode, setMode }) => {
       .then((data) => {
         if (data.error) {
           alert({ message: data.error, type: 'error' });
-
+          setstate(false);
         }
         else {
           alert({ message: 'Confirmation email sent', type: 'success' });
-
+          setstate(false);
+          document.getElementById("email").value = "";
         }
       });
+    }
   }
 
   return (
@@ -134,7 +147,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <VisibilityIcon onClick={togglePassword} /> : <VisibilityOffIcon onClick={togglePassword} />}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton>: <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -149,7 +162,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <VisibilityIcon onClick={togglePassword} /> : <VisibilityOffIcon onClick={togglePassword} />}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> :<IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -158,6 +171,7 @@ const Forgot = ({ mode, setMode }) => {
               <Button variant="contained" color="primary" sx={{ marginBottom: 7 }} onClick={resetpass}>
                 Change Password
               </Button>
+              {state?<LinearProgress/>:<></>}
             </> : <>
               <TextField id="email" type="email" name="email" onChange={emailchange} label="Enter your Email" variant="outlined" required fullWidth
                 InputProps={{
@@ -176,7 +190,7 @@ const Forgot = ({ mode, setMode }) => {
                 marginBottom: 7,
               }} onClick={resetp}>
                 Submit
-              </Button></>}
+              </Button>{state?<LinearProgress/>:<></>}</>}
           </Box>
         </Card>
       </Box>
@@ -218,7 +232,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <VisibilityIcon onClick={togglePassword} /> : <VisibilityOffIcon onClick={togglePassword} />}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> :<IconButton> <VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -233,7 +247,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <VisibilityIcon onClick={togglePassword} /> : <VisibilityOffIcon onClick={togglePassword} />}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton>: <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -242,6 +256,7 @@ const Forgot = ({ mode, setMode }) => {
               <Button variant="contained" color="primary" sx={{ marginBottom: 7 }} onClick={resetpass}>
                 Change Password
               </Button>
+              {state?<LinearProgress/>:<></>}
             </> : <>
               <TextField id="email" name="email" type="email" onChange={emailchange} label="Enter your Email" variant="outlined" required fullWidth
                 InputProps={{
@@ -260,7 +275,7 @@ const Forgot = ({ mode, setMode }) => {
                 marginBottom: 7,
               }} onClick={resetp}>
                 Submit
-              </Button></>}
+              </Button>{state?<LinearProgress/>:<></>}</>}
           </Box>
         </Card>
       </Box>

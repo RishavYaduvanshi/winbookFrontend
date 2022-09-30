@@ -270,7 +270,7 @@ const Navbar = ({ mode, setMode }) => {
         <Search>
           <InputBase placeholder='Search...' />
         </Search>
-        {tkn===null?<Typography variant='span'>Not Logged In</Typography>:
+        {tkn===null?<Typography sx={{display:{ xs: 'none', sm: 'flex' }}} variant='span'>Not Logged In</Typography>:
         <>
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection:"row" }}>
           <Box>
@@ -283,7 +283,7 @@ const Navbar = ({ mode, setMode }) => {
         <UserBox onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
         }}>
-          {tkn===null?<Typography variant='span'>Not Logged In</Typography>:<Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
+          {tkn===null?<Typography sx={{ display: { xs: 'block', sm: 'flex' } }} variant='span'>Not Logged In</Typography>:<Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
             <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
           }}/></Box>}

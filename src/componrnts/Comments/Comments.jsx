@@ -11,7 +11,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { alert } from 'react-custom-alert';
 
 export default function Comments(props) {
-  console.log("sent props are : ",props);
+  //console.log("sent props are : ",props);
   const history = useNavigate();
   const [dp, setdp] = useState("https://winbookbackend.d3m0n1k.engineer/static/authn/dp.png");
   const [userName, setuserName] = useState();
@@ -27,7 +27,7 @@ export default function Comments(props) {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        //console.log(data);
         setuserName(data.username);
         setdp(data.dp);
       });
@@ -53,7 +53,7 @@ export default function Comments(props) {
     })
       .then(data => {
         if(data.status === 204){
-          console.log(data);
+          //console.log(data);
           props.funcn(true);
           alert({message:'Comment deleted',type:'success'});
         }
