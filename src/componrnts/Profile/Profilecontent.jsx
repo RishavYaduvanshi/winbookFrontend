@@ -9,7 +9,6 @@ import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Badge from '@mui/material/Badge';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-//https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import Menu from '@mui/material/Menu';
@@ -145,7 +144,7 @@ const Profilecontent = (props) => {
     }).then((response) =>{
       if(response.status >= 200 && response.status < 300){
         response.json().then((data) => {
-          alert({ message: 'Profile Picture Removed', type: 'success' });
+          alert({ message: 'Profile Picture Removed', type: 'error' });
           window.location.reload();
         })
       }  

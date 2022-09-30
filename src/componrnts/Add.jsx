@@ -1,13 +1,14 @@
-import { Avatar, Button, ButtonGroup, Fab, Modal, Stack, styled, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Button, ButtonGroup, Fab, Menu, Modal, Stack, styled, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 import AddIcon from '@mui/icons-material/Add';
-import PersonIcon from '@mui/icons-material/Person';
 import { Image } from '@mui/icons-material';
 import Paper from '@mui/material/Paper';
 import Badge from '@mui/material/Badge';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css'; 
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import Picker from 'emoji-picker-react';
 
 const Styledmodal = styled(Modal)({
   display:"flex",
@@ -27,6 +28,18 @@ const Add = () => {
   const [image,setImage] = useState();
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState();
+  
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     if(image){
@@ -87,6 +100,10 @@ const createpost = () => {
     })
   }
 
+  const onEmojiClick = (emojiObject) => {
+    document.getElementById("caption").value += emojiObject.emoji;
+  };
+
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
     <Tooltip title="Create new Post" sx={{position:"fixed",bottom:20,left:10}}>
@@ -100,15 +117,15 @@ const createpost = () => {
   aria-labelledby="modal-modal-title"
   aria-describedby="modal-modal-description"
 >
-  <Box bgcolor={"background.default"} color={"text.primary"} height={300} p={3} borderRadius={5} width={400}>
+  <Box bgcolor={"background.default"} color={"text.primary"} height={320} p={3} borderRadius={5} width={400}>
     <Typography variant='h6' color="gray" textAlign="center">Create Post</Typography>
     <Userbox>
-      <Avatar
-      sx={{ bgcolor: "lightcoral",height:32, width:32}} ><PersonIcon/></Avatar>
+      <img src={localStorage.getItem('profile')} height="40px" width="40px" style={{borderRadius:"50%"}}/>
       <Typography variant='span' fontWeight={500}>{localStorage.getItem("user")}</Typography>
     </Userbox>
     <TextField
-          id="standard-multiline-static"
+          id="caption"
+          name="caption"
           multiline
           rows={3}
           placeholder="What's on your Mind?"
@@ -121,8 +138,10 @@ const createpost = () => {
         <Stack direction={"row"} mt={1} mb={4} gap={1}>
         <label  htmlFor="formId">
          <input name="file" accept='image/*' type="file" id="formId" hidden onChange={browse} />
-         <Image color="secondary" />  
-     </label>
+         <Image color="secondary" /> 
+     </label><EmojiEmotionsIcon color="error" onClick={
+      handleClick
+     } />
      {/* <EmojiEmotions color='primary'/>  <VideoCameraBack color='success'/>  <PersonAdd color='error'/> */}
      {preview ? <Badge badgeContent={'x'} color="error" onClick={()=>{
         setImage(null);
@@ -135,6 +154,17 @@ const createpost = () => {
         </ButtonGroup>
   </Box>
 </Styledmodal>
+<Menu
+id="basic-menu"
+anchorEl={anchorEl}
+open={open1}
+onClose={handleClose}
+MenuListProps={{
+  'aria-labelledby': 'basic-button',
+}}
+>
+<Picker onEmojiClick={onEmojiClick} pickerStyle={{width:"100%"}}/>
+</Menu>
       </Box>
       );
 }

@@ -13,7 +13,7 @@ import Typography from '@mui/material/Typography';
 import { NavLink, useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import { InputAdornment } from '@mui/material';
+import { IconButton, InputAdornment } from '@mui/material';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css'; 
 import LinearProgress from '@mui/material/LinearProgress';
@@ -124,7 +124,7 @@ export const Login = ({mode,setMode}) => {
                 InputProps={{
                   endAdornment: (
                       <InputAdornment position="end">
-                         {passwordType==="password"?<VisibilityIcon onClick={togglePassword}/>:<VisibilityOffIcon onClick={togglePassword}/>}
+                         {passwordType==="password"?<IconButton><VisibilityIcon onClick={togglePassword}/></IconButton>:<IconButton><VisibilityOffIcon onClick={togglePassword}/></IconButton>}
                           </InputAdornment>
                   )
                 }}

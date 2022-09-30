@@ -13,6 +13,11 @@ today = dd + '/' + mm + '/' + yyyy;
 const Feed = () => { 
 
 var [users, setUsers] = useState([]);
+const [status, setstatus] = useState();
+
+const pull_data = (data) => {
+  setstatus(data); 
+}
 
 useEffect(() => {
   fetch('https://winbookbackend.d3m0n1k.engineer/post/',{
@@ -29,7 +34,7 @@ useEffect(() => {
       })
     }
   })
-}, []);
+}, [status]);
 
 
 
@@ -39,7 +44,7 @@ if (users.length===0) return <Box flex={4} p={2}><CircularProgress/></Box>;
   <Box flex={4} p={2}>
     {
       users.map((post) => {
-        return <Posts ob={post} />
+        return <Posts ob={post} func={pull_data} />
       })
     }
 </Box>

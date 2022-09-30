@@ -9,38 +9,35 @@ import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { Divider } from '@mui/material';
-import { Menu, MenuItem } from '@mui/material';
+import { Divider, InputAdornment } from '@mui/material';
+import { Menu, MenuItem, styled } from '@mui/material';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import { useNavigate } from 'react-router-dom';
+import CommentIcon from '@mui/icons-material/Comment';
+import TextField from '@mui/material/TextField';
+import SendIcon from '@mui/icons-material/Send';
+import Comments from './Comments/Comments';
+import { Box } from '@mui/system';
+
+const StyledTextField = styled(TextField)({
+  fullWidth: true,
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderRadius: 50,
+    },
+  },
+
+});
 
 
 const Posts = (props) => {
-  // console.log(props.ob.user);
-  const [like, setlike] = useState();
-  const [status, setstatus] = useState();
-  const [profilephoto,setprofilephoto] = useState();
+  //console.log(props.ob);
+  const [like, setlike] = useState(props.ob.liked_cnt);
+  const [status, setstatus] = useState(props.ob.likedStatus);
   const history = useNavigate();
-
-  useEffect(() => {
-    setlike(props.ob.liked_cnt);
-    setstatus(props.ob.likedStatus);
-    fetch('https://winbookbackend.d3m0n1k.engineer/user/f/'+props.ob.userName+'/',{
-      method: 'GET',
-      headers: {
-        "Accept": "application/json",
-      },
-    }).then((response) => {
-      if(response.status >= 200 && response.status < 300){
-        response.json().then((data) => {
-          //console.log(data);
-          setprofilephoto(data.dp);
-        })
-      }
-    })
-  
-}, [props.ob.userName,props.ob.liked_cnt,props.ob.likedStatus]);
+  const [state, setstate] = useState(false);
+  const [com, setcom] = useState("");
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -57,6 +54,7 @@ const Posts = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
 
 
@@ -105,9 +103,45 @@ const Posts = (props) => {
     setAnchorEl(false);
     alert({message:'Link copied to clipboard',type:'success'});
   }
-  var datetime = new Date(props.ob.updated_at);
+  var datetime = new Date(props.ob.created_at);
   // console.log(like);
   
+  const changestate = () => {
+    if(state === true){
+      setstate(false);
+    }
+    else{
+      setstate(true);
+    }
+  }
+  
+  const commentget = (e) => {
+    //console.log(e.target.value);
+    setcom(e.target.value)
+  }
+
+  const postcomment = (e) => {
+    e.preventDefault();
+    const comm = JSON.stringify({
+      comment: com
+    });
+    fetch('https://winbookbackend.d3m0n1k.engineer/post/'+props.ob.pk+'/comment/', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Token " + localStorage.getItem('authtoken'),
+        "Content-Type": "application/json"
+      },
+      body: comm,
+    }).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        setcom("");
+        setstate(false);
+        props.func(true);
+        alert({message:'Comment posted',type:'success'});
+      }
+    })
+  }
 
   
 
@@ -115,7 +149,7 @@ const Posts = (props) => {
     <Card sx={{ margin: 0.5 }}>
       <CardHeader
       avatar={
-        <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile}/>
+        <img src={props.ob.userDp} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile}/>
       }
       action={
         <IconButton aria-label="settings">
@@ -134,9 +168,10 @@ const Posts = (props) => {
         onClick={() => history('/post/'+props.ob.pk+'/')}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body1" fontWeight={500} color="text.secondary">
           {props.ob.caption}
         </Typography>
+        <br/>
         <Divider />
         <Typography variant="body2" color="text.secondary" marginTop={1} marginBottom={0}>
           Liked By <strong>{like}</strong> People in total
@@ -144,17 +179,47 @@ const Posts = (props) => {
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          {status === true ? <><Favorite sx={{ color: "red" }} onClick={likePost} /></> : <><FavoriteBorder onClick={likePost} /></>}
+          {status === true ? <><Favorite sx={{ color: "red" }} onClick={likePost} /></> : <><FavoriteBorder color="primary" onClick={likePost} /></>}
           {/* <Checkbox icon={<FavoriteBorder />}  checkedIcon={<Favorite sx={{color:"red"}}/>} onClick={likePost}/> */}
           <h6>{like}</h6>
         </IconButton>
+        <IconButton aria-label="comment">
+          <CommentIcon color="primary" onClick={changestate}/>
+        </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon />
+          <ShareIcon color="primary"/>
         </IconButton>
       </CardActions>
+      <Divider/>
+      {props.ob.comments.length!==0 ? <Box sx={{display:"flex", width:"100%", justifyContent:"flex-end", alignItems:"flex-end"}}><IconButton onClick={() => history('/post/'+props.ob.pk+'/')} sx={{fontSize:16}}>View all {props.ob.comments.length} Comments</IconButton></Box>:<Box sx={{display:"flex", width:"100%", justifyContent:"flex-end", alignItems:"flex-end"}}><Typography fontWeight={300}>No Comments Yet !</Typography></Box>}
+      {state===true?<CardContent>
+        <StyledTextField id="filled-basic" component='form' onSubmit={postcomment} noValidate fullWidth placeholder="Add your comment" color='primary'  variant="outlined" onChange={commentget}
+        InputProps={{
+          endAdornment: (
+              <InputAdornment position="end">
+                 <IconButton type='submit' ><SendIcon color='primary'/></IconButton>
+                  </InputAdornment>
+          )
+        }}
+        />
+      </CardContent>:<></>}
 
-
-
+      {
+        props.st?
+        <Typography variant="body2" color="text.secondary">
+          {props.ob.comments.map((ob) => {
+            return (
+              <div>
+                <Comments user={ob.user} comment={ob.comment} />
+              </div>
+            )
+          })}
+        </Typography>:
+        <>
+        {props.ob.comments.length===0?<></>: 
+        <Comments user={props.ob.comments[(props.ob.comments.length)-1].user} comment={props.ob.comments[(props.ob.comments.length)-1].comment}/>
+      }</>
+      }
 
 {/*Menu Item of post*/}
       <Menu
