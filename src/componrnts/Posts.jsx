@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { Divider, InputAdornment } from '@mui/material';
+import { Divider, InputAdornment, ListItemIcon } from '@mui/material';
 import { Menu, MenuItem, styled } from '@mui/material';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
@@ -19,6 +19,11 @@ import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
 import Comments from './Comments/Comments';
 import { Box } from '@mui/system';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import MobileScreenShareIcon from '@mui/icons-material/MobileScreenShare';
+import ChatIcon from '@mui/icons-material/Chat';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 
 const StyledTextField = styled(TextField)({
   fullWidth: true,
@@ -32,12 +37,13 @@ const StyledTextField = styled(TextField)({
 
 
 const Posts = (props) => {
-  //console.log(props.ob);
+  //console.log("POST DATA: ",props);
   const [like, setlike] = useState(props.ob.liked_cnt);
   const [status, setstatus] = useState(props.ob.likedStatus);
   const history = useNavigate();
   const [state, setstate] = useState(false);
   const [com, setcom] = useState("");
+  const [del, setdel] = useState(false);
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -46,6 +52,7 @@ const Posts = (props) => {
   today = dd + '/' + mm + '/' + yyyy;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  var child_comments = [];
 
 
   const handleClick = (event) => {
@@ -140,8 +147,20 @@ const Posts = (props) => {
         props.func(true);
         alert({message:'Comment posted',type:'success'});
       }
+      else{
+        alert({message:'The comment ws not posted due to some error OR You are not Logged In!',type:'error'});
+      }
     })
   }
+  const pull_data = (data) => {
+    setstatus(data); 
+  }
+
+  const pull_data1 = (data) => {
+    props.func(data);
+  }
+
+
 
   
 
@@ -187,7 +206,7 @@ const Posts = (props) => {
           <CommentIcon color="primary" onClick={changestate}/>
         </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon color="primary"/>
+          <ShareIcon color="primary" onClick={()=> copyFunction(window.location.origin+"/post/"+props.ob.pk+"/")} />
         </IconButton>
       </CardActions>
       <Divider/>
@@ -208,16 +227,18 @@ const Posts = (props) => {
         props.st?
         <Typography variant="body2" color="text.secondary">
           {props.ob.comments.map((ob) => {
+            var a = <Comments user={ob.user} comment={ob.comment} func={pull_data} funcn={pull_data1} pk={ob.pk}/>
+            console.log(child_comments);
             return (
               <div>
-                <Comments user={ob.user} comment={ob.comment} />
+                {a}
               </div>
             )
           })}
         </Typography>:
         <>
         {props.ob.comments.length===0?<></>: 
-        <Comments user={props.ob.comments[(props.ob.comments.length)-1].user} comment={props.ob.comments[(props.ob.comments.length)-1].comment}/>
+        <Comments user={props.ob.comments[(props.ob.comments.length)-1].user} comment={props.ob.comments[(props.ob.comments.length)-1].comment} func={pull_data} funcn={pull_data1} pk={props.ob.comments[(props.ob.comments.length)-1].pk}/>
       }</>
       }
 
@@ -238,22 +259,23 @@ const Posts = (props) => {
         }}
       >
         {props.ob.userName === localStorage.getItem('user') ? <div>
-          <MenuItem >Edit Post</MenuItem>
+          <MenuItem ><ListItemIcon><EditIcon/></ListItemIcon>Edit Post</MenuItem>
           <Divider />
-          <MenuItem onClick={deletePost}>Delete Post</MenuItem>
+          <MenuItem onClick={deletePost}><ListItemIcon><DeleteForeverIcon/></ListItemIcon>Delete Post</MenuItem>
           <Divider />
         </div> : <div></div>}
-        <MenuItem >Quick Share</MenuItem>
+        <MenuItem ><ListItemIcon><MobileScreenShareIcon/></ListItemIcon>Quick Share</MenuItem>
         <Divider />
-        <MenuItem >Send via chats</MenuItem>
+        <MenuItem ><ListItemIcon><ChatIcon/></ListItemIcon>Send via chats</MenuItem>
         <Divider />
-        <MenuItem onClick={()=> copyFunction(window.location.origin+"/post/"+props.ob.pk+"/")} >Copy Link</MenuItem>
+        <MenuItem onClick={()=> copyFunction(window.location.origin+"/post/"+props.ob.pk+"/")} ><ListItemIcon><FileCopyIcon/></ListItemIcon>Copy Link</MenuItem>
       </Menu>
 {/*Menu Item of post*/}
 
 
     </Card>
   );
+console.log(child_comments);
 }
 
 export default Posts
