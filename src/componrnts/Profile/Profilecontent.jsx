@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material'
+import { Box, Button, LinearProgress } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Share from '../share/Share'
 import { Modal, styled, Typography, TextField, ButtonGroup } from '@mui/material';
@@ -51,6 +51,8 @@ const Profilecontent = (props) => {
   var [coverphoto, setcoverphoto] = useState();
   const [name, setname] = useState("");
   const [id, setid] = useState();
+  const [state, setstate] = useState(false);
+  const [reload, setreload] = useState(false);
 
 
   // if(localStorage.getItem('user') === name){
@@ -82,7 +84,7 @@ const Profilecontent = (props) => {
         history('/NotFound/404');
       }
     })
-  }, [props.name]);
+  }, [props.name,reload]);
   
 
 
@@ -145,13 +147,14 @@ const Profilecontent = (props) => {
       if(response.status >= 200 && response.status < 300){
         response.json().then((data) => {
           alert({ message: 'Profile Picture Removed', type: 'error' });
-          window.location.reload();
+          setreload(!reload);
         })
       }  
     })
   }
 
   const updateProfile = (event) => {
+    setstate(true);
     const bdy = new FormData()
     bdy.append('dp', image);
 
@@ -167,9 +170,12 @@ const Profilecontent = (props) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
           alert({ message: 'Profile Picture Updated', type: 'success' });
-          window.location.reload();
           setOpen1(false);
           setPreview(null);
+          setstate(false);
+          setAnchorEl(null);
+          setreload(!reload);
+          props.func(true);
         })
       }
       else {
@@ -189,6 +195,7 @@ const Profilecontent = (props) => {
 
 
   const updatecover = (event) => {
+    setstate(true);
     event.preventDefault();
     const bdy = new FormData()
     bdy.append('cover', image);
@@ -205,9 +212,11 @@ const Profilecontent = (props) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
           alert({ message: 'Cover Picture Updated', type: 'success' });
-          window.location.reload();
           setOpen2(false);
+          setOpen(false);
           setPreview(null);
+          setstate(false);
+          setreload(!reload);
         })
       }
       else {
@@ -251,7 +260,7 @@ const Profilecontent = (props) => {
         </Box>
       </Box>
       <UserBox>
-      <Share />
+      <Share reload={reload} />
       </UserBox>
       <Stack direction="row" spacing={2} justifyContent="space-between">
       <Box sx={{
@@ -259,7 +268,7 @@ const Profilecontent = (props) => {
         width: '10%',
       }} >
       </Box>
-      <Profilefeed id={id}/>
+      <Profilefeed id={id} reload={reload}/>
       <Box sx={{
         display:{xs:'none',sm:'block'},
         width: '10%',
@@ -314,6 +323,7 @@ const Profilecontent = (props) => {
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
             <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
           </ButtonGroup>
+          {state?<LinearProgress />:<></>}
         </Box>
       </Styledmodal>
 
@@ -338,6 +348,7 @@ const Profilecontent = (props) => {
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
             <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
           </ButtonGroup>
+          {state?<LinearProgress />:<></>}
         </Box>
       </Styledmodal>
 

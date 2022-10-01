@@ -11,8 +11,9 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Picker from 'emoji-picker-react';
 
 
-export default function Share() {
+export default function Share(props) {
   const history = useNavigate();
+  var profile = localStorage.getItem('profile');
 
   const [image, setImage] = useState();
   const [caption, setCaption] = useState("");
@@ -86,12 +87,16 @@ export default function Share() {
     setAnchorEl(null);
   };
 
+  useEffect(() => {
+    profile = localStorage.getItem('profile');
+  }, [props.reload])
+
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
           {/* <Avatar className="shareProfileImg" /> */}
-          <img src={localStorage.getItem('profile')} alt="" className="shareProfileImg" />
+          <img src={profile} alt="profile pic" className="shareProfileImg" />
           <InputBase
             placeholder="What's on your mind ?"
             className="shareInput"

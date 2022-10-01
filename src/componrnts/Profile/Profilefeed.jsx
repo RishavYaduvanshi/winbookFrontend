@@ -24,6 +24,12 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 
 var [users, setUsers] = useState([]);
+const [status, setstatus] = useState();
+
+const pull_data = (data) => {
+ // console.log("DATA: ",data);
+  setstatus(data); 
+}
 
 useEffect(() => {
   window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -44,7 +50,7 @@ useEffect(() => {
       })
     }
   })
-}, [props.id]);
+}, [props.id,props.reload,status]);
 
 
 
@@ -54,7 +60,7 @@ if (users.length===0) return <UserBox><CircularProgress /></UserBox>;
   <Box flex={3} p={2}>
     {
       users.map((post) => {
-        return <Posts ob={post} />
+        return <Posts ob={post} func={pull_data} />
       })
     }
 </Box>

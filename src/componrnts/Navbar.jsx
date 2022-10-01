@@ -80,7 +80,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 }));
 var Noticications=0;
 
-const Navbar = ({ mode, setMode }) => {
+const Navbar = (props) => {
 
 
   const [state, setState] = React.useState({
@@ -173,12 +173,12 @@ const Navbar = ({ mode, setMode }) => {
               <ListItemIcon>
                 <ModeNight/>
               </ListItemIcon>
-              {mode==='dark'?<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e=>{
-                setMode(mode === "light"? "dark":"light");
-                localStorage.setItem("theme", mode === "light"? "dark":"light");
+              {props.mode==='dark'?<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e=>{
+                props.setMode(props.mode === "light"? "dark":"light");
+                localStorage.setItem("theme", props.mode === "light"? "dark":"light");
                 }}/>:<MaterialUISwitch sx={{ m: 1 }} onChange={e=>{
-                  setMode(mode === "light"? "dark":"light");
-                  localStorage.setItem("theme", mode === "light"? "dark":"light");
+                  props.setMode(props.mode === "light"? "dark":"light");
+                  localStorage.setItem("theme", props.mode === "light"? "dark":"light");
                 }}/>}
             </ListItemButton>
           </ListItem>
@@ -191,7 +191,7 @@ const Navbar = ({ mode, setMode }) => {
   var background = ""; 
   const [Open, setOpen] = useState(false);
   const [profilephoto,setprofilephoto] = useState();
-  if(mode==="light")
+  if(props.mode==="light")
   {
     background = "white";
   }
@@ -241,7 +241,7 @@ const Navbar = ({ mode, setMode }) => {
         })
       }
     })
-  }}, []);
+  }}, [props.status]);
 
 
   return (
