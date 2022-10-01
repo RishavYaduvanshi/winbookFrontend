@@ -16,6 +16,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './Profile/Profile.css';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
+import LinearProgress from '@mui/material/LinearProgress';
 
 function Copyright(props) {
   return (
@@ -33,6 +34,7 @@ function Copyright(props) {
 export default function SignUp({mode,setMode}) {
 
   const [passwordType, setPasswordType] = React.useState("password");
+  const [state, setState] = React.useState(false);
   const togglePassword =()=>{
     if(passwordType==="password")
     {
@@ -43,8 +45,10 @@ export default function SignUp({mode,setMode}) {
   }
   const history = useNavigate();
   const handleSubmit = (event) => {
+    setState(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if(data.get('username') || data.get('password') || data.get('email') || data.get('firstName') || data.get('lastName') !== ""){
     // console.log(data.get('username'));
     fetch('https://winbookbackend.d3m0n1k.engineer/signup/', {
       method: 'POST',
@@ -61,14 +65,21 @@ export default function SignUp({mode,setMode}) {
     }).then((response) => {
       if(response.status >= 200 && response.status < 300){
         alert({ message: 'Successfully Signed Up', type: 'success' });
+        setState(false);
         history('/');
       }
       else{
         alert({ message: 'Something wrong happened you are not registered. Try Again!', type: 'error' });
+        setState(false);
       }
       
     });
-  };
+  }
+  else{
+    alert({ message: 'Please fill all the fields', type: 'error' });
+    setState(false);
+  }
+};
 
 
 
@@ -90,6 +101,7 @@ export default function SignUp({mode,setMode}) {
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          {state?<LinearProgress sx={{marginBottom:2}} />:<></>}
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

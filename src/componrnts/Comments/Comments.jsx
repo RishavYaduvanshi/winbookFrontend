@@ -11,10 +11,11 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { alert } from 'react-custom-alert';
 
 export default function Comments(props) {
-  //console.log("sent props are : ",props);
+  //console.log("got",props.user);
   const history = useNavigate();
   const [dp, setdp] = useState("https://winbookbackend.d3m0n1k.engineer/static/authn/dp.png");
   const [userName, setuserName] = useState();
+  const [user, setuser] = useState();
 
 
   useEffect(() => {
@@ -27,7 +28,9 @@ export default function Comments(props) {
     })
       .then(response => response.json())
       .then(data => {
-        //console.log(data);
+        if(data.posts.length!==0){
+          setuser(data.posts[0].user);
+        }
         setuserName(data.username);
         setdp(data.dp);
       });
@@ -38,9 +41,6 @@ export default function Comments(props) {
     history('/'+userName+'/');
   }
 
-  const sendprops = () => {
-    props.func(true);
-  }
 
 
   const deletecomment = () => {
@@ -76,7 +76,7 @@ export default function Comments(props) {
         action={
           <Box>
           <IconButton aria-label="settings">
-            <ReplyIcon color='primary' onClick={sendprops}/>
+            <ReplyIcon color='primary'/>
           </IconButton>
           <IconButton aria-label="settings">
             <DeleteForeverIcon color='error' onClick={deletecomment}/>

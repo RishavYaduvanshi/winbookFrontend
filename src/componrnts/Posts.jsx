@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useState } from 'react'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -43,7 +43,6 @@ const Posts = (props) => {
   const history = useNavigate();
   const [state, setstate] = useState(false);
   const [com, setcom] = useState("");
-  const [del, setdel] = useState(false);
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -52,7 +51,6 @@ const Posts = (props) => {
   today = dd + '/' + mm + '/' + yyyy;
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
-  var child_comments = [];
 
 
   const handleClick = (event) => {
@@ -152,9 +150,6 @@ const Posts = (props) => {
       }
     })
   }
-  const pull_data = (data) => {
-    setstatus(data); 
-  }
 
   const pull_data1 = (data) => {
     props.func(false);
@@ -227,18 +222,16 @@ const Posts = (props) => {
         props.st?
         <Typography variant="body2" color="text.secondary">
           {props.ob.comments.map((ob) => {
-            var a = <Comments user={ob.user} comment={ob.comment} func={pull_data} funcn={pull_data1} pk={ob.pk}/>
-            console.log(child_comments);
             return (
-              <div>
-                {a}
-              </div>
+              <>
+                <Comments user={ob.user} comment={ob.comment} funcn={pull_data1} pk={ob.pk} id={props.ob.user}/>
+              </>
             )
           })}
         </Typography>:
         <>
         {props.ob.comments.length===0?<></>: 
-        <Comments user={props.ob.comments[(props.ob.comments.length)-1].user} comment={props.ob.comments[(props.ob.comments.length)-1].comment} func={pull_data} funcn={pull_data1} pk={props.ob.comments[(props.ob.comments.length)-1].pk}/>
+        <Comments user={props.ob.comments[(props.ob.comments.length)-1].user} id={props.ob.user} comment={props.ob.comments[(props.ob.comments.length)-1].comment} funcn={pull_data1} pk={props.ob.comments[(props.ob.comments.length)-1].pk}/>
       }</>
       }
 
@@ -275,7 +268,6 @@ const Posts = (props) => {
 
     </Card>
   );
-console.log(child_comments);
 }
 
 export default Posts
