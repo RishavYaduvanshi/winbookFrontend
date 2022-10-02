@@ -45,7 +45,7 @@ const Profilecontent = (props) => {
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
   const [preview, setPreview] = useState();
   var [profilephoto, setprofilephoto] = useState();
   var [coverphoto, setcoverphoto] = useState();
@@ -80,12 +80,12 @@ const Profilecontent = (props) => {
           setname(data.username);
         })
       }
-      else{
+      else {
         history('/NotFound/404');
       }
     })
-  }, [props.name,reload]);
-  
+  }, [props.name, reload]);
+
 
 
   const addbio = (event) => {
@@ -143,49 +143,55 @@ const Profilecontent = (props) => {
         "Accept": "application/json",
         "Authorization": "Token " + localStorage.getItem('authtoken')
       },
-    }).then((response) =>{
-      if(response.status >= 200 && response.status < 300){
+    }).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
           alert({ message: 'Profile Picture Removed', type: 'error' });
           setreload(!reload);
         })
-      }  
+      }
     })
   }
 
   const updateProfile = (event) => {
     setstate(true);
-    const bdy = new FormData()
-    bdy.append('dp', image);
+    if (image !== null) {
+      const bdy = new FormData()
+      bdy.append('dp', image);
 
-    event.preventDefault();
-    fetch('https://winbookbackend.d3m0n1k.engineer/user/' + id + '/update_dp/', {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Token " + localStorage.getItem('authtoken')
-      },
-      body: bdy
-    }).then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        response.json().then((data) => {
-          alert({ message: 'Profile Picture Updated', type: 'success' });
-          setOpen1(false);
-          setPreview(null);
-          setstate(false);
-          setAnchorEl(null);
-          setreload(!reload);
-          props.func(true);
-        })
-      }
-      else {
-        alert({ message: 'Something went Wrong please try again after some time', type: 'error' });
-      }
-    })
+      event.preventDefault();
+      fetch('https://winbookbackend.d3m0n1k.engineer/user/' + id + '/update_dp/', {
+        method: 'POST',
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Token " + localStorage.getItem('authtoken')
+        },
+        body: bdy
+      }).then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            alert({ message: 'Profile Picture Updated', type: 'success' });
+            setOpen1(false);
+            setPreview(null);
+            setstate(false);
+            setAnchorEl(null);
+            setreload(!reload);
+            props.func(true);
+          })
+        }
+        else {
+          alert({ message: 'Something went Wrong please try again after some time', type: 'error' });
+        }
+      })
+    }
+    else {
+      alert({ message: 'No Image Selected', type: 'error' });
+      setstate(false);
+    }
   }
 
   const viewprofile = () => {
-    
+
     window.open(profilephoto, 'width=800, height=600');
   }
 
@@ -197,32 +203,45 @@ const Profilecontent = (props) => {
   const updatecover = (event) => {
     setstate(true);
     event.preventDefault();
-    const bdy = new FormData()
-    bdy.append('cover', image);
+    if (image !== null) {
+      const bdy = new FormData()
+      bdy.append('cover', image);
 
-    event.preventDefault();
-    fetch('https://winbookbackend.d3m0n1k.engineer/user/' + id + '/update_cover/', {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Token " + localStorage.getItem('authtoken')
-      },
-      body: bdy
-    }).then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        response.json().then((data) => {
-          alert({ message: 'Cover Picture Updated', type: 'success' });
-          setOpen2(false);
-          setOpen(false);
-          setPreview(null);
-          setstate(false);
-          setreload(!reload);
-        })
-      }
-      else {
-        alert({ message: 'Something went Wrong please try again after some time', type: 'error' });
-      }
-    })
+      event.preventDefault();
+      fetch('https://winbookbackend.d3m0n1k.engineer/user/' + id + '/update_cover/', {
+        method: 'POST',
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Token " + localStorage.getItem('authtoken')
+        },
+        body: bdy
+      }).then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            alert({ message: 'Cover Picture Updated', type: 'success' });
+            setOpen2(false);
+            setOpen(false);
+            setPreview(null);
+            setstate(false);
+            props.func(true);
+            setreload(!reload);
+          })
+        }
+        else {
+          alert({ message: 'Something went Wrong please try again after some time', type: 'error' });
+        }
+      })
+    }
+    else {
+      alert({ message: 'Please Select a Picture', type: 'error' });
+      setstate(false);
+      setOpen2(false);
+      setOpen(false);
+      setPreview(null);
+      setstate(false);
+      props.func(true);
+      setreload(!reload);
+    }
   }
 
 
@@ -245,35 +264,35 @@ const Profilecontent = (props) => {
                 src={profilephoto}
                 alt="profile pic"
               />
-              {localStorage.getItem('user')===name?<AddIcon className="profileUserImgAdd"
+              {localStorage.getItem('user') === name ? <AddIcon className="profileUserImgAdd"
                 aria-controls={Open ? 'basic-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={Open ? 'true' : undefined}
-                onClick={handleClick} />:<></>}
-              {localStorage.getItem('user')===name?<Button variant="outlined" color="primary" className="butn" onClick={()=>{setOpen2(true)}}>Update Cover</Button>:<></>}
+                onClick={handleClick} /> : <></>}
+              {localStorage.getItem('user') === name ? <Button variant="outlined" color="primary" className="butn" onClick={() => { setOpen2(true) }}>Update Cover</Button> : <></>}
             </Box>
             <Box className="profileInfo">
-              <h4 className="profileInfoName">{localStorage.getItem('user')===props.name?localStorage.getItem('user'):props.name}</h4>
-              <Box className="profileInfoDesc">{bio}{localStorage.getItem('user')===name?<EditIcon color='secondary' onClick={() => { setOpen(true) }} />:<></>}</Box>
+              <h4 className="profileInfoName">{localStorage.getItem('user') === props.name ? localStorage.getItem('user') : props.name}</h4>
+              <Box className="profileInfoDesc">{bio}{localStorage.getItem('user') === name ? <EditIcon color='secondary' onClick={() => { setOpen(true) }} /> : <></>}</Box>
             </Box>
           </Box>
         </Box>
       </Box>
       <UserBox>
-      <Share reload={reload} />
+        <Share reload={reload} />
       </UserBox>
       <Stack direction="row" spacing={2} justifyContent="space-between">
-      <Box sx={{
-        display:{xs:'none',sm:'block'},
-        width: '10%',
-      }} >
-      </Box>
-      <Profilefeed id={id} reload={reload}/>
-      <Box sx={{
-        display:{xs:'none',sm:'block'},
-        width: '10%',
-      }} >
-      </Box>
+        <Box sx={{
+          display: { xs: 'none', sm: 'block' },
+          width: '10%',
+        }} >
+        </Box>
+        <Profilefeed id={id} reload={reload} />
+        <Box sx={{
+          display: { xs: 'none', sm: 'block' },
+          width: '10%',
+        }} >
+        </Box>
       </Stack>
       <Styledmodal
         open={open}
@@ -323,7 +342,7 @@ const Profilecontent = (props) => {
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
             <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
           </ButtonGroup>
-          {state?<LinearProgress />:<></>}
+          {state ? <LinearProgress /> : <></>}
         </Box>
       </Styledmodal>
 
@@ -348,7 +367,7 @@ const Profilecontent = (props) => {
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
             <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
           </ButtonGroup>
-          {state?<LinearProgress />:<></>}
+          {state ? <LinearProgress /> : <></>}
         </Box>
       </Styledmodal>
 
@@ -361,7 +380,7 @@ const Profilecontent = (props) => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        <MenuItem onClick={()=>{setOpen1(true)}}>Update Profile Picture</MenuItem>
+        <MenuItem onClick={() => { setOpen1(true) }}>Update Profile Picture</MenuItem>
         <MenuItem onClick={deletepic}>Remove Picture</MenuItem>
         <MenuItem onClick={viewprofile}>View Profile Picture</MenuItem>
       </Menu>

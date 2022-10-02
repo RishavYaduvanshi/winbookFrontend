@@ -78,9 +78,9 @@ export default function Comments(props) {
           <IconButton aria-label="settings">
             <ReplyIcon color='primary'/>
           </IconButton>
-          <IconButton aria-label="settings">
+          {props.id===props.user?<><IconButton aria-label="settings">
             <DeleteForeverIcon color='error' onClick={deletecomment}/>
-          </IconButton>
+          </IconButton></>:<></>}
           </Box>
         }
         >
