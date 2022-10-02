@@ -23,7 +23,6 @@ export default function Comments(props) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Token '+localStorage.getItem('authtoken')
       },
     })
       .then(response => response.json())
