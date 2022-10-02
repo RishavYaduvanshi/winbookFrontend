@@ -186,7 +186,12 @@ const Profilecontent = (props) => {
     }
     else {
       alert({ message: 'No Image Selected', type: 'error' });
+      setOpen1(false);
+      setPreview(null);
       setstate(false);
+      setAnchorEl(null);
+      setreload(!reload);
+      props.func(true);
     }
   }
 
