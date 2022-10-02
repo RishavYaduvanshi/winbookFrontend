@@ -11,7 +11,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { alert } from 'react-custom-alert';
 
 export default function Comments(props) {
-  //console.log("got",props.user);
   const history = useNavigate();
   const [dp, setdp] = useState("https://winbookbackend.d3m0n1k.engineer/static/authn/dp.png");
   const [userName, setuserName] = useState();
@@ -77,7 +76,7 @@ export default function Comments(props) {
           <IconButton aria-label="settings">
             <ReplyIcon color='primary'/>
           </IconButton>
-          {props.id===props.user?<><IconButton aria-label="settings">
+          {props.user===parseInt(localStorage.getItem('id'))?<><IconButton aria-label="settings">
             <DeleteForeverIcon color='error' onClick={deletecomment}/>
           </IconButton></>:<></>}
           </Box>
