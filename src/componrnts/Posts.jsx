@@ -25,6 +25,8 @@ import MobileScreenShareIcon from '@mui/icons-material/MobileScreenShare';
 import ChatIcon from '@mui/icons-material/Chat';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { useEffect } from 'react';
+import EmojiPicker from 'emoji-picker-react';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const StyledTextField = styled(TextField)({
   fullWidth: true,
@@ -44,7 +46,7 @@ const Styledmodal = styled(Modal)({
 
 
 const Posts = (props) => {
-  //console.log("POST DATA: ",props.ob.pk);
+  //console.log("POST DATA: ",typeof(props.ob.url));
   const [like, setlike] = useState();
   const [status, setstatus] = useState();
   const history = useNavigate();
@@ -147,15 +149,13 @@ const Posts = (props) => {
     }
   }
 
-  const commentget = (e) => {
-    //console.log(e.target.value);
-    setcom(e.target.value)
-  }
+
 
   const postcomment = (e) => {
     e.preventDefault();
+    const data = new FormData(e.currentTarget);
     const comm = JSON.stringify({
-      comment: com
+      comment: data.get('filled-basic'),
     });
     fetch('https://winbookbackend.d3m0n1k.engineer/post/' + props.ob.pk + '/comment/', {
       method: 'POST',
@@ -173,7 +173,7 @@ const Posts = (props) => {
         alert({ message: 'Comment posted', type: 'success' });
       }
       else {
-        alert({ message: 'The comment ws not posted due to some error OR You are not Logged In!', type: 'error' });
+        alert({ message: 'The comment ws not posted due to some error', type: 'error' });
       }
     })
   }
@@ -182,7 +182,21 @@ const Posts = (props) => {
     props.func(false);
   }
 
+  const onEmojiClick = (emojiObject) => {
+    document.getElementById("filled-basic").value += emojiObject.emoji;
+  };
 
+
+  const [anchorEli, setAnchorEli] = React.useState(null);
+  const open2 = Boolean(anchorEli);
+
+  const handleClick1 = (event) => {
+    setAnchorEli(event.currentTarget);
+  };
+
+  const handleClose1 = () => {
+    setAnchorEli(null);
+  };
 
 
 
@@ -202,17 +216,17 @@ const Posts = (props) => {
           }
           subheader={datetime.toLocaleString()}
         />
-        <CardMedia
+        {props.ob.url === null ? <></> : <><CardMedia
           component="img"
           height="20%"
           image={props.ob.url}
           alt={props.ob.userName}
           onClick={() => history('/post/' + props.ob.pk + '/')}
-        />
+        /></>}
         <CardContent>
-          <Typography variant="body1" fontWeight={500} color="text.secondary">
+          {props.ob.caption === "" ? <></> : <><Typography variant="body1" fontWeight={500} color="text.secondary">
             {props.ob.caption}
-          </Typography>
+          </Typography></>}
           <br />
           <Divider />
           <Typography variant="body2" color="text.secondary" marginTop={1} marginBottom={0}>
@@ -235,11 +249,18 @@ const Posts = (props) => {
         <Divider />
         {props.ob.comments.length !== 0 ? <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end", alignItems: "flex-end" }}><IconButton onClick={() => history('/post/' + props.ob.pk + '/')} sx={{ fontSize: 16 }}>View all {props.ob.comments.length} Comments</IconButton></Box> : <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end", alignItems: "flex-end" }}><Typography fontWeight={300}>No Comments Yet !</Typography></Box>}
         {state === true ? <CardContent>
-          <StyledTextField id="filled-basic" component='form' onSubmit={postcomment} noValidate fullWidth placeholder="Add your comment" color='primary' variant="outlined" onChange={commentget}
+          <StyledTextField id="filled-basic" name="filled-basic" autoFocus component='form' onSubmit={postcomment} noValidate fullWidth placeholder="Add your comment" color='primary' variant="outlined"
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton type='submit' ><SendIcon color='primary' /></IconButton>
+                  <IconButton>
+                  <EmojiEmotionsIcon color="error" onClick={
+                      handleClick1
+                    } />
+                  </IconButton>
+                  <IconButton type='submit' >
+                    <SendIcon color='primary' /></IconButton>
+
                 </InputAdornment>
               )
             }}
@@ -282,7 +303,7 @@ const Posts = (props) => {
           {props.ob.userName === localStorage.getItem('user') ? <div>
             <MenuItem ><ListItemIcon><EditIcon /></ListItemIcon>Edit Post</MenuItem>
             <Divider />
-            <MenuItem onClick={()=>{
+            <MenuItem onClick={() => {
               setOpen1(true);
             }}><ListItemIcon><DeleteForeverIcon /></ListItemIcon>Delete Post</MenuItem>
             <Divider />
@@ -294,6 +315,7 @@ const Posts = (props) => {
           <MenuItem onClick={() => copyFunction(window.location.origin + "/post/" + props.ob.pk + "/")} ><ListItemIcon><FileCopyIcon /></ListItemIcon>Copy Link</MenuItem>
         </Menu>
         {/*Menu Item of post*/}
+        {/*Delete Post*/}
         <Styledmodal
           open={open1}
           onClose={e => setOpen1(false)}
@@ -301,22 +323,34 @@ const Posts = (props) => {
           aria-describedby="modal-modal-description"
         >
           <Box bgcolor={"background.default"} color={"text.primary"} height={150} p={3} borderRadius={5} width={400}>
-          <Typography variant='h6' color="error" textAlign="center">Confirm Delete?</Typography>
-          <Box sx={{display:"flex",justifyContent:"space-around",alignItems:"center",marginTop:3}}>
-            <Typography variant='h7' color="error" textAlign="center" >
-              Are You Sure You Want To Delete This Post?
-            </Typography>
+            <Typography variant='h6' color="error" textAlign="center">Confirm Delete?</Typography>
+            <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center", marginTop: 3 }}>
+              <Typography variant='h7' color="error" textAlign="center" >
+                Are You Sure You Want To Delete This Post?
+              </Typography>
             </Box>
-            <Box sx={{display:"flex",justifyContent:"flex-end",marginTop:5}}>
-            <Button variant="contained" color="error" onClick={deletePost} sx={{marginRight:1}} >
-              Delete
-            </Button>
-            <Button variant="contained" color="primary" sx={{marginLeft:1}} onClick={e => {setOpen1(false); setAnchorEl(false)}}>
-              Cancel
-            </Button>
+            <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop: 5 }}>
+              <Button variant="contained" color="error" onClick={deletePost} sx={{ marginRight: 1 }} >
+                Delete
+              </Button>
+              <Button variant="contained" color="primary" sx={{ marginLeft: 1 }} onClick={e => { setOpen1(false); setAnchorEl(false) }}>
+                Cancel
+              </Button>
             </Box>
-            </Box>
+          </Box>
         </Styledmodal>
+        {/*Delete Post*/}
+        <Menu
+          id="basic-menu"
+          anchorEli={anchorEli}
+          open={open2}
+          onClose={handleClose1}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <EmojiPicker onEmojiClick={onEmojiClick} pickerStyle={{ width: "100%" }} />
+        </Menu>
 
 
       </Card>

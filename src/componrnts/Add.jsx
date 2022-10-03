@@ -25,7 +25,7 @@ const Userbox = styled(Box)({
 
 const Add = (props) => {
   const [caption, setCaption] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState();
   const [state, setState] = useState(false);
@@ -80,8 +80,7 @@ const Add = (props) => {
     const bdy = new FormData()
     bdy.append('url', image);
     bdy.append('caption', caption);
-
-    //console.log(bdy);
+    // console.log(bdy.get('url'), bdy.get('caption'));
 
     fetch('https://winbookbackend.d3m0n1k.engineer/post/', {
       method: 'POST',
@@ -97,10 +96,12 @@ const Add = (props) => {
         alert({ message: 'Post created successfully', type: 'success' });
         setState(false);
         props.func(true);
+        setImage(null);
       }
       else {
         alert({ message: 'Something went wrong! Please try again', type: 'error' });
         setState(false);
+        setImage(null);
       }
     })
   }

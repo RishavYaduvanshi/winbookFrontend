@@ -7,7 +7,6 @@ import NotFound from "./componrnts/NotFound";
 import {ViewPost} from "./componrnts/Profile/ViewPost";
 import {  useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
-import Comments from "./componrnts/Comments/Comments";
 import {
   Routes,
   Route,
@@ -34,8 +33,8 @@ function App() {
         <Route path="/forgot" element={<Forgot setMode={setMode} mode={mode} />} />
         <Route path="/signup" element={<SignUp setMode={setMode} mode={mode} />} />
         <Route path="/home" element={<Content setMode={setMode} mode={mode} />} />
-        <Route path="/comm" element={<Comments />} />
         <Route path="/post/:val" element={<ViewPost setMode={setMode} mode={mode} />} />
+        {/* <Route path="/test" element={<RecipeReviewCard/>} /> */}
       </Routes>
     </ThemeProvider>
   );

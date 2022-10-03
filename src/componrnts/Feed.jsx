@@ -40,10 +40,10 @@ useEffect(() => {
 
 
 if (users.length===0) return (<Box flex={4} p={2}><Stack spacing={1}>
-<Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+<Skeleton variant="text" sx={{ fontSize: '2rem' }} />
 <Skeleton variant="circular" width={40} height={40} />
-<Skeleton variant="rectangular"height={60} />
-<Skeleton variant="rounded"  height={60} />
+<Skeleton variant="rectangular"height={120} />
+<Skeleton variant="rounded"  height={120} />
 </Stack></Box>);
 
  return (

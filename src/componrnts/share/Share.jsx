@@ -15,7 +15,7 @@ export default function Share(props) {
   const history = useNavigate();
   var profile = localStorage.getItem('profile');
 
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
   const [caption, setCaption] = useState("");
   const [preview, setPreview] = useState();
 
