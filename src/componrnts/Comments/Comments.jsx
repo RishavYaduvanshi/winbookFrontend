@@ -14,7 +14,6 @@ export default function Comments(props) {
   const history = useNavigate();
   const [dp, setdp] = useState("https://winbookbackend.d3m0n1k.engineer/static/authn/dp.png");
   const [userName, setuserName] = useState();
-  const [user, setuser] = useState();
 
 
   useEffect(() => {
@@ -26,9 +25,6 @@ export default function Comments(props) {
     })
       .then(response => response.json())
       .then(data => {
-        if(data.posts.length!==0){
-          setuser(data.posts[0].user);
-        }
         setuserName(data.username);
         setdp(data.dp);
       });

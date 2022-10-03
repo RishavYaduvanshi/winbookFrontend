@@ -1,7 +1,6 @@
-import { Box } from '@mui/material'
+import { Box, Skeleton } from '@mui/material'
 import Posts from '../Posts'
 import { useEffect, useState} from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 import {styled} from '@mui/material';
 import React from 'react'
 
@@ -54,7 +53,7 @@ useEffect(() => {
 
 
 
-if (users.length===0) return <UserBox><CircularProgress /></UserBox>;
+if (users.length===0) return <UserBox><Skeleton variant="rectangular" /></UserBox>;
 
  return (
   <Box flex={3} p={2}>

@@ -1,7 +1,6 @@
-import { Box } from '@mui/material'
+import { Box, Skeleton, Stack } from '@mui/material'
 import Posts from './Posts'
 import { useEffect, useState} from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
 import React from 'react'
 
 var today = new Date();
@@ -10,7 +9,8 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
 
-const Feed = () => { 
+const Feed = (props) => { 
+    //console.log(props);
 
 var [users, setUsers] = useState([]);
 const [status, setstatus] = useState();
@@ -35,11 +35,16 @@ useEffect(() => {
       })
     }
   })
-}, [status]);
+}, [status,props.data]);
 
 
 
-if (users.length===0) return <Box flex={4} p={2}><CircularProgress/></Box>;
+if (users.length===0) return (<Box flex={4} p={2}><Stack spacing={1}>
+<Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+<Skeleton variant="circular" width={40} height={40} />
+<Skeleton variant="rectangular"height={60} />
+<Skeleton variant="rounded"  height={60} />
+</Stack></Box>);
 
  return (
   <Box flex={4} p={2}>
