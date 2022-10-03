@@ -1,4 +1,4 @@
-import { Avatar, Button, ButtonGroup, Fab, Menu, Modal, Stack, styled, TextField, Tooltip, Typography } from '@mui/material'
+import { Avatar, Button, ButtonGroup, Fab, LinearProgress, Menu, Modal, Stack, styled, TextField, Tooltip, Typography } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system';
 import AddIcon from '@mui/icons-material/Add';
@@ -28,6 +28,7 @@ const Add = () => {
   const [image,setImage] = useState();
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState();
+  const [state, setState] = useState(false);
   
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -74,6 +75,7 @@ const Add = () => {
   //console.log(caption);
 
 const createpost = () => {
+  setState(true);
     const bdy = new FormData()
     bdy.append('url',image);
     bdy.append('caption',caption);
@@ -92,10 +94,12 @@ const createpost = () => {
       if(response.status >= 200 && response.status < 300){
       setOpen(false);
       alert({ message: 'Post created successfully', type: 'success' });
+      setState(false);
       window.location.reload(false);
       }
       else{
         alert({ message: 'Something went wrong! Please try again', type: 'error' });
+        setState(false);
       }
     })
   }
@@ -151,6 +155,7 @@ const createpost = () => {
         </Stack>
         <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
           <Button onClick={createpost}>Post</Button>
+          {state?<LinearProgress />:<></>}
         </ButtonGroup>
   </Box>
 </Styledmodal>
