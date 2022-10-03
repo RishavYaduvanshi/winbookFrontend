@@ -155,8 +155,8 @@ const createpost = () => {
         </Stack>
         <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
           <Button onClick={createpost}>Post</Button>
-          {state?<LinearProgress />:<></>}
         </ButtonGroup>
+        {state?<LinearProgress />:<></>}
   </Box>
 </Styledmodal>
 <Menu
