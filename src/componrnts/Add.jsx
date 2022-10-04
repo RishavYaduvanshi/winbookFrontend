@@ -62,7 +62,7 @@ const Add = (props) => {
       setImage(fileUploaded);
     }
     else {
-      setImage(null);
+      setImage("");
     }
   }
 
@@ -96,12 +96,12 @@ const Add = (props) => {
         alert({ message: 'Post created successfully', type: 'success' });
         setState(false);
         props.func(true);
-        setImage(null);
+        setImage("");
       }
       else {
         alert({ message: 'Something went wrong! Please try again', type: 'error' });
         setState(false);
-        setImage(null);
+        setImage("");
       }
     })
   }

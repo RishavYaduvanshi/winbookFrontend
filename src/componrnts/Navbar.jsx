@@ -1,6 +1,5 @@
-import { Laptop } from '@mui/icons-material';
 import { AppBar, styled, Toolbar, Typography, Box, InputBase, Menu, MenuItem, Switch, Badge, IconButton } from '@mui/material'
-import { AccountBox, Article, Group, Home, Person, Settings, Storefront,ModeNight } from '@mui/icons-material'
+import { AccountBox, Article, Group, Home, Person, Settings,ModeNight } from '@mui/icons-material'
 import React, { useEffect,useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Divider, ListItemIcon } from '@mui/material';
@@ -13,8 +12,8 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const StyledToolBar = styled(Toolbar)({
   display: "flex",
@@ -250,14 +249,7 @@ const Navbar = (props) => {
         <NavLink to={"/home"} style={{color:'white',textDecoration:'none'}}><Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>WinBook</Typography></NavLink>
         {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-         <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent:"right"}}><MoreVertIcon  onClick={toggleDrawer(anchor, true)}/> <Laptop onClick={()=>{
-          if(tkn!==null){
-          history('/home');
-          }
-          else{
-            history('/');
-          }
-         }}/></Box>
+         <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent:"right"}}><MenuIcon  onClick={toggleDrawer(anchor, true)}/></Box>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

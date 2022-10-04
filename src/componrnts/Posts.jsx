@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
-import { Button, ButtonGroup, Divider, InputAdornment, ListItemIcon, Modal } from '@mui/material';
+import { Button, Divider, InputAdornment, ListItemIcon, Modal } from '@mui/material';
 import { Menu, MenuItem, styled } from '@mui/material';
 import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
@@ -103,7 +103,12 @@ const Posts = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         alert({ message: 'Post deleted', type: 'warning' });
-        props.func(true);
+        if(props.st===true){
+          history('/home');
+        }
+        else{
+          props.func(true);
+        }
       }
     })
   }
@@ -224,7 +229,7 @@ const Posts = (props) => {
           onClick={() => history('/post/' + props.ob.pk + '/')}
         /></>}
         <CardContent>
-          {props.ob.caption === "" ? <></> : <><Typography variant="body1" fontWeight={500} color="text.secondary">
+          {props.ob.caption === "" ? <></> : <><Typography variant="body1" fontWeight={500} onClick={() => history('/post/' + props.ob.pk + '/')} color="text.secondary">
             {props.ob.caption}
           </Typography></>}
           <br />
@@ -322,7 +327,7 @@ const Posts = (props) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box bgcolor={"background.default"} color={"text.primary"} height={150} p={3} borderRadius={5} width={400}>
+          <Box bgcolor={"background.default"} color={"text.primary"} height={160} p={3} borderRadius={5} width={400}>
             <Typography variant='h6' color="error" textAlign="center">Confirm Delete?</Typography>
             <Box sx={{ display: "flex", justifyContent: "space-around", alignItems: "center", marginTop: 3 }}>
               <Typography variant='h7' color="error" textAlign="center" >
