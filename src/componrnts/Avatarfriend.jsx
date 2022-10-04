@@ -4,22 +4,22 @@ import AvatarGroup from '@mui/material/AvatarGroup';
 
 const Avatarfriend = () => {
   return (
-    <AvatarGroup max={7} >
+    <AvatarGroup max={7} sx={{display:"inline-flex"}}>
         <Avatar 
-        alt="Likith Patnaik" 
-        src="https://mui.com/static/images/avatar/1.jpg" 
+        alt="Hasib Nirban" 
+        src="https://winbookbackend.d3m0n1k.engineer/media/dp/IMG_20220728_133237_088_PnImcPW.jpg" 
         />
         <Avatar 
-        alt="Travis Howard" 
-        src="https://mui.com/static/images/avatar/2.jpg" 
+        alt="Gagan singh" 
+        src="https://winbookbackend.d3m0n1k.engineer/media/dp/Snapchat-2057028057.jpg" 
         />
         <Avatar 
-        alt="Cindy Baker" 
-        src="https://mui.com/static/images/avatar/3.jpg" 
+        alt="Vimdhayak Ji" 
+        src="https://winbookbackend.d3m0n1k.engineer/media/dp/download.jpeg" 
         />
         <Avatar 
-        alt="Agnes Walker" 
-        src="https://mui.com/static/images/avatar/4.jpg" 
+        alt="Shahrukh" 
+        src="https://winbookbackend.d3m0n1k.engineer/media/dp/IMG-20220810-WA0011.jpg" 
         />
         <Avatar 
         alt="THasib" 
@@ -27,7 +27,7 @@ const Avatarfriend = () => {
         />
         <Avatar 
         alt="Danish" 
-        src="https://mui.com/static/images/avatar/6.jpg" 
+        src="https://winbookbackend.d3m0n1k.engineer/media/dp/IMG_20220916_220207_890.jpg" 
         />
         <Avatar 
         alt="Keede" 

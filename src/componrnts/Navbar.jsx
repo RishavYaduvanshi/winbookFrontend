@@ -268,7 +268,7 @@ const Navbar = (props) => {
           <Box>
             <IconButton sx={{marginRight:"9px", color:"white"}}><Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge></IconButton>
           </Box>
-          <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
+          <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20, objectFit:"cover"}} onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
           }}/></Box>
           </>}
@@ -276,7 +276,7 @@ const Navbar = (props) => {
           tkn!==null?setOpen(true):setOpen(false);
         }}>
           {tkn===null?<Typography sx={{ display: { xs: 'block', sm: 'flex' } }} variant='span'>Not Logged In</Typography>:<Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
-            <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20}} onClick={e => {
+            <img src={profilephoto} alt="profile pic" style={{ objectFit:"cover", width: 40, height: 40, borderRadius: 20}} onClick={e => {
           tkn!==null?setOpen(true):setOpen(false);
           }}/></Box>}
         </UserBox>

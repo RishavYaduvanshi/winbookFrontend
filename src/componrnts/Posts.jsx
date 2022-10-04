@@ -210,7 +210,7 @@ const Posts = (props) => {
       <Card sx={{ margin: 0.5 }}>
         <CardHeader
           avatar={
-            <img src={props.ob.userDp} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
+            <img src={props.ob.userDp} alt="profile pic" style={{ objectFit:"cover", width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
           }
           action={
             <IconButton aria-label="settings">
