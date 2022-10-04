@@ -113,8 +113,8 @@ const Add = (props) => {
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <Tooltip title="Create new Post" sx={{ position: "fixed", bottom: 20, left: 10 }}>
-        <Fab color="primary" aria-label="add">
-          <AddIcon onClick={() => { setOpen(true) }} />
+        <Fab color="primary" aria-label="add" onClick={() => { setOpen(true) }}>
+          <AddIcon />
         </Fab>
       </Tooltip>
       <Styledmodal
