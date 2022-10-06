@@ -1,2 +1,6 @@
 node_modules
 build
+
+# The following files are ment for local changes.
+src1/comp
+extension
