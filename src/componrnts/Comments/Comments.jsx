@@ -31,7 +31,6 @@ export default function Comments(props) {
   }, [props.user]);
 
   const viewprofile = () => {
-    // console.log(userName);
     history('/'+userName+'/');
   }
 
@@ -52,7 +51,7 @@ export default function Comments(props) {
           alert({message:'Comment deleted',type:'success'});
         }
         else{
-          alert({message:'Error deleting comment',type:'error'});
+          alert({message:'Error in deleting comment',type:'error'});
         }
       });
   }
