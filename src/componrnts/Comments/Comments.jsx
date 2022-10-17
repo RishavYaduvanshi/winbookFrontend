@@ -62,14 +62,16 @@ export default function Comments(props) {
       <Card variant='outlined' sx={{ display:"flex", margin: 0.5, maxWidth: "100%", borderRadius:10, marginLeft:2}}>
         <CardHeader
         avatar={
-          <img src={dp} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile}/>
+          <img src={dp} alt="profile pic" style={{ objectFit:'cover' ,width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile}/>
         }
         title={<Typography fontWeight={500} fontSize={16} onClick={viewprofile}>{userName} :</Typography>
         }
         subheader={<Typography fontSize={14} color="text.secondary">{props.comment}</Typography>}
         action={
           <Box>
-          <IconButton aria-label="settings">
+          <IconButton aria-label="settings" onClick={()=>{
+            
+          }}>
             <ReplyIcon color='primary'/>
           </IconButton>
           {props.user===parseInt(localStorage.getItem('id'))?<><IconButton aria-label="settings">
