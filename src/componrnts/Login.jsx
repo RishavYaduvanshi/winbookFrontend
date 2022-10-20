@@ -75,7 +75,7 @@ export const Login = ({ mode, setMode }) => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://i.ibb.co/FBC7wPT/wibrant-cover.png)',
+          backgroundImage: 'url(https://i.ibb.co/ZfpSJHK/Helps-you-connect-and-share-with-people-in-your-life-1.png)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) =>
             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
