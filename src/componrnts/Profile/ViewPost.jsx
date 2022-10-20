@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import Navbar from '../Navbar'
 import "./Profile.css";
 import Sidebar from '../Sidebar';
-import { CircularProgress, Stack } from '@mui/material';
+import { Stack, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Posts from '../Posts';
@@ -38,7 +38,7 @@ export const ViewPost = (props) => {
     }, [status, val]);
 
     document.title = "Wibrant | Post";
-    if (user.length === 0) return <Box flex={4} p={2}><CircularProgress /></Box>;
+    if (user.length === 0) return <Box flex={4} p={2}><Skeleton variant="rectangular" /></Box>;
 
     return (
         <Box bgcolor={"background.default"} color={"text.primary"}>
