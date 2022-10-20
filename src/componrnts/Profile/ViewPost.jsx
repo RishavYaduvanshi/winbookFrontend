@@ -45,7 +45,7 @@ export const ViewPost = (props) => {
             <Navbar setMode={props.setMode} mode={props.mode} />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <Sidebar position="flex" setMode={props.setMode} mode={props.mode} />
-                <Box flex={4} p={2} sx={{ height: "85.5vh" }}>
+                <Box flex={4} p={2} sx={{ height: "auto" }}>
                     <Posts ob={user} st={true} func={pull_data} />
                 </Box>
                 <Box sx={{
