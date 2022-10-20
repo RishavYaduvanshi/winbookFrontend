@@ -1,15 +1,15 @@
 <a name="readme-top"></a>
-# Contributing to Winbook
+# Contributing to Wibrant
 
-Though *Winbook* is developed and maintained by Team Demonik, we welcome community contributions.
-Involvement in *Winbook* can take many forms.
+Though *Wibrant* is developed and maintained by Team Demonik, we welcome community contributions.
+Involvement in *Wibrant* can take many forms.
 
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
 
 
 ## Using
 
-Deploying *Winbook* and trying it out at your own institution is itself a way of contributing to the development process.
+Deploying *Wibrant* and trying it out at your own institution is itself a way of contributing to the development process.
 For more information on deployment strategies please see the [Deployment Guide][deployment-guide].
 
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
@@ -17,7 +17,7 @@ For more information on deployment strategies please see the [Deployment Guide][
 
 ## Filing Issues
 
-Once you are using *Winbook* the creation of new issues through GitHub is a major method of contribution towards *Winbook* development.
+Once you are using *Wibrant* the creation of new issues through GitHub is a major method of contribution towards *Wibrant* development.
 Issues can be motivated by the discovery of a bug in the software, or by the desire to see either new features added or see changes to existing features.
 
 There are two primary types of issues:
@@ -34,7 +34,7 @@ A **Feature** involves new functionality or behavior.
 ## Creating a Pull Request
 
 Community code and documentation contributions are welcome and should take the form of a **GitHub Pull Request** (*PR*).
-Each *PR* will need to be reviewed by a *Winbook* developer.
+Each *PR* will need to be reviewed by a *Wibrant* developer.
 A review will result in the *PR* being accepted and merged, a descriptive request for changes, or the *PR* being closed along with a detailed explanation.
 
 It is our intention to maintain labeling on issues that are deemed to be low difficulty in order to provide a good point of entry for those looking to begin contributing code or documentation.
@@ -55,6 +55,6 @@ In general keep in mind:
 ## Good Luck!
 
 We look forward to seeing your contributions.
-If you have any additional questions please contact the *Winbook* developers at teamd3m0n1k@gmail.com
+If you have any additional questions please contact the *Wibrant* developers at teamd3m0n1k@gmail.com
 
 <div align="right">(<a href="#readme-top">back to top</a>)</div>
