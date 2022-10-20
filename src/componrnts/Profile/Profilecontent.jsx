@@ -4,7 +4,7 @@ import Share from '../share/Share'
 import { Modal, styled, Typography, TextField, ButtonGroup } from '@mui/material';
 import './Profile.css'
 import profilePic from '../.././resources/proflepic.png'
-import coverPic from '../.././resources/winbook1.png'
+import coverPic from '../.././resources/wibrant_cover1.png'
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import Badge from '@mui/material/Badge';
@@ -84,7 +84,7 @@ const Profilecontent = (props) => {
         history('/NotFound/404');
       }
     })
-  }, [props.name, reload]);
+  }, [props.name, reload, history]);
 
 
 

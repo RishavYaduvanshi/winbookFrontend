@@ -5,25 +5,25 @@ import Navbar from "./Navbar";
 import Rightbar from "./Rightbar";
 import Sidebar from "./Sidebar";
 import { Box, Stack } from "@mui/material";
-import {useState} from 'react';
+import { useState } from 'react';
 
 
-export const Main = ({mode,setMode}) => {
+export const Main = ({ mode, setMode }) => {
 
   var theme = localStorage.getItem("theme");
-  document.title = "Winbook | Home";
+  document.title = "Wibrant | Home";
   const [data, setdata] = useState();
 
   const pull_data = (data) => {
     setdata(data);
   }
-  
-    
+
+
   return (
     <Box bgcolor={"background.default"} color={"text.primary"}>
-      <Navbar setMode={setMode} mode={theme}/>
+      <Navbar setMode={setMode} mode={theme} />
       <Stack direction="row" spacing={2} justifyContent="space-between">
-      <Sidebar position="sticky" setMode={setMode} mode={theme}/>
+        <Sidebar position="sticky" setMode={setMode} mode={theme} />
         <Feed onChange={data} data={data} />
         <Rightbar />
       </Stack>

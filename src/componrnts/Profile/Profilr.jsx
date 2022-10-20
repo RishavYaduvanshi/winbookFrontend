@@ -25,7 +25,7 @@ export const Profilr = (props) => {
     // console.log("DATA: ",data);
     setstatus(data);
   }
-  document.title = "Winbook | Profile";
+  document.title = "Wibrant | Profile";
 
   return (
     <Box bgcolor={"background.default"} color={"text.primary"}>

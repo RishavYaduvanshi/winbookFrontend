@@ -35,9 +35,9 @@ export const ViewPost = (props) => {
                 })
             }
         })
-    }, [status,val]);
+    }, [status, val]);
 
-    document.title = "Winbook | Post";
+    document.title = "Wibrant | Post";
     if (user.length === 0) return <Box flex={4} p={2}><CircularProgress /></Box>;
 
     return (

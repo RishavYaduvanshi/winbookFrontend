@@ -1,6 +1,6 @@
 import { AppBar, styled, Toolbar, Typography, Box, InputBase, Menu, MenuItem, Switch, Badge, IconButton } from '@mui/material'
-import { AccountBox, Article, Group, Home, Person, Settings,ModeNight } from '@mui/icons-material'
-import React, { useEffect,useState } from 'react'
+import { AccountBox, Article, Group, Home, Person, Settings, ModeNight } from '@mui/icons-material'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Divider, ListItemIcon } from '@mui/material';
 import { PersonAdd } from '@mui/icons-material';
@@ -77,7 +77,7 @@ const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }));
-var Noticications=0;
+var Noticications = 0;
 
 const Navbar = (props) => {
 
@@ -90,9 +90,9 @@ const Navbar = (props) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-    if(tkn!==null){
-    setState({ ...state, [anchor]: open });
-    }else{
+    if (tkn !== null) {
+      setState({ ...state, [anchor]: open });
+    } else {
       history('/')
     }
   };
@@ -105,97 +105,95 @@ const Navbar = (props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-      <ListItem disablePadding>
-        <Box sx={{width:"10px",height:"10px",}}>
-        </Box>
-          </ListItem>
-      <ListItem key={"Home"} disablePadding>
-            <ListItemButton onClick={()=>{
-              history("/home")
-            }}>
-              <ListItemIcon>
+        <ListItem disablePadding>
+          <Box sx={{ width: "10px", height: "10px", }}>
+          </Box>
+        </ListItem>
+        <ListItem key={"Home"} disablePadding>
+          <ListItemButton onClick={() => {
+            history("/home")
+          }}>
+            <ListItemIcon>
               <Home />
-              </ListItemIcon>
-              <ListItemText primary={"Home"} />
-            </ListItemButton>
-          </ListItem>
-              <ListItem disablePadding>
-            <ListItemButton onClick={()=>{history('/profile')}}>
-              <ListItemIcon>
-                <AccountBox/>
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Article/>
-              </ListItemIcon>
-              <ListItemText primary="Pages" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Group/>
-              </ListItemIcon>
-              <ListItemText primary="Groups" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={"Home"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => { history('/profile') }}>
+            <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Article />
+            </ListItemIcon>
+            <ListItemText primary="Pages" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Group />
+            </ListItemIcon>
+            <ListItemText primary="Groups" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
               <Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge>
-              </ListItemIcon>
-              <ListItemText primary="Alerts" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Person/>
-              </ListItemIcon>
-              <ListItemText primary="Friends" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Settings/>
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <ModeNight/>
-              </ListItemIcon>
-              {props.mode==='dark'?<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e=>{
-                props.setMode(props.mode === "light"? "dark":"light");
-                localStorage.setItem("theme", props.mode === "light"? "dark":"light");
-                }}/>:<MaterialUISwitch sx={{ m: 1 }} onChange={e=>{
-                  props.setMode(props.mode === "light"? "dark":"light");
-                  localStorage.setItem("theme", props.mode === "light"? "dark":"light");
-                }}/>}
-            </ListItemButton>
-          </ListItem>
+            </ListItemIcon>
+            <ListItemText primary="Alerts" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Person />
+            </ListItemIcon>
+            <ListItemText primary="Friends" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <Settings />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <ModeNight />
+            </ListItemIcon>
+            {props.mode === 'dark' ? <MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e => {
+              props.setMode(props.mode === "light" ? "dark" : "light");
+              localStorage.setItem("theme", props.mode === "light" ? "dark" : "light");
+            }} /> : <MaterialUISwitch sx={{ m: 1 }} onChange={e => {
+              props.setMode(props.mode === "light" ? "dark" : "light");
+              localStorage.setItem("theme", props.mode === "light" ? "dark" : "light");
+            }} />}
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
 
 
   const tkn = localStorage.getItem('authtoken')
-  var background = ""; 
+  var background = "";
   const [Open, setOpen] = useState(false);
-  const [profilephoto,setprofilephoto] = useState();
-  if(props.mode==="light")
-  {
+  const [profilephoto, setprofilephoto] = useState();
+  if (props.mode === "light") {
     background = "white";
   }
-  else
-  {
+  else {
     background = "#1a1a1a";
   }
 
@@ -203,13 +201,13 @@ const Navbar = (props) => {
   const logout = () => {
     localStorage.clear();
     history("/");
-    alert({message:'Logged Out!', type:'info'})
+    alert({ message: 'Logged Out!', type: 'info' })
   }
 
   const logout1 = () => {
     localStorage.clear();
     history("/");
-    alert({message:'Logged Out! You can now Log In to a different Account', type:'info'})
+    alert({ message: 'Logged Out! You can now Log In to a different Account', type: 'info' })
   }
 
   const profile = () => {
@@ -224,61 +222,62 @@ const Navbar = (props) => {
   }));
 
   useEffect(() => {
-    if(localStorage.getItem('authtoken')!==null){
-    fetch('https://winbookbackend.d3m0n1k.engineer/user/f/'+localStorage.getItem('user')+'/',{
-      method: 'GET',
-      headers: {
-        "Accept": "application/json",
-        "Authorization": "Token " + localStorage.getItem('authtoken')
-      },
-    }).then((response) => {
-      if(response.status >= 200 && response.status < 300){
-        response.json().then((data) => {
-          localStorage.setItem('id',data.id);
-          localStorage.setItem('profile',data.dp);
-          setprofilephoto(data.dp);
-        })
-      }
-    })
-  }}, [props.status]);
+    if (localStorage.getItem('authtoken') !== null) {
+      fetch('https://winbookbackend.d3m0n1k.engineer/user/f/' + localStorage.getItem('user') + '/', {
+        method: 'GET',
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Token " + localStorage.getItem('authtoken')
+        },
+      }).then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            localStorage.setItem('id', data.id);
+            localStorage.setItem('profile', data.dp);
+            setprofilephoto(data.dp);
+          })
+        }
+      })
+    }
+  }, [props.status]);
 
 
   return (
-    <AppBar position='sticky' sx={{width:'100%'}}>
+    <AppBar position='sticky' sx={{ width: '100%' }}>
       <StyledToolBar>
-        <NavLink to={"/home"} style={{color:'white',textDecoration:'none'}}><Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>WinBook</Typography></NavLink>
+        <NavLink to={"/home"} style={{ color: 'white', textDecoration: 'none' }}><Typography variant='h6' sx={{ display: { xs: "none", sm: "block" } }}>Wibrant</Typography></NavLink>
         {['left'].map((anchor) => (
-        <React.Fragment key={anchor}>
-         <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent:"right"}}><MenuIcon  onClick={toggleDrawer(anchor, true)}/></Box>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
+          <React.Fragment key={anchor}>
+            <Box sx={{ display: { xs: "block", sm: "none" }, justifyContent: "right" }}><MenuIcon onClick={toggleDrawer(anchor, true)} /></Box>
+            <Drawer
+              anchor={anchor}
+              open={state[anchor]}
+              onClose={toggleDrawer(anchor, false)}
+            >
+              {list(anchor)}
+            </Drawer>
           </React.Fragment>
-          ))}
+        ))}
         <Search>
           <InputBase placeholder='Search...' />
         </Search>
-        {tkn===null?<Typography sx={{display:{ xs: 'none', sm: 'flex' }}} variant='span'>Not Logged In</Typography>:
-        <>
-        <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection:"row" }}>
-          <Box>
-            <IconButton sx={{marginRight:"9px", color:"white"}}><Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge></IconButton>
-          </Box>
-          <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20, objectFit:"cover"}} onClick={e => {
-          tkn!==null?setOpen(true):setOpen(false);
-          }}/></Box>
+        {tkn === null ? <Typography sx={{ display: { xs: 'none', sm: 'flex' } }} variant='span'>Not Logged In</Typography> :
+          <>
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: "row" }}>
+              <Box>
+                <IconButton sx={{ marginRight: "9px", color: "white" }}><Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge></IconButton>
+              </Box>
+              <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20, objectFit: "cover" }} onClick={e => {
+                tkn !== null ? setOpen(true) : setOpen(false);
+              }} /></Box>
           </>}
         <UserBox onClick={e => {
-          tkn!==null?setOpen(true):setOpen(false);
+          tkn !== null ? setOpen(true) : setOpen(false);
         }}>
-          {tkn===null?<Typography sx={{ display: { xs: 'block', sm: 'flex' } }} variant='span'>Not Logged In</Typography>:<Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
-            <img src={profilephoto} alt="profile pic" style={{ objectFit:"cover", width: 40, height: 40, borderRadius: 20}} onClick={e => {
-          tkn!==null?setOpen(true):setOpen(false);
-          }}/></Box>}
+          {tkn === null ? <Typography sx={{ display: { xs: 'block', sm: 'flex' } }} variant='span'>Not Logged In</Typography> : <Box sx={{ display: { xs: 'block', sm: 'flex' } }}>
+            <img src={profilephoto} alt="profile pic" style={{ objectFit: "cover", width: 40, height: 40, borderRadius: 20 }} onClick={e => {
+              tkn !== null ? setOpen(true) : setOpen(false);
+            }} /></Box>}
         </UserBox>
       </StyledToolBar>
       <Menu
@@ -315,7 +314,7 @@ const Navbar = (props) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <MenuItem onClick={profile}>
-        <img src={profilephoto} alt="profile pic" style={{ width: 30, height: 30, borderRadius: 20}}/> <Typography sx={{marginLeft:"10px"}}>{localStorage.getItem('user')}</Typography>
+          <img src={profilephoto} alt="profile pic" style={{ width: 30, height: 30, borderRadius: 20 }} /> <Typography sx={{ marginLeft: "10px" }}>{localStorage.getItem('user')}</Typography>
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout1}>
