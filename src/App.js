@@ -4,8 +4,8 @@ import { Content } from "./componrnts/Content";
 import { Profilr } from "./componrnts/Profile/Profilr";
 import Forgot from "./componrnts/Forgot";
 import NotFound from "./componrnts/NotFound";
-import {ViewPost} from "./componrnts/Profile/ViewPost";
-import {  useState } from "react";
+import { ViewPost } from "./componrnts/Profile/ViewPost";
+import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   Routes,
@@ -26,7 +26,7 @@ function App() {
   var routes = (
     <ThemeProvider theme={darkTheme}>
       <Routes>
-        <Route  path='/:val' element={<Profilr setMode={setMode} mode={mode} />} />
+        <Route path='/view/:val' element={<Profilr setMode={setMode} mode={mode} />} />
         <Route path="/profile" element={<Profilr setMode={setMode} mode={mode} />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Login setMode={setMode} mode={mode} />} />

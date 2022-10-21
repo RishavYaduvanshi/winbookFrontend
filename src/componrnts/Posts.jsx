@@ -103,10 +103,10 @@ const Posts = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         alert({ message: 'Post deleted', type: 'warning' });
-        if(props.st===true){
+        if (props.st === true) {
           history('/home');
         }
-        else{
+        else {
           props.func(true);
         }
       }
@@ -134,7 +134,7 @@ const Posts = (props) => {
 
   const viewprofile = () => {
     //console.log(props.ob.user);
-    history('/' + props.ob.userName + '/');
+    history('/view/' + props.ob.userName + '/');
   }
 
   const copyFunction = (text) => {
@@ -210,7 +210,7 @@ const Posts = (props) => {
       <Card sx={{ margin: 0.5 }}>
         <CardHeader
           avatar={
-            <img src={props.ob.userDp} alt="profile pic" style={{ objectFit:"cover", width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
+            <img src={props.ob.userDp} alt="profile pic" style={{ objectFit: "cover", width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
           }
           action={
             <IconButton aria-label="settings">
@@ -259,7 +259,7 @@ const Posts = (props) => {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton>
-                  <EmojiEmotionsIcon color="error" onClick={
+                    <EmojiEmotionsIcon color="error" onClick={
                       handleClick1
                     } />
                   </IconButton>
