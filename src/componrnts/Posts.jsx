@@ -207,7 +207,7 @@ const Posts = (props) => {
 
   return (
     <>
-      <Card raised sx={{ margin: 0.5, }}>
+      <Card raised sx={{ margin: 0.5 }}>
         <CardHeader
           avatar={
             <img src={props.ob.userDp} alt="profile pic" style={{ objectFit: "cover", width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
