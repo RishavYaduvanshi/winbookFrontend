@@ -6,6 +6,7 @@ import Forgot from "./componrnts/Forgot";
 import NotFound from "./componrnts/NotFound";
 import { ViewPost } from "./componrnts/Profile/ViewPost";
 import { useState } from "react";
+import MainFrnd from "./componrnts/Friends/MainFrnd";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   Routes,
@@ -33,6 +34,7 @@ function App() {
         <Route path="/forgot" element={<Forgot setMode={setMode} mode={mode} />} />
         <Route path="/signup" element={<SignUp setMode={setMode} mode={mode} />} />
         <Route path="/home" element={<Content setMode={setMode} mode={mode} />} />
+        <Route path="/frnd" element={<MainFrnd setMode={setMode} mode={mode} />} />
         <Route path="/post/:val" element={<ViewPost setMode={setMode} mode={mode} />} />
         {/* <Route path="/test" element={<RecipeReviewCard/>} /> */}
       </Routes>

@@ -1,4 +1,4 @@
-import { AccountBox, Article, Group, Home, ModeNight, Person, Settings, Storefront } from '@mui/icons-material'
+import { AccountBox, Article, Group, Home, ModeNight, Person, Settings } from '@mui/icons-material'
 import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -51,32 +51,32 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const Sidebar = ({mode,setMode}) => {
+const Sidebar = ({ mode, setMode }) => {
   const history = useNavigate();
-  var Notifications=0;
+  var Notifications = 0;
 
   return (
-    <Box 
-    flex={1} 
-    p={2}
-    sx={{display:{xs:"none", sm:"block"}, position:"sticky", top:0, bgcolor:"background.paper"}}
+    <Box
+      flex={1}
+      p={2}
+      sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
     >
       <Box position="fixed">
-          <List>
+        <List>
           <ListItem disablePadding >
-            <ListItemButton onClick={()=>{
+            <ListItemButton onClick={() => {
               history("/home")
             }}>
               <ListItemIcon>
-                <Home/>
+                <Home />
               </ListItemIcon>
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={()=>{history('/profile')}}>
+            <ListItemButton onClick={() => { history('/profile') }}>
               <ListItemIcon>
-                <AccountBox/>
+                <AccountBox />
               </ListItemIcon>
               <ListItemText primary="Profile" />
             </ListItemButton>
@@ -84,7 +84,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Article/>
+                <Article />
               </ListItemIcon>
               <ListItemText primary="Pages" />
             </ListItemButton>
@@ -92,7 +92,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Group/>
+                <Group />
               </ListItemIcon>
               <ListItemText primary="Groups" />
             </ListItemButton>
@@ -100,7 +100,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-              <Badge badgeContent={Notifications} color="error" > <NotificationsIcon/></Badge>
+                <Badge badgeContent={Notifications} color="error" > <NotificationsIcon /></Badge>
               </ListItemIcon>
               <ListItemText primary="Alerts" />
             </ListItemButton>
@@ -108,7 +108,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Person/>
+                <Person />
               </ListItemIcon>
               <ListItemText primary="Friends" />
             </ListItemButton>
@@ -116,7 +116,7 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <Settings/>
+                <Settings />
               </ListItemIcon>
               <ListItemText primary="Settings" />
             </ListItemButton>
@@ -124,15 +124,15 @@ const Sidebar = ({mode,setMode}) => {
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                <ModeNight/>
+                <ModeNight />
               </ListItemIcon>
-              {mode==='dark'?<MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e=>{
-                setMode(mode === "light"? "dark":"light");
-                localStorage.setItem("theme", mode === "light"? "dark":"light");
-                }}/>:<MaterialUISwitch sx={{ m: 1 }} onChange={e=>{
-                  setMode(mode === "light"? "dark":"light");
-                  localStorage.setItem("theme", mode === "light"? "dark":"light");
-                }}/>}
+              {mode === 'dark' ? <MaterialUISwitch sx={{ m: 1 }} defaultChecked onChange={e => {
+                setMode(mode === "light" ? "dark" : "light");
+                localStorage.setItem("theme", mode === "light" ? "dark" : "light");
+              }} /> : <MaterialUISwitch sx={{ m: 1 }} onChange={e => {
+                setMode(mode === "light" ? "dark" : "light");
+                localStorage.setItem("theme", mode === "light" ? "dark" : "light");
+              }} />}
             </ListItemButton>
           </ListItem>
         </List>
