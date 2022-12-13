@@ -162,7 +162,7 @@ const Navbar = (props) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={handleClick3}>
             <ListItemIcon>
               <Badge badgeContent={noti} color="error" ><NotificationsIcon /></Badge>
             </ListItemIcon>
