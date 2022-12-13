@@ -98,14 +98,6 @@ const Sidebar = ({ mode, setMode }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <Badge badgeContent={Notifications} color="error" > <NotificationsIcon /></Badge>
-              </ListItemIcon>
-              <ListItemText primary="Alerts" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
             <ListItemButton onClick={() => { history('/frnd') }} >
               <ListItemIcon>
                 <Person />
