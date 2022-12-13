@@ -335,6 +335,8 @@ const Navbar = (props) => {
             }} /></Box>}
         </UserBox>
       </StyledToolBar>
+
+      {/* Menu for Profile */}
       <Menu
         id="account-menu"
         open={Open}
@@ -391,6 +393,8 @@ const Navbar = (props) => {
           Logout
         </MenuItem>
       </Menu>
+
+      {/* Menu for Notifications */}
 
       <Menu
         open={open3}

@@ -24,12 +24,12 @@ function App() {
     },
   });
 
-  useEffect(() => {
-    addNotification({
-      title: 'Warning',
-      native: true
-    })
-  }, []);
+  // useEffect(() => {
+  //   addNotification({
+  //     title: 'Warning',
+  //     native: true
+  //   })
+  // }, []);
 
 
 
