@@ -2,31 +2,32 @@ import React from 'react'
 import { useState } from 'react';
 import { Main } from './Main';
 import { useEffect } from 'react';
-import  Unauthorized  from './Unauthorized';
+import Unauthorized from './Unauthorized';
 
 
-export const Content = ({mode,setMode}) => {
+export const Content = ({ mode, setMode }) => {
 
 
-  const[logindata,setLogindata] = useState([]);
-    const calllogin = () => {
+  const [logindata, setLogindata] = useState([]);
+  const calllogin = () => {
     var authtoken = localStorage.getItem("authtoken");
-    if(authtoken && authtoken.length){
+    if (authtoken && authtoken.length) {
       setLogindata(authtoken);
     }
+    //console.log(logindata);
   }
-    useEffect(() => {
-      calllogin();
-    },[])
-    
+  useEffect(() => {
+    calllogin();
+  }, [])
+
   return (
     <>
-    {
-      logindata.length === 0 ?<Unauthorized/>:
-      <>
-      <Main setMode={setMode} mode={mode}/>
-      </>
-    }
+      {
+        logindata.length === 0 ? <Unauthorized /> :
+          <>
+            <Main setMode={setMode} mode={mode} />
+          </>
+      }
     </>
   )
 }

@@ -5,6 +5,7 @@ import FriendsSidebar from './FriendsSidebar'
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Unauthorized from '../Unauthorized';
+import FrndContent from './FrndContent';
 
 const MainFrnd = (props) => {
 
@@ -27,6 +28,7 @@ const MainFrnd = (props) => {
                     {/* <Typography>Friends</Typography> */}
                     <Stack direction="row" spacing={2} sx={{ p: 2 }}>
                         <FriendsSidebar mode={props.mode} setMode={props.setMode} />
+                        <FrndContent mode={props.mode} setMode={props.setMode} />
                     </Stack>
                 </>
         }

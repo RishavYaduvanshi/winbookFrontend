@@ -59,7 +59,7 @@ const Sidebar = ({ mode, setMode }) => {
     <Box
       flex={1}
       p={2}
-      sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
+      sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper", }}
     >
       <Box position="fixed">
         <List>
@@ -106,7 +106,7 @@ const Sidebar = ({ mode, setMode }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => { history('/frnd') }} >
               <ListItemIcon>
                 <Person />
               </ListItemIcon>

@@ -1,7 +1,8 @@
 import React from 'react'
-import { Person, ModeNight } from '@mui/icons-material'
+import { Person, ModeNight, Home } from '@mui/icons-material'
 import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { useNavigate } from 'react-router-dom'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -51,10 +52,22 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const FriendsSidebar = ({ mode, setMode }) => {
+    const history = useNavigate();
     return (
-        <>
-            <Box position="fixed">
+        <Box
+            flex={1}
+            sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
+        >
+            <Box position="fixed" >
                 <List>
+                    <ListItem disablePadding>
+                        <ListItemButton onClick={() => { history('/home') }} >
+                            <ListItemIcon>
+                                <Home />
+                            </ListItemIcon>
+                            <ListItemText primary="Home" />
+                        </ListItemButton>
+                    </ListItem>
                     <ListItem disablePadding>
                         <ListItemButton >
                             <ListItemIcon>
@@ -87,7 +100,7 @@ const FriendsSidebar = ({ mode, setMode }) => {
                     </ListItem>
                 </List>
             </Box>
-        </>
+        </Box>
     )
 }
 

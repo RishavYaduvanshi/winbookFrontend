@@ -5,13 +5,15 @@ import { Profilr } from "./componrnts/Profile/Profilr";
 import Forgot from "./componrnts/Forgot";
 import NotFound from "./componrnts/NotFound";
 import { ViewPost } from "./componrnts/Profile/ViewPost";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MainFrnd from "./componrnts/Friends/MainFrnd";
 import { createTheme, ThemeProvider } from "@mui/material";
 import {
   Routes,
   Route,
 } from "react-router-dom";
+import addNotification from "react-push-notification";
+import { Notifications } from "react-push-notification";
 
 
 function App() {
@@ -21,6 +23,13 @@ function App() {
       mode: mode,
     },
   });
+
+  useEffect(() => {
+    addNotification({
+      title: 'Warning',
+      native: true
+    })
+  }, []);
 
 
 

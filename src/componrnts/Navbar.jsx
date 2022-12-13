@@ -14,6 +14,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
+import NotifyCard from './NotifyCard';
 
 const StyledToolBar = styled(Toolbar)({
   display: "flex",
@@ -77,9 +78,26 @@ const UserBox = styled(Box)(({ theme }) => ({
     display: "none",
   },
 }));
-var Noticications = 0;
+
+
+// ++++++++++++++++++++++++++++++=================NAVBAR============++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
 const Navbar = (props) => {
+  const [anchorEl3, setAnchorEl3] = React.useState(null);
+  const open3 = Boolean(anchorEl3);
+  const [notifications, setNotifications] = React.useState([]);
+  const [data1, setData1] = React.useState(true);
+  const [noti, setNoti] = React.useState(0);
+
+
+  const handleClick3 = (event) => {
+    setAnchorEl3(event.currentTarget);
+  };
+  const handleClose3 = () => {
+    setAnchorEl3(null);
+  };
 
 
   const [state, setState] = React.useState({
@@ -146,7 +164,7 @@ const Navbar = (props) => {
         <ListItem disablePadding>
           <ListItemButton>
             <ListItemIcon>
-              <Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge>
+              <Badge badgeContent={noti} color="error" ><NotificationsIcon /></Badge>
             </ListItemIcon>
             <ListItemText primary="Alerts" />
           </ListItemButton>
@@ -241,6 +259,43 @@ const Navbar = (props) => {
     }
   }, [props.status]);
 
+  useEffect(() => {
+    // console.log("useEffect");
+    if (localStorage.getItem('authtoken') !== null) {
+      fetch('https://winbookbackend.d3m0n1k.engineer/notification/', {
+        method: 'GET',
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Token " + localStorage.getItem('authtoken')
+        },
+      }).then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            setNotifications(data.results);
+            // console.log(data.results);
+            var count = 0;
+            notifications.map((item) => {
+              if (item.isRead === false) {
+                count = count + 1;
+              }
+            })
+            setNoti(count);
+            console.log(count);
+          })
+        }
+      })
+    }
+  }, [[], data1]);
+
+  const pull = (dat) => {
+
+    if (data1 === true) {
+      setData1(false);
+    } else {
+      setData1(true);
+    }
+    // console.log(data1);
+  }
 
   return (
     <AppBar position='sticky' sx={{ width: '100%' }}>
@@ -265,7 +320,7 @@ const Navbar = (props) => {
           <>
             <Box sx={{ display: { xs: 'none', sm: 'flex' }, flexDirection: "row" }}>
               <Box>
-                <IconButton sx={{ marginRight: "9px", color: "white" }}><Badge badgeContent={Noticications} color="error" ><NotificationsIcon /></Badge></IconButton>
+                <IconButton sx={{ marginRight: "9px", color: "white" }} onClick={handleClick3} ><Badge badgeContent={noti} color="error" ><NotificationsIcon /></Badge></IconButton>
               </Box>
               <img src={profilephoto} alt="profile pic" style={{ width: 40, height: 40, borderRadius: 20, objectFit: "cover" }} onClick={e => {
                 tkn !== null ? setOpen(true) : setOpen(false);
@@ -336,6 +391,38 @@ const Navbar = (props) => {
           Logout
         </MenuItem>
       </Menu>
+
+      <Menu
+        open={open3}
+        onClose={handleClose3}
+        anchorEl={anchorEl3}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <Box sx={{ width: 340, height: "auto", overflow: "auto" }}>
+          <Typography variant='h6' sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>Notifications</Typography>
+          <>
+            <Divider />
+            {
+              notifications.length === 0 ? <Typography sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>No Notifications</Typography> : <></>
+            }
+          </>
+          <>
+            {
+              notifications.map((item) => {
+                return <NotifyCard ob={item} func={pull} />
+              })
+            }
+          </>
+        </Box>
+      </Menu>
+
     </AppBar>
   )
 }

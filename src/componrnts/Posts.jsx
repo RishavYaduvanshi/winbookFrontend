@@ -204,7 +204,6 @@ const Posts = (props) => {
   };
 
 
-
   return (
     <>
       <Card raised sx={{ margin: 0.5 }}>
@@ -226,7 +225,7 @@ const Posts = (props) => {
           height="20%"
           image={props.ob.url}
           alt={props.ob.userName}
-          sx={{ objectFit: "contain", cursor: "pointer", maxHeight: 400, }}
+          sx={{ objectFit: "contain", cursor: "pointer", maxHeight: 400 }}
           onClick={() => history('/post/' + props.ob.pk + '/')}
         /></>}
         <CardContent>
