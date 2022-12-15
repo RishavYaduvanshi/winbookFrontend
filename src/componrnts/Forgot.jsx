@@ -13,7 +13,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 const Forgot = ({ mode, setMode }) => {
   document.title = "Winbook | Forgot Password";
-  var auth,eml;
+  var auth, eml;
   const [passwordType, setPasswordType] = useState("password");
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordInput1, setPasswordInput1] = useState("");
@@ -25,7 +25,7 @@ const Forgot = ({ mode, setMode }) => {
   if (auth !== 'undefined' || eml !== 'undefined') {
     eml = emailInput;
     auth = null;
-  }else{
+  } else {
     eml = searchParams.get('email');
     auth = searchParams.get('token');
   }
@@ -79,29 +79,29 @@ const Forgot = ({ mode, setMode }) => {
     setstate(true);
     var fd = {};
     fd.email = eml;
-    if(eml===""){
+    if (eml === "") {
       alert({ message: 'Please enter your email', type: 'warning' });
     }
-    else{
-    //console.log(JSON.stringify(fd));
-    fetch("https://winbookbackend.d3m0n1k.engineer/forgot/", {
-      method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      body:JSON.stringify(fd),
-    }).then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          alert({ message: data.error, type: 'error' });
-          setstate(false);
-        }
-        else {
-          alert({ message: 'Confirmation email sent', type: 'success' });
-          setstate(false);
-          document.getElementById("email").value = "";
-        }
-      });
+    else {
+      //console.log(JSON.stringify(fd));
+      fetch("https://winbookbackend.d3m0n1k.engineer/forgot/", {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: JSON.stringify(fd),
+      }).then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert({ message: data.error, type: 'error' });
+            setstate(false);
+          }
+          else {
+            alert({ message: 'Confirmation email sent', type: 'success' });
+            setstate(false);
+            document.getElementById("email").value = "";
+          }
+        });
     }
   }
 
@@ -138,7 +138,7 @@ const Forgot = ({ mode, setMode }) => {
 
           }}>
             {typeof searchParams.get("token") !== 'undefined' && searchParams.get("token") !== null ? <>
-              <TextField type={passwordType} id="password" name="password" onChange={handlePasswordChange_} label="New Password" variant="outlined" required fullWidth
+              <TextField autoFocus type={passwordType} id="password" name="password" onChange={handlePasswordChange_} label="New Password" variant="outlined" required fullWidth
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -147,7 +147,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton>: <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton> : <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -162,7 +162,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> :<IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> : <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -171,7 +171,7 @@ const Forgot = ({ mode, setMode }) => {
               <Button variant="contained" color="primary" sx={{ marginBottom: 7 }} onClick={resetpass}>
                 Change Password
               </Button>
-              {state?<LinearProgress/>:<></>}
+              {state ? <LinearProgress /> : <></>}
             </> : <>
               <TextField id="email" type="email" name="email" onChange={emailchange} label="Enter your Email" variant="outlined" required fullWidth
                 InputProps={{
@@ -190,7 +190,7 @@ const Forgot = ({ mode, setMode }) => {
                 marginBottom: 7,
               }} onClick={resetp}>
                 Submit
-              </Button>{state?<LinearProgress/>:<></>}</>}
+              </Button>{state ? <LinearProgress /> : <></>}</>}
           </Box>
         </Card>
       </Box>
@@ -232,7 +232,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> :<IconButton> <VisibilityOffIcon onClick={togglePassword} /></IconButton>}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /></IconButton> : <IconButton> <VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -247,7 +247,7 @@ const Forgot = ({ mode, setMode }) => {
                   ),
                   endAdornment: (
                     <InputAdornment position="end">
-                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton>: <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
+                      {passwordType === "password" ? <IconButton><VisibilityIcon onClick={togglePassword} /> </IconButton> : <IconButton><VisibilityOffIcon onClick={togglePassword} /></IconButton>}
                     </InputAdornment>
                   )
                 }}
@@ -256,7 +256,7 @@ const Forgot = ({ mode, setMode }) => {
               <Button variant="contained" color="primary" sx={{ marginBottom: 7 }} onClick={resetpass}>
                 Change Password
               </Button>
-              {state?<LinearProgress/>:<></>}
+              {state ? <LinearProgress /> : <></>}
             </> : <>
               <TextField id="email" name="email" type="email" onChange={emailchange} label="Enter your Email" variant="outlined" required fullWidth
                 InputProps={{
@@ -275,7 +275,7 @@ const Forgot = ({ mode, setMode }) => {
                 marginBottom: 7,
               }} onClick={resetp}>
                 Submit
-              </Button>{state?<LinearProgress/>:<></>}</>}
+              </Button>{state ? <LinearProgress /> : <></>}</>}
           </Box>
         </Card>
       </Box>
