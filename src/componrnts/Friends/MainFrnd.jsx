@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material'
+import { Stack, Typography, Box } from '@mui/material'
 import React from 'react'
 import Navbar from '../Navbar'
 import FriendsSidebar from './FriendsSidebar'
@@ -24,12 +24,14 @@ const MainFrnd = (props) => {
         <>{
             logindata.length === 0 ? <Unauthorized /> :
                 <>
-                    <Navbar setMode={props.setMode} mode={props.mode} />
-                    {/* <Typography>Friends</Typography> */}
-                    <Stack direction="row" spacing={2} sx={{ p: 2 }}>
-                        <FriendsSidebar mode={props.mode} setMode={props.setMode} />
-                        <FrndContent mode={props.mode} setMode={props.setMode} />
-                    </Stack>
+                    <Box bgcolor={"background.default"} color={"text.primary"}>
+                        <Navbar setMode={props.setMode} mode={props.mode} />
+                        {/* <Typography>Friends</Typography> */}
+                        <Stack direction="row" justifyContent="space-between" spacing={2} sx={{ p: 2 }}>
+                            <FriendsSidebar mode={props.mode} setMode={props.setMode} />
+                            <FrndContent mode={props.mode} setMode={props.setMode} />
+                        </Stack>
+                    </Box>
                 </>
         }
         </>

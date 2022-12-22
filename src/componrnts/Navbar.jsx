@@ -280,7 +280,7 @@ const Navbar = (props) => {
               }
             })
             setNoti(count);
-            console.log(count);
+            // console.log(count);
           })
         }
       })
