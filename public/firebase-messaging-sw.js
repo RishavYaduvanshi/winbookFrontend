@@ -14,16 +14,16 @@ firebase.initializeApp({
     messagingSenderId: "782389588592",
 })
 
-const initMessaging = firebase.messaging()
+const messaging = firebase.messaging()
 
-messaging.onBackgroundMessage(function (payload) {
-    console.log('Received background message ', payload);
+// messaging.onBackgroundMessage(function (payload) {
+//     console.log('Received background message ', payload);
 
-    const notificationTitle = payload.notification.title;
-    const notificationOptions = {
-        body: payload.notification.body,
-    };
+//     const notificationTitle = payload.notification.title;
+//     const notificationOptions = {
+//         body: payload.notification.body,
+//     };
 
-    self.registration.showNotification(notificationTitle,
-        notificationOptions);
-});
+//     self.registration.showNotification(notificationTitle,
+//         notificationOptions);
+// });

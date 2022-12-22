@@ -56,8 +56,7 @@ const FriendsSidebar = ({ mode, setMode }) => {
     return (
         <Box
             flex={1}
-            p={2}
-            sx={{ display: { xs: "none", md: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
+            sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
         >
             <Box position="fixed" >
                 <List>
