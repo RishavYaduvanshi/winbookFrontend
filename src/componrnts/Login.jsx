@@ -16,7 +16,6 @@ import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import LinearProgress from '@mui/material/LinearProgress';
 import logo from '../resources/wibrant1.png';
-import { initMessaging } from '../messaging';
 
 export const Login = ({ mode, setMode }) => {
   document.title = "Wibrant";
@@ -138,15 +137,6 @@ export const Login = ({ mode, setMode }) => {
             >
 
               Sign In
-            </Button>
-
-            <Button
-              onClick={() => initMessaging()}
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              ENABLE NOTIFICATIONS
             </Button>
 
             <Grid container>
