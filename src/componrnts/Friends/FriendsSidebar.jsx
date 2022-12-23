@@ -1,6 +1,6 @@
 import React from 'react'
 import { Person, ModeNight, Home } from '@mui/icons-material'
-import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
+import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import { useNavigate } from 'react-router-dom'
 
@@ -56,9 +56,13 @@ const FriendsSidebar = ({ mode, setMode }) => {
     return (
         <Box
             flex={1}
-            sx={{ display: { xs: "none", sm: "block" }, position: "sticky", top: 0, bgcolor: "background.paper" }}
+            sx={{
+                display: { xs: "none", sm: "block" }, position: "sticky",
+                top: 0, bgcolor: "background.paper", height: "100vh", overflow: "auto",
+                borderRight: "1px solid rgba(0, 0, 0, 0.12)", minWidth: "30vh"
+            }}
         >
-            <Box position="fixed" >
+            <Box  >
                 <List>
                     <ListItem disablePadding>
                         <ListItemButton onClick={() => { history('/home') }} >

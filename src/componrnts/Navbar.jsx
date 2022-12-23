@@ -170,7 +170,7 @@ const Navbar = (props) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => { history('/frnd') }}>
             <ListItemIcon>
               <Person />
             </ListItemIcon>
