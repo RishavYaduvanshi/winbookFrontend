@@ -12,7 +12,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import { initMessaging } from "./messaging";
 // import addNotification from "react-push-notification";
 // import { Notifications } from "react-push-notification";
 
@@ -27,10 +26,6 @@ function App() {
       mode: mode,
     },
   });
-
-  useEffect(() => {
-    initMessaging();
-  }, []);
 
 
   var routes = (

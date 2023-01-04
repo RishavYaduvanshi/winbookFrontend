@@ -285,7 +285,7 @@ const Navbar = (props) => {
         }
       })
     }
-  }, [notifications, data1]);
+  }, [data1]);
 
   const pull = (dat) => {
 

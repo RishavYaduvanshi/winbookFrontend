@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Main } from './Main';
 import { useEffect } from 'react';
 import Unauthorized from './Unauthorized';
+import { initMessaging } from '../messaging';
 
 
 export const Content = ({ mode, setMode }) => {
@@ -18,6 +19,7 @@ export const Content = ({ mode, setMode }) => {
   }
   useEffect(() => {
     calllogin();
+    initMessaging();
   }, [])
 
   return (
