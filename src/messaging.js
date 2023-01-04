@@ -15,33 +15,39 @@ const registerDevice = (token) => {
         return response.json();
     }).then((data) => {
         console.log(data);
-        data.forEach((element) => {
-            if (element.registration_id === token) {
-                console.log("device already registered");
-                return;
-            }
-        });
+        var registered = false;
 
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": "Token " + localStorage.getItem('authtoken')
-            },
-            body: JSON.stringify({
-                "registration_id": token,
-                "name": String(navigator.userAgent),
-                "cloud_message_type": "FCM",
-            })
-        }).then((response) => {
-            console.log(response);
-            if (response.status === 201) {
-                console.log("device registered");
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].registration_id === token) {
+                console.log("device already registered");
+                registered = true;
             }
-        }).catch((error) => {
-            console.error(error);
-        });
+        }
+
+        if (!registered) {
+            console.log("registering device");
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "Token " + localStorage.getItem('authtoken')
+                },
+                body: JSON.stringify({
+                    "registration_id": token,
+                    "name": String(navigator.userAgent),
+                    "cloud_message_type": "FCM",
+                })
+            }).then((response) => {
+                console.log(response);
+                if (response.status === 201) {
+                    console.log("device registered");
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
 
     });
 
