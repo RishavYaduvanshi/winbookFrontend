@@ -15,6 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotifyCard from './NotifyCard';
+import SearchCars from './Friends/SearchCars';
 
 const StyledToolBar = styled(Toolbar)({
   display: "flex",
@@ -90,13 +91,22 @@ const Navbar = (props) => {
   const [notifications, setNotifications] = React.useState([]);
   const [data1, setData1] = React.useState(true);
   const [noti, setNoti] = React.useState(0);
+  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const open1 = Boolean(anchorEl1);
 
 
   const handleClick3 = (event) => {
     setAnchorEl3(event.currentTarget);
   };
+  const handleClick1 = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
   const handleClose3 = () => {
     setAnchorEl3(null);
+  };
+  const handleClose1 = () => {
+    setAnchorEl1(null);
+    setSearch([]);
   };
 
 
@@ -202,9 +212,9 @@ const Navbar = (props) => {
       </List>
     </Box>
   );
-
-
+  const history = useNavigate();
   const tkn = localStorage.getItem('authtoken')
+  const [search, setSearch] = useState([]);
   var background = "";
   const [Open, setOpen] = useState(false);
   const [profilephoto, setprofilephoto] = useState();
@@ -214,8 +224,6 @@ const Navbar = (props) => {
   else {
     background = "#1a1a1a";
   }
-
-  const history = useNavigate();
   const logout = () => {
     localStorage.clear();
     history("/");
@@ -236,7 +244,7 @@ const Navbar = (props) => {
     backgroundColor: background,
     padding: "0 10px",
     borderRadius: theme.shape.borderRadius,
-    width: "40%"
+    width: "40%",
   }));
 
   useEffect(() => {
@@ -285,7 +293,7 @@ const Navbar = (props) => {
         }
       })
     }
-  }, [notifications, data1]);
+  }, [data1]);
 
   const pull = (dat) => {
 
@@ -295,6 +303,31 @@ const Navbar = (props) => {
       setData1(true);
     }
     // console.log(data1);
+  }
+
+  const searchFrnd = async (e) => {
+    e.preventDefault();
+    var search = document.getElementById('src').value;
+    fetch('https://winbookbackend.d3m0n1k.engineer/user/s/' + search + '/', {
+      method: 'GET',
+      headers: {
+        "Accept": "application/json",
+      },
+    }).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        response.json().then((data) => {
+          //console.log(data.results);
+          setSearch(data.results);
+
+        })
+      }
+    }
+    )
+    handleClick1(e);
+  }
+
+  const pulldat = (data) => {
+    setAnchorEl1(null);
   }
 
   return (
@@ -313,8 +346,10 @@ const Navbar = (props) => {
             </Drawer>
           </React.Fragment>
         ))}
-        <Search>
-          <InputBase placeholder='Search...' />
+        <Search >
+          <Box component="form" noValidate onSubmit={searchFrnd}>
+            <InputBase name="src" id="src" placeholder='Search...' />
+          </Box>
         </Search>
         {tkn === null ? <Typography sx={{ display: { xs: 'none', sm: 'flex' } }} variant='span'>Not Logged In</Typography> :
           <>
@@ -421,6 +456,84 @@ const Navbar = (props) => {
             {
               notifications.map((item) => {
                 return <NotifyCard ob={item} func={pull} />
+              })
+            }
+          </>
+        </Box>
+      </Menu>
+
+      {/* Menu for Desktop Search */}
+      <Menu
+        sx={{
+          width: 500, height: "auto", overflow: "auto",
+          top: "40px",
+          left: "34%",
+          display: { xs: "none", sm: "block" }
+        }}
+        open={open1}
+        onClose={handleClose1}
+        anchorEl={anchorEl1}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <Box sx={{ width: 340, height: "auto", overflow: "auto" }}>
+          <Typography variant='h6' sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>Search Results</Typography>
+          <>
+            <Divider />
+            {
+              search.length === 0 ? <Typography sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>No Results</Typography> : <></>
+            }
+          </>
+          <>
+
+            {
+              search.map((item) => {
+                return <SearchCars ob={item} func={pulldat} />
+              })
+            }
+          </>
+        </Box>
+      </Menu>
+      {/* Menu for Mobile Search */}
+      <Menu
+        sx={{
+          width: "auto", height: "auto", overflow: "auto",
+          top: "40px",
+          left: "1px",
+          right: "1px",
+          display: { xs: "block", sm: "none" }
+        }}
+        open={open1}
+        onClose={handleClose1}
+        anchorEl={anchorEl1}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <Box sx={{ width: 340, height: "auto", overflow: "auto" }}>
+          <Typography variant='h6' sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>Search Results</Typography>
+          <>
+            <Divider />
+            {
+              search.length === 0 ? <Typography sx={{ marginLeft: "10px", marginTop: "10px", marginBottom: "10px" }}>No Results</Typography> : <></>
+            }
+          </>
+          <>
+
+            {
+              search.map((item) => {
+                return <SearchCars ob={item} />
               })
             }
           </>

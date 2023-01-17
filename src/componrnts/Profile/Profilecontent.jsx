@@ -1,4 +1,4 @@
-import { Box, Button, LinearProgress } from '@mui/material'
+import { Box, Button, Card, CardContent, LinearProgress } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Share from '../share/Share'
 import { Modal, styled, Typography, TextField, ButtonGroup } from '@mui/material';
@@ -53,6 +53,9 @@ const Profilecontent = (props) => {
   const [id, setid] = useState();
   const [state, setstate] = useState(false);
   const [reload, setreload] = useState(false);
+  const [follow, setfollow] = useState(0);
+  const [followed, setfollowed] = useState(0);
+  const [Posts, setPosts] = useState(0);
 
 
   // if(localStorage.getItem('user') === name){
@@ -78,6 +81,9 @@ const Profilecontent = (props) => {
           setprofilephoto(data.dp);
           setcoverphoto(data.cover);
           setname(data.username);
+          setPosts(data.posts.length);
+          setfollow(data.following_count);
+          setfollowed(data.follower_count);
         })
       }
       else {
@@ -282,6 +288,43 @@ const Profilecontent = (props) => {
             </Box>
           </Box>
         </Box>
+      </Box>
+      <Box>
+        <br></br>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Box sx={{ width: "10%" }}></Box>
+          <Card sx={{ width: "10%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {Posts}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Posts
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card sx={{ width: "10%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {followed}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Followers
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card sx={{ width: "10%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {follow}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Following
+              </Typography>
+            </CardContent>
+          </Card>
+          <Box sx={{ width: "10%" }}></Box>
+        </Stack>
       </Box>
       <UserBox>
         <Share reload={reload} />

@@ -25,16 +25,16 @@ const CardFrnd = () => {
                         Description
                     </Typography>
                 </CardContent>
-                <CardActions>
+                {/* <CardActions>
                     <ButtonGroup disableElevation variant='contained' sx={{ display: { xs: "none", sm: "flex" } }} >
-                        <Button color="primary" sx={{ marginRight: "2px" }} >Confirm</Button>
+                        <Button color="primary" sx={{ marginRight: "2px" }} >Accept</Button>
                         <Button color="error" sx={{ marginLeft: "2px" }} >Delete</Button>
                     </ButtonGroup>
                     <ButtonGroup orientation='vertical' disableElevation variant='contained' sx={{ display: { xs: "flex", sm: "none" } }} >
-                        <Button color="primary" sx={{ marginBottom: "2px" }} >Confirm</Button>
+                        <Button color="primary" sx={{ marginBottom: "2px" }} >Accept</Button>
                         <Button color="error" sx={{ marginTop: "2px" }} >Delete</Button>
                     </ButtonGroup>
-                </CardActions>
+                </CardActions> */}
             </Card>
         </>
     )

@@ -73,7 +73,7 @@ const FriendsSidebar = ({ mode, setMode }) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                        <ListItemButton >
+                        <ListItemButton>
                             <ListItemIcon>
                                 <Person />
                             </ListItemIcon>
@@ -85,7 +85,7 @@ const FriendsSidebar = ({ mode, setMode }) => {
                             <ListItemIcon>
                                 <GroupAddIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Friend Requests" />
+                            <ListItemText primary="Pending Requests" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
