@@ -291,40 +291,80 @@ const Profilecontent = (props) => {
       </Box>
       <Box>
         <br></br>
-        <Stack direction="row" spacing={2} justifyContent="space-between">
+
+        {/** DesktopView*/}
+        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{ display: { xs: "none", sm: "flex" } }}>
           <Box sx={{ width: "10%" }}></Box>
           <Card sx={{ width: "10%" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" textAlign="center" >
                 {Posts}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" textAlign="center">
                 Posts
               </Typography>
             </CardContent>
           </Card>
           <Card sx={{ width: "10%" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" textAlign="center">
                 {followed}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" textAlign="center">
                 Followers
               </Typography>
             </CardContent>
           </Card>
           <Card sx={{ width: "10%" }}>
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography gutterBottom variant="h5" component="div" textAlign="center">
                 {follow}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography variant="body2" color="text.secondary" textAlign="center">
                 Following
               </Typography>
             </CardContent>
           </Card>
           <Box sx={{ width: "10%" }}></Box>
         </Stack>
+
+        {/**Mobile View */}
+        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{ display: { xs: "flex", sm: "none" } }}>
+          <Box sx={{ width: "3%" }}></Box>
+          <Card sx={{ width: "25%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" textAlign="center">
+                {Posts}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" textAlign="center">
+                Posts
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card sx={{ width: "25%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" textAlign="center">
+                {followed}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" textAlign="center">
+                Followers
+              </Typography>
+            </CardContent>
+          </Card>
+          <Card sx={{ width: "25%" }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" textAlign="center">
+                {follow}
+              </Typography>
+              <Typography variant="body2" color="text.secondary" textAlign="center">
+                Following
+              </Typography>
+            </CardContent>
+          </Card>
+          <Box sx={{ width: "3%" }}></Box>
+        </Stack>
+
+
       </Box>
       <UserBox>
         <Share reload={reload} />
