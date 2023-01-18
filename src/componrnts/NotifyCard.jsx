@@ -1,12 +1,25 @@
-import { Box, Card, CardActions, CardHeader, CardMedia, IconButton } from '@mui/material'
+import { Box, Card, CardActions, CardMedia, IconButton } from '@mui/material'
 import React from 'react'
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        "& :hover": {
+            backgroundColor: "#e1e6e8",
+        }
+    },
+
+}));
 
 const NotifyCard = (props) => {
     // console.log(props);
+    const classes = useStyles();
 
     const handleclick = () => {
         fetch('https://winbookbackend.d3m0n1k.engineer/notification/' + props.ob.id + '/', {
@@ -39,7 +52,7 @@ const NotifyCard = (props) => {
         <>
             {
                 props.ob.isRead === true ? <>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Box className={classes.root}>
                         <Card sx={{ cursor: 'pointer', display: 'flex', maxWidth: "auto", marginTop: "5px" }}>
                             <CardMedia
                                 component="img"
@@ -67,7 +80,7 @@ const NotifyCard = (props) => {
                         </Card>
                     </Box>
                 </> : <>
-                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Box className={classes.root}>
                         <Card sx={{ cursor: 'pointer', display: 'flex', maxWidth: "auto", marginTop: "5px", backgroundColor: '#b9dbed' }} onClick={handleclick}>
                             <CardMedia
                                 component="img"

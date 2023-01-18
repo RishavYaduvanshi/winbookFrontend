@@ -56,6 +56,7 @@ const Profilecontent = (props) => {
   const [follow, setfollow] = useState(0);
   const [followed, setfollowed] = useState(0);
   const [Posts, setPosts] = useState(0);
+  const [status, setstatus] = useState();
 
 
   // if(localStorage.getItem('user') === name){
@@ -75,7 +76,7 @@ const Profilecontent = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
-          //console.log(data);
+          // console.log(data);
           setbio(data.bio);
           setid(data.id);
           setprofilephoto(data.dp);
@@ -84,6 +85,7 @@ const Profilecontent = (props) => {
           setPosts(data.posts.length);
           setfollow(data.following_count);
           setfollowed(data.follower_count);
+          setstatus(data.following);
         })
       }
       else {
@@ -91,6 +93,30 @@ const Profilecontent = (props) => {
       }
     })
   }, [props.name, reload, history]);
+
+
+  const followFunc = () => {
+    fetch('https://winbookbackend.d3m0n1k.engineer/user/' + id + '/follow/', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Authorization": "Token " + localStorage.getItem('authtoken')
+      },
+    }).then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        response.json().then((data) => {
+          setfollow(data.follow_count);
+          if (data.message == 'followed') {
+            setstatus(true);
+          }
+          else {
+            setstatus(false);
+          }
+
+        });
+      }
+    })
+  }
 
 
 
@@ -112,7 +138,7 @@ const Profilecontent = (props) => {
     }).then(
       (response) => response.json()).then(
         (data) => {
-          console.log(data);
+          //console.log(data);
           setbio(data.bio);
 
         })
@@ -259,7 +285,7 @@ const Profilecontent = (props) => {
 
 
   return (
-    <Box flex={6} paddingTop={1}>
+    <Box flex={6} paddingTop={1} sx={{ margin: "2px" }}>
       <Box className="profile" >
         <Box className="profileRight">
           <Box className="profileRightTop">
@@ -281,13 +307,54 @@ const Profilecontent = (props) => {
                 aria-expanded={Open ? 'true' : undefined}
                 onClick={handleClick} /> : <></>}
               {localStorage.getItem('user') === name ? <Button variant="outlined" color="primary" className="butn" onClick={() => { setOpen2(true) }}>Update Cover</Button> : <></>}
+              {localStorage.getItem('user') !== name ? <>
+                {status ? <>
+                  <Button variant="outlined" color="primary"
+                    sx={{
+                      display: { sm: "inline-flex", xs: "none" },
+                      left: "45%",
+                      top: "20px"
+                    }} onClick={followFunc} >Following</Button>
+                  <Button variant="outlined" color="primary"
+                    sx={{
+                      display: { sm: "none", xs: "inline-flex" },
+                      left: "64%",
+                    }} onClick={followFunc} >Following</Button>
+                </> : <>
+                  <Button variant="outlined" color="primary"
+                    sx={{
+                      display: { sm: "inline-flex", xs: "none" },
+                      left: "46%",
+                      top: "20px"
+                    }} onClick={followFunc} >Follow</Button>
+                  <Button variant="outlined" color="primary"
+                    sx={{
+                      display: { sm: "none", xs: "inline-flex" },
+                      left: "70%",
+                    }} onClick={followFunc} >Follow</Button>
+                </>
+                }
+              </> :
+                <></>
+              }
             </Box>
-            <Box className="profileInfo">
-              <h4 className="profileInfoName">{localStorage.getItem('user') === props.name ? localStorage.getItem('user') : props.name}</h4>
-              <Box className="profileInfoDesc">{bio}{localStorage.getItem('user') === name ? <EditIcon color='secondary' onClick={() => { setOpen(true) }} /> : <></>}</Box>
-            </Box>
+
           </Box>
         </Box>
+      </Box>
+      <Box className="profileInfo">
+        <h4 className="profileInfoName">{localStorage.getItem('user') === props.name ? localStorage.getItem('user') : props.name}</h4>
+        <Stack direction="row">
+          <Box sx={{
+            fontWeight: "300",
+            height: "auto",
+            width: "100%"
+          }}>
+            {bio}
+          </Box>
+          {localStorage.getItem('user') === name ?
+            <EditIcon color='secondary' onClick={() => { setOpen(true) }} /> : <></>}
+        </Stack>
       </Box>
       <Box>
         <br></br>
