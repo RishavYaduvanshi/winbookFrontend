@@ -126,7 +126,7 @@ const Add = (props) => {
         <Box bgcolor={"background.default"} color={"text.primary"} height={320} p={3} borderRadius={5} width={400}>
           <Typography variant='h6' color="gray" textAlign="center">Create Post</Typography>
           <Userbox>
-            <img alt="" src={localStorage.getItem('profile')} height="40px" width="40px" sx={{ borderRadius: "50%", objectFit: "cover" }} />
+            <img alt="" src={localStorage.getItem('profile')} height="40px" width="40px" style={{ borderRadius: "50%", objectFit: "cover" }} />
             <Typography variant='span' fontWeight={500}>{localStorage.getItem("user")}</Typography>
           </Userbox>
           <TextField

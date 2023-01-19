@@ -406,7 +406,7 @@ const Navbar = (props) => {
         anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
       >
         <MenuItem onClick={profile}>
-          <img src={profilephoto} alt="profile pic" sx={{ width: 30, height: 30, borderRadius: 20, objectFit: "cover" }} /> <Typography sx={{ marginLeft: "10px" }}>{localStorage.getItem('user')}</Typography>
+          <img src={profilephoto} alt="profile pic" style={{ width: 30, height: 30, borderRadius: 20, objectFit: "cover" }} /> <Typography sx={{ marginLeft: "10px" }}>{localStorage.getItem('user')}</Typography>
         </MenuItem>
         <Divider />
         <MenuItem onClick={logout1}>
