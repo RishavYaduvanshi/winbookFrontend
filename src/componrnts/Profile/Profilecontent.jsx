@@ -105,7 +105,7 @@ const Profilecontent = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
-          setfollow(data.follow_count);
+          setfollowed(data.follow_count);
           if (data.message == 'followed') {
             setstatus(true);
           }
