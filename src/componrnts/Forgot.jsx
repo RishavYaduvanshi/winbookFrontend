@@ -120,6 +120,8 @@ const Forgot = ({ mode, setMode }) => {
             borderRadius: '10px',
           },
         }}
+        bgcolor={"background.default"}
+        color={"text.primary"}
         justifyContent="center"
         justifyItems="center"
       >
@@ -207,6 +209,8 @@ const Forgot = ({ mode, setMode }) => {
           },
         }}
         justifyContent="center"
+        bgcolor={"background.default"}
+        color={"text.primary"}
       >
         <Card elevation={12} sx={{
           display: 'flex',
