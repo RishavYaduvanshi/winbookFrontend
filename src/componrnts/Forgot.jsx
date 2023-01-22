@@ -111,6 +111,7 @@ const Forgot = ({ mode, setMode }) => {
       {/* Desktop Display */}
       <Box
         sx={{
+          height: '90vh',
           display: { sm: "flex", xs: "none" },
           '& > :not(style)': {
             m: 1,
@@ -199,18 +200,19 @@ const Forgot = ({ mode, setMode }) => {
 
       {/* Mobile Display */}
       <Box
+        bgcolor={"background.default"}
+        color={"text.primary"}
         sx={{
+          height: '90vh',
           display: { sm: "none", xs: "block" },
           '& > :not(style)': {
             m: 1,
             height: 'auto',
-            marginTop: '20%',
             borderRadius: '10px',
           },
         }}
         justifyContent="center"
-        bgcolor={"background.default"}
-        color={"text.primary"}
+
       >
         <Card elevation={12} sx={{
           display: 'flex',
