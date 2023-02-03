@@ -15,7 +15,7 @@ const PageView = (props) => {
     const [data, setData] = React.useState([]);
     var text;
     var URL;
-    if (props.page === 0) {
+    if (props.page === 0 && props.page1 === 0) {
         URL = "https://winbookbackend.d3m0n1k.engineer/user/" + localStorage.getItem("id") + "/followers/"
         text = "Followers"
     }

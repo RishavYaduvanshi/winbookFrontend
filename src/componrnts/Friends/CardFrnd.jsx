@@ -24,7 +24,10 @@ const CardFrnd = (props) => {
                 <CardContent
                     sx={{ cursor: "pointer" }}
                 >
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h5" component="div" sx={{ display: { xs: "none", sm: "block" }, overflow: "hidden", textOverflow: "ellipsis", width: '11rem' }}>
+                        {props.follower.username}
+                    </Typography>
+                    <Typography gutterBottom variant="h7" component="div" sx={{ display: { xs: "block", sm: "none" } }}>
                         {props.follower.username}
                     </Typography>
                     <Typography variant="body" color="text.secondary">
