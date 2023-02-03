@@ -10,10 +10,14 @@ import PageView from './PageView';
 
 const FrndContent = (props) => {
     // console.log(props.page);
+    const [value, setValue] = React.useState(0);
+    const pullData = (data) => {
+        setValue(data);
+    }
 
     return (
         <Box width="64%" sx={{ flexGrow: 1 }} >
-            <PageView page={props.page} />
+            <PageView page={props.page} func={value} />
         </Box>
     )
 }
