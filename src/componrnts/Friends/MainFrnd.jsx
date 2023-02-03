@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import Unauthorized from '../Unauthorized';
 import FrndContent from './FrndContent';
-
 const MainFrnd = (props) => {
 
     const [logindata, setLogindata] = useState([]);
+    const [page, setPage] = useState(0);
     const calllogin = () => {
         var authtoken = localStorage.getItem("authtoken");
         if (authtoken && authtoken.length) {
@@ -20,6 +20,11 @@ const MainFrnd = (props) => {
         calllogin();
     }, [])
 
+    const pullData = (data) => {
+        // console.log(data);
+        setPage(data);
+    }
+
     return (
         <>{
             logindata.length === 0 ? <Unauthorized /> :
@@ -28,8 +33,8 @@ const MainFrnd = (props) => {
                         <Navbar setMode={props.setMode} mode={props.mode} />
                         {/* <Typography>Friends</Typography> */}
                         <Stack direction="row" justifyContent="space-between" spacing={2} sx={{ p: 2 }}>
-                            <FriendsSidebar mode={props.mode} setMode={props.setMode} />
-                            <FrndContent mode={props.mode} setMode={props.setMode} />
+                            <FriendsSidebar mode={props.mode} setMode={props.setMode} func={pullData} />
+                            <FrndContent mode={props.mode} setMode={props.setMode} page={page} />
                         </Stack>
                     </Box>
                 </>

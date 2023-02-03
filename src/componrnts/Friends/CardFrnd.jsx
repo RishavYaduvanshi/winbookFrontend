@@ -1,28 +1,34 @@
 import React from 'react'
-import CardActions from '@mui/material/CardActions';
+import { useNavigate } from 'react-router-dom';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-import { ButtonGroup } from '@mui/material';
 
-const CardFrnd = () => {
+const CardFrnd = (props) => {
+    // console.log(props);
+    const history = useNavigate();
+    var url = "https://winbookbackend.d3m0n1k.engineer" + props.follower.dp;
     return (
         <>
-            <Card sx={{ maxWidth: "auto", margin: "10px", maxHeight: "auto" }}>
+            <Card sx={{ maxWidth: "auto", margin: "10px", maxHeight: "auto" }} onClick={() => {
+                history("/view/" + props.follower.username + "/")
+            }}>
                 <CardMedia
                     component="img"
                     height="120"
-                    image='https://media.gettyimages.com/id/175280583/photo/medhaghat-waterfall.jpg?s=612x612&w=gi&k=20&c=oGvSjTvmED80G-Y4b3-FKvvA4q6QbFRlsvgt6QPNQ3M='
+                    image={url}
                     alt="green iguana"
+                    sx={{ objectFit: "contain", cursor: "pointer" }}
                 />
-                <CardContent>
+                <CardContent
+                    sx={{ cursor: "pointer" }}
+                >
                     <Typography gutterBottom variant="h5" component="div">
-                        Name
+                        {props.follower.username}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Description
+                    <Typography variant="body" color="text.secondary">
+                        {props.follower.first_name} {props.follower.last_name}
                     </Typography>
                 </CardContent>
                 {/* <CardActions>

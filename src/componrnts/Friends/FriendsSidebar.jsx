@@ -2,7 +2,7 @@ import React from 'react'
 import { Person, ModeNight, Home } from '@mui/icons-material'
 import { Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     width: 62,
@@ -51,18 +51,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-const FriendsSidebar = ({ mode, setMode }) => {
+const FriendsSidebar = ({ mode, setMode, func }) => {
     const history = useNavigate();
     return (
         <Box
             flex={1}
             sx={{
                 display: { xs: "none", sm: "block" }, position: "sticky",
-                top: 0, bgcolor: "background.paper", height: "100vh", overflow: "auto",
-                borderRight: "1px solid rgba(0, 0, 0, 0.12)", minWidth: "30vh"
+                top: 0, bgcolor: "background.paper", height: "100vh",
+                borderRight: "1px solid rgba(0, 0, 0, 0.12)",
             }}
         >
-            <Box  >
+            <Box position="fixed" >
                 <List>
                     <ListItem disablePadding>
                         <ListItemButton onClick={() => { history('/home') }} >
@@ -73,19 +73,27 @@ const FriendsSidebar = ({ mode, setMode }) => {
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton onClick={
+                            () => {
+                                func(0);
+                            }
+                        }>
                             <ListItemIcon>
                                 <Person />
                             </ListItemIcon>
-                            <ListItemText primary="All Friends" />
+                            <ListItemText primary="Followers" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding >
-                        <ListItemButton>
+                        <ListItemButton onClick={
+                            () => {
+                                func(1);
+                            }
+                        }>
                             <ListItemIcon>
                                 <GroupAddIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Pending Requests" />
+                            <ListItemText primary="Following" />
                         </ListItemButton>
                     </ListItem>
                     <ListItem disablePadding>
