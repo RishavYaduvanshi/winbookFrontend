@@ -104,7 +104,7 @@ export const Login = ({ mode, setMode }) => {
               required
               fullWidth
               id="email"
-              label="User Name"
+              label="User Name or Email Address"
               name="email"
               autoComplete="email"
               autoFocus
