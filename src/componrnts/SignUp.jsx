@@ -67,6 +67,9 @@ export default function SignUp({ mode, setMode }) {
         })
       }).then((response) => {
         if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            // console.log(data);
+          });
           alert({ message: 'Successfully Signed Up', type: 'success' });
           setState(false);
           history('/');
