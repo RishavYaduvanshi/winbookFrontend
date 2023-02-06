@@ -53,7 +53,9 @@ export const Login = ({ mode, setMode }) => {
     }).then((result) => {
       result.json().then((resp) => {
         localStorage.setItem("authtoken", resp.token);
-        localStorage.setItem("user", data.get('email'));
+        localStorage.setItem("user", resp.username);
+        localStorage.setItem("id", resp.pk);
+        // localStorage.setItem("user", data.get('email'));
         if (resp.token) {
           history('/home');
           alert({ message: 'Logged In ! Welcome', type: 'info' });
