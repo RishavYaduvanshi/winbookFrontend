@@ -21,7 +21,7 @@ const Feed = (props) => {
   }
 
   useEffect(() => {
-    fetch('https://winbookbackend.d3m0n1k.engineer/post/', {
+    fetch('https://winbookbackend.d3m0n1k.engineer/post/feed', {
       method: 'GET',
       headers: {
         "Accept": "application/json",
