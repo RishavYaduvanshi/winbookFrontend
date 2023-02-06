@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-//gg
 const CardFrnd = (props) => {
     // console.log(props);
     const history = useNavigate();

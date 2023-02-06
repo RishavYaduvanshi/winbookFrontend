@@ -147,7 +147,7 @@ export const Login = ({ mode, setMode }) => {
                 </NavLink>
               </Grid>
               <Grid item>
-                <p className='mt-3'>Don't have an account? <span><NavLink to="/signup">Sign Up</NavLink></span></p>
+                <p className='mt-3'>Don't have an account MC? <span><NavLink to="/signup">Sign Up</NavLink></span></p>
               </Grid>
             </Grid>
           </Box>
