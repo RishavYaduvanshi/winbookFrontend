@@ -10,7 +10,7 @@ const CardFrnd = (props) => {
     var url = "https://winbookbackend.d3m0n1k.engineer" + props.follower.dp;
     return (
         <>
-            <Card sx={{ maxWidth: "auto", margin: "10px", maxHeight: "auto" }} onClick={() => {
+            <Card sx={{ maxWidth: "auto", margin: "10px", height: "95%" }} onClick={() => {
                 history("/view/" + props.follower.username + "/")
             }}>
                 <CardMedia

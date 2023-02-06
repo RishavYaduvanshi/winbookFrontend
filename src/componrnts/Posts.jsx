@@ -216,7 +216,7 @@ const Posts = (props) => {
               <MoreVertIcon onClick={handleClick} />
             </IconButton>
           }
-          title={<Typography onClick={viewprofile}>{props.ob.userName}</Typography>
+          title={<Typography sx={{ overflow: "hidden", textOverflow: "ellipsis", width: '11rem' }} onClick={viewprofile}>{props.ob.userName}</Typography>
           }
           subheader={datetime.toLocaleString()}
         />
