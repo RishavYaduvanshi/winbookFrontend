@@ -46,7 +46,12 @@ export default function SignUp({ mode, setMode }) {
     setState(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (data.get('username') || data.get('password') || data.get('email') || data.get('firstName') || data.get('lastName') !== "") {
+    if (data.get('username').length >= 20) {
+      alert({ message: 'Username should be less than 20 characters', type: 'error' });
+      setState(false);
+      return;
+    }
+    if ((data.get('username') || data.get('password') || data.get('email') || data.get('firstName') || data.get('lastName') !== "")) {
       // console.log(data.get('username'));
       fetch('https://winbookbackend.d3m0n1k.engineer/signup/', {
         method: 'POST',
@@ -62,12 +67,15 @@ export default function SignUp({ mode, setMode }) {
         })
       }).then((response) => {
         if (response.status >= 200 && response.status < 300) {
+          response.json().then((data) => {
+            // console.log(data);
+          });
           alert({ message: 'Successfully Signed Up', type: 'success' });
           setState(false);
           history('/');
         }
         else {
-          alert({ message: 'Something wrong happened you are not registered. Try Again!', type: 'error' });
+          alert({ message: 'Something wrong. Try Again!', type: 'error' });
           setState(false);
         }
 
@@ -128,6 +136,7 @@ export default function SignUp({ mode, setMode }) {
                 label="User Name"
                 name="username"
                 autoComplete="username"
+                placeholder='Username should not be more than 20 characters'
               />
             </Grid>
             <Grid item xs={12}>

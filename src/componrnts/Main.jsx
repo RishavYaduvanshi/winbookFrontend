@@ -1,5 +1,5 @@
 import React from 'react'
-import Add from "./Add";
+import Add from "./Add/Add";
 import Feed from "./Feed";
 import Navbar from "./Navbar";
 import Rightbar from "./Rightbar";

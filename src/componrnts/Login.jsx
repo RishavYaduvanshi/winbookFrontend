@@ -16,7 +16,7 @@ import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import LinearProgress from '@mui/material/LinearProgress';
 import logo from '../resources/wibrant1.png';
-import Alert from '@mui/material/Alert';
+
 
 export const Login = ({ mode, setMode }) => {
   document.title = "Wibrant";
@@ -104,7 +104,7 @@ export const Login = ({ mode, setMode }) => {
               required
               fullWidth
               id="email"
-              label="User Name"
+              label="User Name or Email Address"
               name="email"
               autoComplete="email"
               autoFocus

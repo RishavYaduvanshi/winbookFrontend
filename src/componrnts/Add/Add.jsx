@@ -9,6 +9,7 @@ import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Picker from 'emoji-picker-react';
+import ButtonFab from './ButtonFab';
 
 const Styledmodal = styled(Modal)({
   display: "flex",
@@ -110,13 +111,18 @@ const Add = (props) => {
     document.getElementById("caption").value += emojiObject.emoji;
   };
 
+  const pull = () => {
+    if (open) {
+      setOpen(false);
+    }
+    else {
+      setOpen(true);
+    }
+  }
+
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
-      <Tooltip title="Create new Post" sx={{ position: "fixed", bottom: 20, left: 10 }}>
-        <Fab color="primary" aria-label="add" onClick={() => { setOpen(true) }}>
-          <AddIcon />
-        </Fab>
-      </Tooltip>
+      <ButtonFab func={pull} />
       <Styledmodal
         open={open}
         onClose={e => setOpen(false)}

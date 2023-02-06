@@ -4,14 +4,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
-
 const CardFrnd = (props) => {
     // console.log(props);
     const history = useNavigate();
     var url = "https://winbookbackend.d3m0n1k.engineer" + props.follower.dp;
     return (
         <>
-            <Card sx={{ maxWidth: "auto", margin: "10px", maxHeight: "auto" }} onClick={() => {
+            <Card sx={{ maxWidth: "auto", margin: "10px", height: "95%" }} onClick={() => {
                 history("/view/" + props.follower.username + "/")
             }}>
                 <CardMedia
