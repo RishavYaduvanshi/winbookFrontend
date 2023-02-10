@@ -17,29 +17,6 @@ const UserBox = styled(Box)(({ theme }) => ({
 const Feed = (props) => {
   //console.log(props);
 
-  const data = {
-    "url": "https://i.ibb.co/BnWYYfy/Black-Purple-Simple-Good-Night-Instagram-Post.png",
-    "caption": "Welcome To Wibrant",
-    "liked_cnt": 1,
-    "created_at": "2023-02-10T09:21:53.793492Z",
-    "updated_at": "2023-02-10T09:21:59.453798Z",
-    "pk": 113,
-    "userName": "admin",
-    "user": 57,
-    "likedStatus": false,
-    "userDp": "http://winbookbackend.d3m0n1k.engineer/static/authn/dp.png",
-    "comments": [],
-    "likedBy": [
-      {
-        "pk": 57,
-        "dp": "/static/authn/dp.png",
-        "username": "admin",
-        "first_name": "Admin ",
-        "last_name": ""
-      }
-    ]
-  }
-
   var [users, setUsers] = useState([]);
   const [status, setstatus] = useState(false);
 
@@ -69,7 +46,6 @@ const Feed = (props) => {
 
   if (users.length === 0) return (
     <Box flex={4} p={2}>
-      <Posts ob={data} func={pull_data} />
       <Stack spacing={1}>
         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
         <Skeleton variant="circular" width={40} height={40} />
