@@ -49,7 +49,7 @@ const Styledmodal = styled(Modal)({
 
 
 const Posts = (props) => {
-  console.log(props.ob);
+  // console.log(props.ob);
   const [like, setlike] = useState();
   const [status, setstatus] = useState();
   const history = useNavigate();
