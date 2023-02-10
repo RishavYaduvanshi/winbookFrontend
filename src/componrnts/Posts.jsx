@@ -27,6 +27,9 @@ import FileCopyIcon from '@mui/icons-material/FileCopy';
 import { useEffect } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import LikeList from './Profile/LikeList';
 
 const StyledTextField = styled(TextField)({
   fullWidth: true,
@@ -46,13 +49,17 @@ const Styledmodal = styled(Modal)({
 
 
 const Posts = (props) => {
-  //console.log("POST DATA: ",typeof(props.ob.url));
+  // console.log(props.ob);
   const [like, setlike] = useState();
   const [status, setstatus] = useState();
   const history = useNavigate();
   const [state, setstate] = useState(false);
   const [com, setcom] = useState("");
   const [open1, setOpen1] = useState(false);
+  const [likedby, setlikedby] = useState([]);
+  const [state1, setState1] = React.useState({
+    bottom: false
+  });
 
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -70,6 +77,14 @@ const Posts = (props) => {
     setAnchorEl(null);
   };
 
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState1({ ...state1, [anchor]: open });
+  };
+
   useEffect(() => {
     fetch('https://winbookbackend.d3m0n1k.engineer/post/' + props.ob.pk + '/', {
       method: 'GET',
@@ -83,6 +98,8 @@ const Posts = (props) => {
           // console.log(data);
           setlike(data.liked_cnt);
           setstatus(data.likedStatus);
+          setlikedby(data.likedBy);
+
         })
       }
     })
@@ -126,7 +143,9 @@ const Posts = (props) => {
         response.json().then((data) => {
           // console.log(data);
           setlike(data.likes_count);
+
           setstatus(data.hasOwnProperty('liked_status') ? data.liked_status : true);
+          props.func(true);
         })
       }
     })
@@ -202,6 +221,27 @@ const Posts = (props) => {
   const handleClose1 = () => {
     setAnchorEli(null);
   };
+  // console.log(likedby);
+
+  const list = (anchor) => (
+    <Box
+      sx={{
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
+        maxHeight: 300, overflow: 'auto'
+      }}
+      role="presentation"
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {
+          likedby.map((item) => {
+            return <LikeList user={item} />
+          })
+        }
+      </List>
+    </Box>
+  );
+
 
 
   return (
@@ -234,9 +274,34 @@ const Posts = (props) => {
           </Typography></>}
           <br />
           <Divider />
-          <Typography variant="body2" color="text.secondary" marginTop={1} marginBottom={0}>
-            Liked By <strong>{like}</strong> People in total
-          </Typography>
+          {props.ob.likedBy.length === 0 ?
+            <>
+              <Typography >
+                No likes yet
+              </Typography>
+            </> :
+            <>
+              {['bottom'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                  <Box>
+                    <Typography sx={{
+                      cursor: "pointer",
+                    }} variant="body2" color="text.secondary" marginTop={1} marginBottom={0} onClick={toggleDrawer(anchor, true)} >
+                      Liked By <strong>{props.ob.likedBy[0].username}</strong> and <strong>{like - 1} others</strong>
+                    </Typography></Box>
+
+                  <Drawer
+                    anchor={anchor}
+                    open={state1[anchor]}
+                    onClose={toggleDrawer(anchor, false)}
+                  >
+                    {list(anchor)}
+                  </Drawer>
+                </React.Fragment>
+              ))}
+
+            </>
+          }
         </CardContent>
         <CardActions disableSpacing>
           <IconButton aria-label="add to favorites">
