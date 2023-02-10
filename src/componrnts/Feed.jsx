@@ -58,7 +58,7 @@ const Feed = (props) => {
     }).then((response) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
-          console.log(data);
+          // console.log(data);
           setUsers(data);
         })
       }
