@@ -18,7 +18,7 @@ const Feed = (props) => {
   //console.log(props);
 
   const data = {
-    "url": "https://ibb.co/9ZKddpb",
+    "url": "https://i.ibb.co/BnWYYfy/Black-Purple-Simple-Good-Night-Instagram-Post.png",
     "caption": "Welcome To Wibrant",
     "liked_cnt": 1,
     "created_at": "2023-02-10T09:21:53.793492Z",
@@ -69,7 +69,7 @@ const Feed = (props) => {
 
   if (users.length === 0) return (
     <Box flex={4} p={2}>
-      <posts ob={data} func={pull_data} />
+      <Posts ob={data} func={pull_data} />
       <Stack spacing={1}>
         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
         <Skeleton variant="circular" width={40} height={40} />
