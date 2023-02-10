@@ -1,4 +1,4 @@
-import { Box, Skeleton, Stack } from '@mui/material'
+import { Box, Skeleton, Stack, styled } from '@mui/material'
 import Posts from './Posts'
 import { useEffect, useState } from 'react';
 import React from 'react'
@@ -9,15 +9,20 @@ var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
 today = dd + '/' + mm + '/' + yyyy;
 
+const UserBox = styled(Box)(({ theme }) => ({
+  marginLeft: "0px",
+  flex: 4,
+}));
+
 const Feed = (props) => {
   //console.log(props);
 
   var [users, setUsers] = useState([]);
-  const [status, setstatus] = useState();
+  const [status, setstatus] = useState(false);
 
   const pull_data = (data) => {
-    // console.log("DATA: ",data);
-    setstatus(data);
+    // console.log("DATA: ", status);
+    setstatus(!status);
   }
 
   useEffect(() => {
@@ -45,16 +50,17 @@ const Feed = (props) => {
     <Skeleton variant="rectangular" height={120} />
     <Skeleton variant="rounded" height={120} />
   </Stack></Box>);
-
-  return (
-    <Box flex={4} p={2} sx={{ padding: "0px" }}>
-      {
-        users.map((post) => {
-          return <Posts ob={post} func={pull_data} />
-        })
-      }
-    </Box>
-  );
+  else {
+    return (
+      <UserBox >
+        {
+          users.map((post) => {
+            return <Posts ob={post} func={pull_data} />
+          })
+        }
+      </UserBox>
+    );
+  }
 }
 
 export default Feed;

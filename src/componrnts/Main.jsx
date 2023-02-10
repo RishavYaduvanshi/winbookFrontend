@@ -20,7 +20,7 @@ export const Main = ({ mode, setMode }) => {
 
 
   return (
-    <Box bgcolor={"background.default"} color={"text.primary"}>
+    <Box bgcolor={"background.default"} color={"text.primary"} >
       <Navbar setMode={setMode} mode={theme} />
       <Stack direction="row" spacing={2} justifyContent="space-between">
         <Sidebar position="sticky" setMode={setMode} mode={theme} />

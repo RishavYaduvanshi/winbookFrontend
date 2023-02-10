@@ -106,7 +106,7 @@ const Profilecontent = (props) => {
       if (response.status >= 200 && response.status < 300) {
         response.json().then((data) => {
           setfollowed(data.follow_count);
-          if (data.message == 'followed') {
+          if (data.message === 'followed') {
             setstatus(true);
           }
           else {
@@ -396,8 +396,8 @@ const Profilecontent = (props) => {
         </Stack>
 
         {/**Mobile View */}
-        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{ display: { xs: "flex", sm: "none" } }}>
-          <Box sx={{ width: "3%" }}></Box>
+        <Stack direction="row" spacing={2} justifyContent="space-evenly" sx={{ display: { xs: "flex", sm: "none" } }}>
+          {/* <Box sx={{ width: "3%" }}></Box> */}
           <Card sx={{ width: "25%" }}>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div" textAlign="center">
@@ -428,7 +428,7 @@ const Profilecontent = (props) => {
               </Typography>
             </CardContent>
           </Card>
-          <Box sx={{ width: "3%" }}></Box>
+          {/* <Box sx={{ width: "3%" }}></Box> */}
         </Stack>
 
 

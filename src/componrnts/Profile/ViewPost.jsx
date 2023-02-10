@@ -7,6 +7,7 @@ import { Stack, Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Posts from '../Posts';
+import LikesSpace from './LikesSpace';
 
 export const ViewPost = (props) => {
 
@@ -45,13 +46,15 @@ export const ViewPost = (props) => {
             <Navbar setMode={props.setMode} mode={props.mode} />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <Sidebar position="flex" setMode={props.setMode} mode={props.mode} />
-                <Box flex={4} p={2} sx={{ height: "auto" }}>
+                <Box flex={4} sx={{ height: "auto", }}>
                     <Posts ob={user} st={true} func={pull_data} />
                 </Box>
                 <Box sx={{
                     display: { xs: "none", sm: "block" },
                     width: "25%",
-                }}></Box>
+                }}>
+                    <LikesSpace ob={user} />
+                </Box>
 
             </Stack>
         </Box>
