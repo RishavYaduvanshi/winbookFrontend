@@ -24,7 +24,7 @@ const Pics = (props) => {
                 }
                 onClick={
                     () => {
-                        window.open(props.url, "_blank")
+                        window.open("/post/"+props.pk)
                     }
                 } />
         </div>
