@@ -7,10 +7,10 @@ const Pics = (props) => {
 
     const [height, setHeight] = React.useState("100%");
     const [width, setWidth] = React.useState("100%");
-    // console.log(props.url);
+    // console.log(props);
     return (
         <div>
-            <img id={props.url} src={props.url} alt="" height={height} width={width} onPointerOver={
+            <img id={props.url.pk} src={props.url.url} alt="" height={height} width={width} onPointerOver={
                 () => {
                     setHeight(100);
                     setWidth(100);
@@ -24,7 +24,7 @@ const Pics = (props) => {
                 }
                 onClick={
                     () => {
-                        window.open("/post/"+props.pk)
+                        window.open("/post/" + props.url.pk)
                     }
                 } />
         </div>

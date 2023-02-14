@@ -29,7 +29,7 @@ const Photos = () => {
     // console.log(posts[i].url);
     if (posts[i].url && rows.length <= 2) {
 
-      rows.push(posts[i].url);
+      rows.push(posts[i]);
     }
   }
 
