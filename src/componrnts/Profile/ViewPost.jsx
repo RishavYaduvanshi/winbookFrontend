@@ -42,7 +42,7 @@ export const ViewPost = (props) => {
     if (user.length === 0) return <Box flex={4} p={2}><Skeleton variant="rectangular" /></Box>;
 
     return (
-        <Box bgcolor={"background.default"} color={"text.primary"} sx={{ height: "100vh" }}>
+        <Box bgcolor={"background.default"} color={"text.primary"} sx={{ minHeight: "100vh" }}>
             <Navbar setMode={props.setMode} mode={props.mode} />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <Sidebar position="flex" setMode={props.setMode} mode={props.mode} />

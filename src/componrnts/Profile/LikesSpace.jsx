@@ -17,9 +17,10 @@ const LikesSpace = (props) => {
                     rowHeight={46}
                     sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {
-                        props.ob.likedBy.map((item) => {
-                            return <LikeList user={item} />
-                        })
+                        props.ob.likedBy.length === 0 ? <Typography variant="h6" fontWeight={500} sx={{ mt: 2, mb: 1 }}>No Likes</Typography> :
+                            props.ob.likedBy.map((item) => {
+                                return <LikeList user={item} />
+                            })
                     }
                 </List>
             </Box>
