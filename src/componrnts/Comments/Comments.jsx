@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import ReplyIcon from '@mui/icons-material/Reply';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { alert } from 'react-custom-alert';
+import { getShowableText } from '../utils'
 
 export default function Comments(props) {
   const history = useNavigate();
@@ -65,7 +66,7 @@ export default function Comments(props) {
           }
           title={<Typography fontWeight={500} fontSize={16} onClick={viewprofile}>{userName} :</Typography>
           }
-          subheader={<Typography fontSize={14} color="text.secondary">{props.comment}</Typography>}
+          subheader={<Typography fontSize={14} fontWeight={400} color="text.secondary"><p dangerouslySetInnerHTML={{ __html: getShowableText(props.comment) }}></p></Typography>}
           action={
             <Box>
               <IconButton aria-label="settings" onClick={() => {

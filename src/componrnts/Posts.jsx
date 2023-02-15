@@ -30,6 +30,7 @@ import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import LikeList from './Profile/LikeList';
+import { getShowableText } from './utils'
 
 const StyledTextField = styled(TextField)({
   fullWidth: true,
@@ -270,7 +271,7 @@ const Posts = (props) => {
         /></>}
         <CardContent>
           {props.ob.caption === "" ? <></> : <><Typography variant="body1" fontWeight={500} onClick={() => history('/post/' + props.ob.pk + '/')} color="text.secondary">
-            {props.ob.caption}
+            <p dangerouslySetInnerHTML={{ __html: getShowableText(props.ob.caption) }}></p>
           </Typography></>}
           <br />
           <Divider />
