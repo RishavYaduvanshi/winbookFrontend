@@ -13,14 +13,9 @@ const ChatScreen = (props) => {
             <Navbar setMode={props.setMode} mode={props.mode} />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <Sidebar position="sticky" setMode={props.setMode} mode={props.mode} />
-                <Box sx={{ width: "60%" }}>
-                    <Box position="sticky" sx={{ width: "100%", mt: 3 }}>
-                        <ChatCard />
-                    </Box>
-                </Box>
+                <ChatCard setMode={props.setMode} mode={props.mode} />
                 <ChatRightbar />
             </Stack>
-            <Add />
         </Box>
     )
 }

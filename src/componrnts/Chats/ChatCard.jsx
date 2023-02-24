@@ -1,47 +1,114 @@
+import { Avatar, Box, Button, Divider, InputAdornment, styled, TextField, Typography } from '@mui/material';
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Divider from '@mui/material/Divider';
-import { Box } from '@mui/material';
+import './ChatCard.css';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import SendIcon from '@mui/icons-material/Send';
 
-const ChatCard = () => {
+const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log(data.get('message'));
+    var message = document.getElementById('message');
+    message.value = "";
+}
+
+
+
+const ChatCard = (props) => {
+
+    const UserBox = styled(Box)(({ theme }) => ({
+        flex: 4,
+        height: "83vh",
+        padding: "10px",
+        borderRadius: "10px",
+        boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.3)",
+        backgroundImage: props.mode === "dark" ? "#282929" : "#ffffff"
+    }));
+
+    const UserBox2 = styled(Box)(({ theme }) => ({
+        overflowY: "scroll",
+        height: "60vh",
+        scrollbarWidth: "none",
+
+        '&::-webkit-scrollbar': {
+            display: "none",
+        },
+        backgroundImage: props.mode === "dark" ? "#1e1e1e" : "#ffffff"
+    }));
     return (
-
-        <Card raised={0.5} sx={{ maxWidth: "100%", height: "83vh" }}>
-            <CardHeader
-                avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
-                    </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
-                title="Shrimp and Chorizo Paella"
-                subheader="September 14, 2016"
-            />
-            <Divider />
-            <Box sx={{ height: "1000px", overflow: "auto" }}>
-
+        < UserBox>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                }}
+            >
+                <Avatar>GR</Avatar>
+                <Typography variant="h6" component="div" sx={{ marginTop: 0.5, marginLeft: 2 }}>
+                    Gagan
+                </Typography>
             </Box>
-        </Card >
+            <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
+            <UserBox2>
+                <div className='message left'>
+                    <div className='message-text'>
+                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+                <div className='message right'>
+                    <div className='message-text'>
+                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+                <div className='message left'>
+                    <div className='message-text'>
+                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+                <div className='message right'>
+                    <div className='message-text'>
+                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+                <div className='message left'>
+                    <div className='message-text'>
+                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+                <div className='message right'>
+                    <div className='message-text'>
+                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                    </div>
+                </div>
+            </UserBox2>
+            <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
+            <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    marginTop: { xs: 0, sm: 2 },
+                }}
+            >
+                <TextField placeholder="Type a message..." variant="outlined"
+                    fullWidth id="message" name="message"
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <EmojiEmotionsIcon sx={{
+                                    cursor: "pointer",
+                                    color: "#000501",
+                                }} />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                <Button variant="contained" color="success" sx={{ margin: 1 }} endIcon={<SendIcon />}>Send</Button>
+            </Box>
 
-
+        </UserBox >
 
 
     )
