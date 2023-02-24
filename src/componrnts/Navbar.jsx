@@ -86,6 +86,7 @@ const UserBox = styled(Box)(({ theme }) => ({
 
 
 const Navbar = (props) => {
+  // console.log(props);
   const [anchorEl3, setAnchorEl3] = React.useState(null);
   const open3 = Boolean(anchorEl3);
   const [notifications, setNotifications] = React.useState([]);
@@ -156,11 +157,13 @@ const Navbar = (props) => {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={() => {
+            history('/chat')
+          }}>
             <ListItemIcon>
               <Article />
             </ListItemIcon>
-            <ListItemText primary="Pages" />
+            <ListItemText primary="Chats" />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
