@@ -19,10 +19,12 @@ import logo from '../resources/wibrant1.png';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" sx={{
+      margin: 2, padding: 2,
+    }} {...props}>
       {'Copyright © '}
       <NavLink className="navlink" to="/">
-        WinBook
+        Wibrant
       </NavLink>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -183,7 +185,7 @@ export default function SignUp({ mode, setMode }) {
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
+      <Copyright sx={{ mt: 5, mb: 2 }} />
     </Container>
   );
 }
