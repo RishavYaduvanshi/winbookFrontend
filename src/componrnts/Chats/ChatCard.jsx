@@ -1,8 +1,27 @@
-import { Avatar, Box, Button, Divider, InputAdornment, styled, TextField, Typography } from '@mui/material';
+import { Avatar, Box, IconButton, Divider, InputAdornment, Menu, styled, TextField, Typography } from '@mui/material';
 import * as React from 'react';
 import './ChatCard.css';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import SendIcon from '@mui/icons-material/Send';
+import EmojiPicker from 'emoji-picker-react';
+
+const StyledTextField = styled(TextField)({
+    fullWidth: true,
+    '& label.Mui-focused': {
+        color: 'primary',
+    },
+    '& .MuiInput-underline:after': {
+        borderBottomColor: 'primary',
+    },
+    marginTop: 2,
+    '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+            borderRadius: 50,
+        },
+    },
+
+});
+
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -13,8 +32,22 @@ const handleSubmit = (event) => {
 }
 
 
-
 const ChatCard = (props) => {
+    const [anchorEli, setAnchorEli] = React.useState(null);
+    const open2 = Boolean(anchorEli);
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        setAnchorEli(event.currentTarget);
+    }
+
+    const handleClose1 = () => {
+        setAnchorEli(false);
+    };
+
+    const onEmojiClick = (emojiObject) => {
+        document.getElementById('message').value += emojiObject.emoji;
+    };
 
     const UserBox = styled(Box)(({ theme }) => ({
         flex: 4,
@@ -82,31 +115,47 @@ const ChatCard = (props) => {
                 </div>
             </UserBox2>
             <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
-            <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    marginTop: { xs: 0, sm: 2 },
+            <StyledTextField id="message" name="message" autoFocus component='form' onSubmit={handleSubmit} noValidate fullWidth placeholder="Message..." color='primary' variant="outlined"
+                InputProps={{
+                    endAdornment: (
+                        <InputAdornment position="end">
+                            <IconButton type='submit' sx={{
+                                backgroundColor: 'primary.main',
+                                '&:hover': {
+                                    backgroundColor: 'success.main',
+                                },
+                            }} >
+                                <SendIcon sx={{ color: "white" }} /></IconButton>
+
+                        </InputAdornment>
+                    ),
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <IconButton>
+                                <EmojiEmotionsIcon color="success" onClick={
+                                    handleClick
+                                } />
+                            </IconButton>
+                        </InputAdornment>
+                    )
+                }}
+            />
+
+            <Menu
+                id="basic-menu"
+                anchorEli={anchorEli}
+                open={open2}
+                onClose={handleClose1}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
                 }}
             >
-                <TextField placeholder="Type a message..." variant="outlined"
-                    fullWidth id="message" name="message"
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <EmojiEmotionsIcon sx={{
-                                    cursor: "pointer",
-                                    color: "#000501",
-                                }} />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <Button variant="contained" color="success" sx={{ margin: 1 }} endIcon={<SendIcon />}>Send</Button>
-            </Box>
+                <EmojiPicker onEmojiClick={onEmojiClick} pickerStyle={{ width: "100%" }} />
+            </Menu>
 
         </UserBox >
 
