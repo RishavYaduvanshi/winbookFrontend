@@ -247,7 +247,7 @@ const Posts = (props) => {
 
   return (
     <>
-      <Card raised sx={{ margin: 0.5 }}>
+      <Card raised sx={{ margin: 0.5, borderRadius: 4 }}>
         <CardHeader
           avatar={
             <img src={props.ob.userDp} alt="profile pic" style={{ objectFit: "cover", width: 40, height: 40, borderRadius: 20 }} onClick={viewprofile} />
@@ -318,7 +318,7 @@ const Posts = (props) => {
           </IconButton>
         </CardActions>
         <Divider />
-        {props.ob.comments.length !== 0 ? <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end", alignItems: "flex-end" }}><IconButton onClick={() => history('/post/' + props.ob.pk + '/')} sx={{ fontSize: 16 }}>View all {props.ob.comments.length} Comments</IconButton></Box> : <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end", alignItems: "flex-end" }}><Typography fontWeight={300}>No Comments Yet !</Typography></Box>}
+        {props.ob.comments.length !== 0 ? <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end", alignItems: "flex-end" }}><IconButton onClick={() => history('/post/' + props.ob.pk + '/')} sx={{ fontSize: 16 }}>View all {props.ob.comments.length} Comments</IconButton></Box> : <Box sx={{ display: "flex", width: "98%", justifyContent: "flex-end", alignItems: "flex-end" }}><Typography fontWeight={300}>No Comments Yet !</Typography></Box>}
         {state === true ? <CardContent>
           <StyledTextField id="filled-basic" name="filled-basic" autoFocus component='form' onSubmit={postcomment} noValidate fullWidth placeholder="Add your comment" color='primary' variant="outlined"
             InputProps={{

@@ -19,7 +19,6 @@ const StyledTextField = styled(TextField)({
             borderRadius: 50,
         },
     },
-
 });
 
 
@@ -115,7 +114,7 @@ const ChatCard = (props) => {
                 </div>
             </UserBox2>
             <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
-            <StyledTextField id="message" name="message" autoFocus component='form' onSubmit={handleSubmit} noValidate fullWidth placeholder="Message..." color='primary' variant="outlined"
+            <StyledTextField id="message" name="message" component='form' onSubmit={handleSubmit} noValidate fullWidth placeholder="Message..." color='primary' variant="outlined"
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
