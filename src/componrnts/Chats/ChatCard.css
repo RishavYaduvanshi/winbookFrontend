@@ -22,3 +22,9 @@
 .msg {
     font-weight: 500;
 }
+
+.time {
+    font-size: 13px;
+    font-weight: 300;
+    margin-bottom: 4px;
+}

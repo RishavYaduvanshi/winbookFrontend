@@ -29,7 +29,11 @@ const MainFrnd = (props) => {
         <>{
             logindata.length === 0 ? <Unauthorized /> :
                 <>
-                    <Box bgcolor={"background.default"} color={"text.primary"}>
+                    <Box bgcolor={"background.default"} color={"text.primary"}
+                        sx={{
+                            minHeight: "100vh",
+                        }}
+                    >
                         <Navbar setMode={props.setMode} mode={props.mode} />
                         {/* <Typography>Friends</Typography> */}
                         <Stack direction="row" justifyContent="space-between" spacing={2} sx={{ p: 2 }}>

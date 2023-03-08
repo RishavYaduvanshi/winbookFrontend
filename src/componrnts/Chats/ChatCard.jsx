@@ -1,9 +1,11 @@
-import { Avatar, Box, IconButton, Divider, InputAdornment, Menu, styled, TextField, Typography } from '@mui/material';
+import { Avatar, Box, IconButton, Divider, InputAdornment, Menu, styled, TextField, Typography, Icon } from '@mui/material';
 import * as React from 'react';
 import './ChatCard.css';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import SendIcon from '@mui/icons-material/Send';
 import EmojiPicker from 'emoji-picker-react';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import './ChatCard.css';
 
 const StyledTextField = styled(TextField)({
     fullWidth: true,
@@ -50,7 +52,7 @@ const ChatCard = (props) => {
 
     const UserBox = styled(Box)(({ theme }) => ({
         flex: 4,
-        height: "83vh",
+        height: "inherit",
         padding: "10px",
         borderRadius: "10px",
         boxShadow: "0 0 10px 0 rgba(0, 0, 0, 0.3)",
@@ -84,37 +86,41 @@ const ChatCard = (props) => {
             <UserBox2>
                 <div className='message left'>
                     <div className='message-text'>
-                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.{/*<div><Icon><AccessTimeIcon sx={{
+                            fontSize: "small", marginTop: 1
+                        }} /></Icon><span class="time">time</span></div>*/}
                     </div>
                 </div>
                 <div className='message right'>
                     <div className='message-text'>
-                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.
                     </div>
                 </div>
                 <div className='message left'>
                     <div className='message-text'>
-                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.
                     </div>
                 </div>
                 <div className='message right'>
                     <div className='message-text'>
-                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.
                     </div>
                 </div>
                 <div className='message left'>
                     <div className='message-text'>
-                        <div className='msg'>Gagan:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.
                     </div>
                 </div>
                 <div className='message right'>
                     <div className='message-text'>
-                        <div className='msg'>You:</div> Hey there, I'm using WhatsApp.
+                        Hey there, I'm using WhatsApp.
                     </div>
                 </div>
             </UserBox2>
             <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
             <StyledTextField id="message" name="message" component='form' onSubmit={handleSubmit} noValidate fullWidth placeholder="Message..." color='primary' variant="outlined"
+                sx={{
+                }}
                 InputProps={{
                     endAdornment: (
                         <InputAdornment position="end">
@@ -139,6 +145,8 @@ const ChatCard = (props) => {
                     )
                 }}
             />
+
+
 
             <Menu
                 id="basic-menu"

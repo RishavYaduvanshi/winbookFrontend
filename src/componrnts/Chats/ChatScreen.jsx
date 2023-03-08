@@ -7,6 +7,7 @@ import Add from '../Add/Add'
 import ChatCard from './ChatCard'
 
 const ChatScreen = (props) => {
+    document.title = "Wibrant | Chat";
     // console.log(props);
     return (
         <Box bgcolor={"background.default"} color={"text.primary"} sx={{ minHeight: "100vh" }} >
