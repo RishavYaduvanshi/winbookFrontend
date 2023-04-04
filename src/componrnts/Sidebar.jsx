@@ -83,7 +83,7 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton onClick={() => {
-              history('/chat')
+              history('/chat/new')
             }}>
               <ListItemIcon>
                 <Article />

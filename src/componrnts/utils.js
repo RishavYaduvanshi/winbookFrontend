@@ -1,3 +1,7 @@
+
+
+let sock = null;
+
 export function getShowableText(text) {
   text = (text + " ").replace(
     /(#.+?)\b/g,
@@ -39,36 +43,67 @@ export function verifySignature() {
   //TODO : verifies a signature of a message
 }
 
-export function getChatList() {
-  fetch("https://winbookbackend.d3m0n1k.engineer/message/get_chats/", {
+export async function getChatList() {
+  const res = await fetch("https://winbookbackend.d3m0n1k.engineer/message/get_chats/", {
     method: "GET",
     headers: {
       Accept: "application/json",
       Authorization: "Token " + localStorage.getItem("authtoken"),
-    },
-  }).then((response) => {
-    if (response.status >= 200 && response.status < 300) {
-      response.json().then((data) => {
-        console.log(data);
-        //TODO : use data to populate the chat list
-      });
     }
   });
+  const data = await res.json();
+  return data;
 }
 
-export function getChatMessages(pk, page) {
-  fetch("https://winbookbackend.d3m0n1k.engineer/message/" + pk + "/", {
+export async function getChatMessages(pk, page) {
+  const res = await fetch("https://winbookbackend.d3m0n1k.engineer/message/" + pk + "/", {
     method: "GET",
     headers: {
       Accept: "application/json",
       Authorization: "Token " + localStorage.getItem("authtoken"),
     },
-  }).then((response) => {
-    if (response.status >= 200 && response.status < 300) {
-      response.json().then((data) => {
-        console.log(data);
-        //TODO : use data to populate the chat messages
-      });
-    }
   });
+  const data = await res.json();
+  return data;
 }
+
+export async function getDetails(username) {
+  if (username === undefined) return;
+  else if (username === "new") return;
+  else {
+    const res = await fetch('https://winbookbackend.d3m0n1k.engineer/user/f/' + username + '/')
+    const data = await res.json();
+    return data;
+  }
+}
+
+export async function sockConnect() {
+  const sock = new WebSocket(
+    "wss://winbookbackend.d3m0n1k.engineer/ws/chat/?" +
+    localStorage.getItem("authtoken")
+  );
+  sock.onmessage = function (e) {
+    const data = JSON.parse(e.data);
+    return data;
+    //use this method to update the messages in a chat window
+  };
+  sock.onopen = sock.onmessage;
+  sock.onerror = sock.onmessage;
+  sock.onclose = sock.onmessage;
+  return sock;
+}
+
+export function getSock() {
+  if (sock === null) {
+    sock = sockConnect();
+  }
+  return sock;
+}
+
+// sock.send(`{
+// 	"handler": "message",
+// 	"body": {
+// 		"to_user": "2",
+// 		"message": "Hello"
+// 	}
+// }`)

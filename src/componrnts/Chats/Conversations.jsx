@@ -1,23 +1,30 @@
 import React from 'react'
 import Messages from './Messages';
 import Box from '@mui/material/Box';
+import { useEffect } from 'react';
+import { getChatList } from '../utils';
 
 const Conversations = () => {
-  const sock = new WebSocket(
-    "wss://winbookbackend.d3m0n1k.engineer/ws/chat/?" +
-      localStorage.getItem("authtoken")
-  );
-  sock.onmessage = function (e) {
-    console.log(e.data);
-    //use this method to update the messages in a chat window
-  };
-  sock.onopen = sock.onmessage;
-  sock.onerror = sock.onmessage;
-  sock.onclose = sock.onmessage;
-  console.log("I WAS EXEC", sock);
+
+  const [chatlist, setchatlist] = React.useState([]);
+
+  useEffect(() => {
+    const list = getChatList().then((data) => {
+      setchatlist(data.results);
+    }
+    );
+
+  }, [])
+
   return (
     <Box>
-      <Messages />
+      {
+        chatlist.map((chat) => {
+          return (
+            <Messages user={chat} />
+          )
+        })
+      }
     </Box>
   )
 }

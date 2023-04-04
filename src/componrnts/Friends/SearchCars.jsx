@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         "& :hover": {
-            backgroundColor: "#e1e6e8",
+            backgroundColor: "#bcc1c2",
         }
     },
 

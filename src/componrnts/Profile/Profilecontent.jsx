@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardContent, LinearProgress } from '@mui/material'
+import { Box, Button, Card, CardContent, Icon, LinearProgress } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import Share from '../share/Share'
 import { Modal, styled, Typography, TextField, ButtonGroup } from '@mui/material';
@@ -16,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Profilefeed from './Profilefeed';
 import { useNavigate } from 'react-router-dom';
 import { Stack } from '@mui/system';
+import TelegramIcon from '@mui/icons-material/Telegram';
+
 
 const Profilecontent = (props) => {
   const history = useNavigate();
@@ -312,31 +314,40 @@ const Profilecontent = (props) => {
                   <Button variant="outlined" color="primary"
                     sx={{
                       display: { sm: "inline-flex", xs: "none" },
-                      left: "45%",
-                      top: "20px"
+                      float: "right",
                     }} onClick={followFunc} >Following</Button>
                   <Button variant="outlined" color="primary"
                     sx={{
                       display: { sm: "none", xs: "inline-flex" },
-                      left: "64%",
+                      float: "right",
                     }} onClick={followFunc} >Following</Button>
                 </> : <>
                   <Button variant="outlined" color="primary"
                     sx={{
                       display: { sm: "inline-flex", xs: "none" },
-                      left: "46%",
-                      top: "20px"
+                      float: "right",
                     }} onClick={followFunc} >Follow</Button>
                   <Button variant="outlined" color="primary"
                     sx={{
                       display: { sm: "none", xs: "inline-flex" },
-                      left: "70%",
+                      float: "right",
                     }} onClick={followFunc} >Follow</Button>
                 </>
                 }
               </> :
                 <></>
               }
+              <Button variant="outlined" color='success' sx={{
+                float: "right",
+                border: "1px solid",
+                marginRight: "10px"
+              }} onClick={
+                () => {
+                  history('/chat/' + props.name);
+                }
+              }>
+                <TelegramIcon />
+              </Button>
             </Box>
 
           </Box>
