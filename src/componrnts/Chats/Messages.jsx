@@ -6,16 +6,30 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
-const Messages = () => {
+const Messages = (props) => {
+    const dp = "https://winbookbackend.d3m0n1k.engineer" + props.user.to_user.dp;
+    const history = useNavigate();
+
     return (
-        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-            <ListItem alignItems="flex-start">
+        <List sx={{
+            width: '100%', maxWidth: 360, bgcolor: 'background.paper', "& :hover": {
+                backgroundColor: "#bcc1c2",
+            },
+            cursor: "pointer",
+        }}
+        >
+            <ListItem alignItems="flex-start"
+                onClick={() => {
+                    history('/chat/' + props.user.to_user.name + '/');
+                }}
+            >
                 <ListItemAvatar>
-                    <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
+                    <Avatar alt="user-dp" src={dp} />
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Brunch this weekend?"
+                    primary={props.user.to_user.name}
                     secondary={
                         <React.Fragment>
                             <Typography
@@ -24,58 +38,15 @@ const Messages = () => {
                                 variant="body2"
                                 color="text.primary"
                             >
-                                Ali Connors
+                                {props.user.from_user.name}
                             </Typography>
-                            {" — I'll be in your neighborhood doing errands this…"}
+                            {" — " + props.user.message}
                         </React.Fragment>
                     }
                 />
             </ListItem>
             <Divider variant="inset" component="li" />
-            <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                    <Avatar alt="Travis Howard" src="https://mui.com/static/images/avatar/2.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                    primary="Summer BBQ"
-                    secondary={
-                        <React.Fragment>
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
-                                to Scott, Alex, Jennifer
-                            </Typography>
-                            {" — Wish I could come, but I'm out of town this…"}
-                        </React.Fragment>
-                    }
-                />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            <ListItem alignItems="flex-start">
-                <ListItemAvatar>
-                    <Avatar alt="Cindy Baker" src="https://mui.com/static/images/avatar/3.jpg" />
-                </ListItemAvatar>
-                <ListItemText
-                    primary="Oui Oui"
-                    secondary={
-                        <React.Fragment>
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
-                                Sandra Adams
-                            </Typography>
-                            {' — Do you have Paris recommendations? Have you ever…'}
-                        </React.Fragment>
-                    }
-                />
-            </ListItem>
-        </List>
+        </List >
     )
 }
 

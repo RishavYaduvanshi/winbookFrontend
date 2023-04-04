@@ -40,7 +40,7 @@ function App() {
         <Route path="/signup" element={<SignUp setMode={setMode} mode={mode} />} />
         <Route path="/home" element={<Content setMode={setMode} mode={mode} />} />
         <Route path="/connections" element={<MainFrnd setMode={setMode} mode={mode} />} />
-        <Route path="/chat" element={<ChatScreen setMode={setMode} mode={mode} />} />
+        <Route path="/chat/:val" element={<ChatScreen setMode={setMode} mode={mode} />} />
         <Route path="/post/:val" element={<ViewPost setMode={setMode} mode={mode} />} />
       </Routes>
     </ThemeProvider>

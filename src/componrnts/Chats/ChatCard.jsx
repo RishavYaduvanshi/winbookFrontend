@@ -1,11 +1,13 @@
 import { Avatar, Box, IconButton, Divider, InputAdornment, Menu, styled, TextField, Typography, Icon } from '@mui/material';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatCard.css';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import SendIcon from '@mui/icons-material/Send';
 import EmojiPicker from 'emoji-picker-react';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import './ChatCard.css';
+import { getDetails, getChatMessages, getSock, sockConnect } from '../utils';
+
 
 const StyledTextField = styled(TextField)({
     fullWidth: true,
@@ -24,22 +26,64 @@ const StyledTextField = styled(TextField)({
 });
 
 
-const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log(data.get('message'));
-    var message = document.getElementById('message');
-    message.value = "";
-}
-
-
 const ChatCard = (props) => {
+    // console.log(props);
+    var sock;
+    const [socket, setsock] = useState(null);
+    const [user, setuser] = useState([]);
+    const [state, setstate] = useState(false);
+
+
+    useEffect(() => {
+        var userdata = getChats(props.user.id)
+        userdata.then((data) => {
+            // console.log(data);
+            setuser(data);
+        });
+    }, [props, state]);
+
+    useEffect(() => {
+        sock = getSock();
+        // console.log(sock);
+        sock.then((data) => {
+            setsock(data);
+        })
+    }, [props, state]);
+    // console.log(socket)
+
+    // console.log(user);
+    const getChats = (userval) => {
+        let res = getChatMessages(userval).then((data) => {
+            return data.results;
+        });
+        return res;
+    }
+
     const [anchorEli, setAnchorEli] = React.useState(null);
     const open2 = Boolean(anchorEli);
 
     const handleClick = (event) => {
         event.preventDefault();
         setAnchorEli(event.currentTarget);
+    }
+
+    const handleSubmit = (event) => {
+        console.log(socket);
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        console.log(data.get('message'));
+        var message = document.getElementById('message');
+        message.value = "";
+        const id = props.user.id;
+        const message1 = data.get('message');
+        socket.send(`{
+            "handler": "message",
+            "body": {
+		        "to_user": ${id},
+		        "message": "${message1}"
+            }
+        }`)
+        setstate(!state);
     }
 
     const handleClose1 = () => {
@@ -77,45 +121,33 @@ const ChatCard = (props) => {
                     flexDirection: 'row',
                 }}
             >
-                <Avatar>GR</Avatar>
+                <Avatar src={props.user.dp}></Avatar>
                 <Typography variant="h6" component="div" sx={{ marginTop: 0.5, marginLeft: 2 }}>
-                    Gagan
+                    {props.user.username}
                 </Typography>
             </Box>
             <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
             <UserBox2>
-                <div className='message left'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.{/*<div><Icon><AccessTimeIcon sx={{
-                            fontSize: "small", marginTop: 1
-                        }} /></Icon><span class="time">time</span></div>*/}
-                    </div>
-                </div>
-                <div className='message right'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.
-                    </div>
-                </div>
-                <div className='message left'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.
-                    </div>
-                </div>
-                <div className='message right'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.
-                    </div>
-                </div>
-                <div className='message left'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.
-                    </div>
-                </div>
-                <div className='message right'>
-                    <div className='message-text'>
-                        Hey there, I'm using WhatsApp.
-                    </div>
-                </div>
+                {user.map((chat) => {
+                    // console.log(chat);
+                    var time_date = new Date(chat.created);
+                    var time = time_date.toLocaleTimeString("en-US", { hour: 'numeric', minute: 'numeric', hour12: true });
+                    var date = time_date.toLocaleDateString("en-In", { year: 'numeric', month: 'numeric', day: 'numeric' });
+                    // console.log(time, date);
+                    return (
+                        <div className={chat.from_user.name === localStorage.getItem("user") ? "message right" : "message left"}>
+                            <div className="message-text">
+                                {chat.message}{
+                                    chat.from_user.name !== localStorage.getItem("user") ?
+                                        <div className='right'><span class="time">{time}</span></div>
+                                        :
+                                        <div className='right'><Icon><DoneAllIcon sx={{ fontSize: "small", marginTop: 1.3 }} /></Icon><span class="time">{time}</span></div>
+                                }
+                            </div>
+                        </div>
+                    )
+                })}
+
             </UserBox2>
             <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
             <StyledTextField id="message" name="message" component='form' onSubmit={handleSubmit} noValidate fullWidth placeholder="Message..." color='primary' variant="outlined"
@@ -165,7 +197,6 @@ const ChatCard = (props) => {
             </Menu>
 
         </UserBox >
-
 
     )
 }

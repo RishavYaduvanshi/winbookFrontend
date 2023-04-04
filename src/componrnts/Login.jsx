@@ -63,6 +63,7 @@ export const Login = ({ mode, setMode }) => {
         else {
           alert({ message: 'Invalid Credentials', type: 'error' });
           setstate(false);
+          document.getElementById('password').value = "";
         }
       })
     })
