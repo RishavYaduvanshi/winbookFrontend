@@ -83,8 +83,7 @@ export async function sockConnect() {
     localStorage.getItem("authtoken")
   );
   sock.onmessage = function (e) {
-    const data = JSON.parse(e.data);
-    return data;
+
     //use this method to update the messages in a chat window
   };
   sock.onopen = sock.onmessage;

@@ -6,7 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import EmojiPicker from 'emoji-picker-react';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import './ChatCard.css';
-import { getDetails, getChatMessages, getSock, sockConnect } from '../utils';
+import { getChatMessages, getSock } from '../utils';
 
 
 const StyledTextField = styled(TextField)({
@@ -50,8 +50,13 @@ const ChatCard = (props) => {
         })
     }, [props, state]);
     // console.log(socket)
+    if (socket !== null) {
+        socket.onmessage = (e) => {
+            setstate(!state);
+        }
+    }
 
-    // console.log(user);
+    console.log(user);
     const getChats = (userval) => {
         let res = getChatMessages(userval).then((data) => {
             return data.results;

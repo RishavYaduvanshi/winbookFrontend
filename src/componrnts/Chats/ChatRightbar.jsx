@@ -20,7 +20,7 @@ const ChatRightbar = () => {
             chatArray.push(chat);
         }
     })
-    console.log(chatArray);
+    // console.log(chatArray);
 
 
     return (
