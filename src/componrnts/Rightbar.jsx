@@ -13,7 +13,7 @@ const Rightbar = () => {
       <Box position="fixed" width={300}>
         <Typography variant="h6" fontWeight={300} mb={2}>Latest Posts</Typography>
         <Photos />
-        <Typography variant="h6" fontWeight={300} mt={1} mb={1}>Latest Conversations</Typography>
+        <Typography variant="h6" fontWeight={300} mt={2} mb={2}>Latest Conversations</Typography>
         <Conversations />
       </Box>
     </Box>

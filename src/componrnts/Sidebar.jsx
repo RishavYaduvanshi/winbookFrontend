@@ -1,8 +1,13 @@
 import { AccountBox, Article, Group, Home, ModeNight, Person, Settings } from '@mui/icons-material'
-import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch } from '@mui/material'
+import { Badge, Box, List, ListItem, ListItemButton, ListItemIcon, ListItemText, styled, Switch, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -53,7 +58,30 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 const Sidebar = ({ mode, setMode }) => {
   const history = useNavigate();
-  var Notifications = 0;
+
+  const [open, setOpen] = React.useState(false);
+  const [scroll, setScroll] = React.useState('paper');
+
+  const handleClickOpen = (scrollType) => () => {
+    setOpen(true);
+    setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const descriptionElementRef = React.useRef(null);
+  React.useEffect(() => {
+    if (open) {
+      const { current: descriptionElement } = descriptionElementRef;
+      if (descriptionElement !== null) {
+        descriptionElement.focus();
+      }
+    }
+  }, [open]);
+
+
 
   return (
     <Box
@@ -108,7 +136,7 @@ const Sidebar = ({ mode, setMode }) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={handleClickOpen('paper')}>
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
@@ -131,7 +159,56 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
         </List>
       </Box>
-    </Box>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll={scroll}
+        aria-labelledby="scroll-dialog-title"
+        aria-describedby="scroll-dialog-description"
+        sx={{
+          '& .MuiDialog-paper': {
+            bgcolor: 'background.paper',
+            color: 'text.primary',
+            boxShadow: 4,
+            borderRadius: 2,
+            minWidth: "60vh",
+          }
+        }
+        }
+      >
+        <DialogTitle id="scroll-dialog-title">Setting ?</DialogTitle>
+        <DialogContent dividers={scroll === 'paper'}>
+          <DialogContentText
+            id="scroll-dialog-description"
+            ref={descriptionElementRef}
+            tabIndex={-1}
+          >
+            <List>
+              <ListItem disablePadding sx={{
+                backgroundColor: "#f5f5f5"
+              }}>
+                <ListItemButton >
+                  <ListItemIcon>
+                    <Settings />
+                  </ListItemIcon>
+                  <ListItemText primary="Settings" />
+                </ListItemButton>
+              </ListItem>
+            </List>
+            <Typography variant="h6" gutterBottom component="div">
+              Ab to meri v Setting hai bhai 😂. Teri kab hogi ?
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant='contained' onClick={handleClose}>I have</Button>
+          <Button variant='contained' onClick={handleClose}>I don't have let me die</Button>
+        </DialogActions>
+      </Dialog>
+
+
+    </Box >
   )
 }
 

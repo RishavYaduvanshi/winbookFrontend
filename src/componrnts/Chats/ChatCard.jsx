@@ -56,7 +56,7 @@ const ChatCard = (props) => {
         }
     }
 
-    console.log(user);
+    // console.log(user);
     const getChats = (userval) => {
         let res = getChatMessages(userval).then((data) => {
             return data.results;

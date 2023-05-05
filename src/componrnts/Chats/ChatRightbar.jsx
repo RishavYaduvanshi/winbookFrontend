@@ -16,7 +16,7 @@ const ChatRightbar = () => {
     // console.log(chatlist);
     chatlist.map((chat) => {
         if (!chatArray.includes(chat)) {
-            console.log(chat);
+            // console.log(chat);
             chatArray.push(chat);
         }
     })

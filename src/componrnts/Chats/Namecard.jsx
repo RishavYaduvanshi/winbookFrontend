@@ -32,7 +32,7 @@ const Namecard = (props) => {
             <Box className={classes.root} onClick={() => {
                 history('/chat/' + props.user.to_user.name + '/');
             }} >
-                <Card sx={{ display: 'flex', maxWidth: "auto", marginTop: "5px", cursor: "pointer" }}>
+                <Card sx={{ display: 'flex', maxWidth: "auto", marginTop: "5px", cursor: "pointer", maxHeight: "auto" }}>
                     <CardMedia
                         component="img"
                         sx={{ width: 50, height: 50, marginLeft: "10px", marginTop: "10px", borderRadius: "50%" }}
@@ -45,7 +45,7 @@ const Namecard = (props) => {
                                 {props.user.to_user.name}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {props.user.from_user.name} - {props.user.message}
+                                {props.user.from_user.name} :- {props.user.message}
                             </Typography>
                         </CardContent>
                     </Box>

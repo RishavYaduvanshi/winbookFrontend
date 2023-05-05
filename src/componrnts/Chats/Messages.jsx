@@ -40,7 +40,7 @@ const Messages = (props) => {
                             >
                                 {props.user.from_user.name}
                             </Typography>
-                            {" — " + props.user.message}
+                            {" :— " + props.user.message}
                         </React.Fragment>
                     }
                 />

@@ -17,7 +17,15 @@ const Conversations = () => {
   }, [])
 
   return (
-    <Box>
+    <Box sx={{
+      maxHeight: "50vh",
+      overflowY: "scroll",
+      msOverflowStyle: "none",
+      scrollbarWidth: "none",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
+    }}>
       {
         chatlist.map((chat) => {
           return (
