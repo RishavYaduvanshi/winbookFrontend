@@ -110,7 +110,7 @@ export default function Share(props) {
             <div className="shareOption">
               <label htmlFor="formId">
                 <input name="file" accept='image/*' type="file" id="formId" hidden onChange={browse} />
-                <PermMedia htmlColor="tomato" className="shareIcon" sx={{ marginRight: 2 }} />
+                <PermMedia htmlColor="tomato" className="shareIcon" sx={{ marginRight: 2, cursor: 'pointer' }} />
               </label>
               <EmojiEmotionsIcon className="shareIcon" color="error" onClick={
                 handleClick

@@ -59,6 +59,7 @@ const Profilecontent = (props) => {
   const [followed, setfollowed] = useState(0);
   const [Posts, setPosts] = useState(0);
   const [status, setstatus] = useState();
+  const [disabled, setdisabled] = useState(false);
 
 
   // if(localStorage.getItem('user') === name){
@@ -124,6 +125,7 @@ const Profilecontent = (props) => {
 
   const addbio = (event) => {
     event.preventDefault();
+    setdisabled(true);
     const data = new FormData(event.currentTarget);
     s = data.get('bio');
     setOpen(false);
@@ -142,7 +144,7 @@ const Profilecontent = (props) => {
         (data) => {
           //console.log(data);
           setbio(data.bio);
-
+          setdisabled(false);
         })
   }
 
@@ -189,6 +191,8 @@ const Profilecontent = (props) => {
 
   const updateProfile = (event) => {
     setstate(true);
+    setdisabled(true);
+    setPreview(null);
     if (image !== null) {
       const bdy = new FormData()
       bdy.append('dp', image);
@@ -211,6 +215,7 @@ const Profilecontent = (props) => {
             setAnchorEl(null);
             setreload(!reload);
             props.func(true);
+            setdisabled(false);
           })
         }
         else {
@@ -241,6 +246,8 @@ const Profilecontent = (props) => {
 
   const updatecover = (event) => {
     setstate(true);
+    setdisabled(true);
+    setPreview(null);
     event.preventDefault();
     if (image !== null) {
       const bdy = new FormData()
@@ -264,6 +271,7 @@ const Profilecontent = (props) => {
             setstate(false);
             props.func(true);
             setreload(!reload);
+            setdisabled(false);
           })
         }
         else {
@@ -482,7 +490,7 @@ const Profilecontent = (props) => {
           <br />
           <br />
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
-            <Button type='submit'>Update</Button>
+            <Button disabled={disabled} type='submit'>Update</Button>
           </ButtonGroup>
         </Box>
       </Styledmodal>
@@ -506,7 +514,7 @@ const Profilecontent = (props) => {
           }}>
             <img src={preview} alt='new post' height={75} width={75} /> </Badge> : <></>}
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
-            <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
+            <Button type='submit' disabled={disabled} sx={{ marginTop: '50px', }}>Update</Button>
           </ButtonGroup>
           {state ? <LinearProgress /> : <></>}
         </Box>
@@ -531,7 +539,7 @@ const Profilecontent = (props) => {
           }}>
             <img src={preview} alt='new post' height={75} width={75} /> </Badge> : <></>}
           <ButtonGroup variant="contained" aria-label="outlined primary button group" fullWidth>
-            <Button type='submit' sx={{ marginTop: '50px' }}>Update</Button>
+            <Button type='submit' disabled={disabled} sx={{ marginTop: '50px' }}>Update</Button>
           </ButtonGroup>
           {state ? <LinearProgress /> : <></>}
         </Box>

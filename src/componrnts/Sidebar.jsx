@@ -111,7 +111,7 @@ const Sidebar = ({ mode, setMode }) => {
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton onClick={() => {
-              history('/chat/new')
+              history('/chat/undefined')
             }}>
               <ListItemIcon>
                 <Article />

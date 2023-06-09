@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../Navbar'
 import Sidebar from '../Sidebar'
 import ChatRightbar from './ChatRightbar'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChatCard from './ChatCard'
 import { getDetails } from '../utils'
 
 const ChatScreen = (props) => {
+    const history = useNavigate();
     document.title = "Wibrant | Chat";
     const [userData, setuserData] = useState([]);
     var username;
@@ -24,7 +25,12 @@ const ChatScreen = (props) => {
         getDetails(username).then((data) => {
             setuserData(data);
         });
+
     }, [username]);
+
+    useEffect(() => {
+        history(`/chat/${userData.username}`);
+    }, [userData]);
     // console.log(username);
 
 
@@ -33,7 +39,7 @@ const ChatScreen = (props) => {
             <Navbar setMode={props.setMode} mode={props.mode} />
             <Stack direction="row" spacing={2} justifyContent="space-between">
                 <Sidebar position="sticky" setMode={props.setMode} mode={props.mode} />
-                {username === "new" ? <Box display="flex" flex={4}>
+                {username === "undefined" ? <Box display="flex" flex={4}>
                     <Box display="flex" flex={1} justifyContent="center" alignItems="center">
                         <Typography variant="h6" fontWeight={500} color="primary">
                             Select a chat to start messaging

@@ -158,7 +158,7 @@ const Navbar = (props) => {
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton onClick={() => {
-            history('/chat/new')
+            history('/chat/undefined')
           }}>
             <ListItemIcon>
               <Article />
