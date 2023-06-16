@@ -12,7 +12,7 @@ function Copyright() {
         <Typography variant="body2" color="text.secondary">
             {'Copyright © '}
             <Link color="inherit" href="https://winbook.d3m0n1k.engineer/">
-                WinBook
+                Wibrant
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -42,9 +42,9 @@ export default function StickyFooter() {
                 </Typography>
                 <Typography variant="h5" component="h2" gutterBottom color={'white'}>
                     {'Seems there is nothing here.'}</Typography>
-                    <Typography variant="h5" component="h2" gutterBottom color={'white'}>
+                <Typography variant="h5" component="h2" gutterBottom color={'white'}>
                     {'The Content you are looking for is not found.'}</Typography>
-                <img src={error} alt="error" height={200} width={300} 
+                <img src={error} alt="error" height={200} width={300}
                 />
             </Container>
             <Box
