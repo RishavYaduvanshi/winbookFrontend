@@ -17,6 +17,7 @@ import 'react-custom-alert/dist/index.css';
 import LinearProgress from '@mui/material/LinearProgress';
 import logo from '../resources/wibrant1.png';
 import { type } from '@testing-library/user-event/dist/type';
+import { dom } from 'aria-query';
 
 function Copyright(props) {
   return (
@@ -140,13 +141,30 @@ export default function SignUp({ mode, setMode }) {
 
   const validateemail = (event) => {
     email = event.target.value;
-    if (email.match(/^[a-z]+@[a-z]+./)) {
-      setButtonState(false);
-    }
-    else {
+
+    user = email.split('@')[0];
+    domain = email.split('@')[1];
+
+    if (user.length > 64) {
+      alert({ message: 'Email should be less than 64 characters', type: 'error' });
       setButtonState(true);
     }
+    
+    else if (domain.length > 255) {
+      alert({ message: 'Email should be less than 255 characters', type: 'error' });
+      setButtonState(true);
+    }
+    else if (email.match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/)) {
+      setButtonState(true);
+    }
+    else {
+      alert({ message: 'Invalid Email', type: 'error' })
+      setButtonState(false);
+      
+    }
   }
+
+
   const validatepassword = (event) => {
     if (event.target.value.length < 8) {
       alert({ message: 'Password should be atleast 8 characters', type: 'error' });
@@ -157,7 +175,7 @@ export default function SignUp({ mode, setMode }) {
       setButtonState(true);
     }
     else if (!event.target.value.match(/[A-Z]/)) {
-      alert({message: 'Password should contain at least one uppercase character',type: 'error' });
+      alert({ message: 'Password should contain at least one uppercase character', type: 'error' });
       setButtonState(true);
     }
     else if (!event.target.value.match(/[a-z]/)) {
@@ -237,7 +255,7 @@ export default function SignUp({ mode, setMode }) {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  onChange={validateemail}
+                  onBlur={validateemail}
                 />
               </Grid>
               <Grid item xs={12}>
