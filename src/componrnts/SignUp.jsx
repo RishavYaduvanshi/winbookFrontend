@@ -16,6 +16,7 @@ import { alert } from 'react-custom-alert';
 import 'react-custom-alert/dist/index.css';
 import LinearProgress from '@mui/material/LinearProgress';
 import logo from '../resources/wibrant1.png';
+import { type } from '@testing-library/user-event/dist/type';
 
 function Copyright(props) {
   return (
@@ -146,6 +147,28 @@ export default function SignUp({ mode, setMode }) {
       setButtonState(true);
     }
   }
+  const validatepassword = (event) => {
+    if (event.target.value.length < 8) {
+      alert({ message: 'Password should be atleast 8 characters', type: 'error' });
+      setButtonState(true);
+    }
+    else if (!event.target.value.match(/[^A-Za-z0-9]/)) {
+      alert({ message: 'Password should contain atleast one special character', type: 'error' });
+      setButtonState(true);
+    }
+    else if (!event.target.value.match(/[A-Z]/)) {
+      alert({message: 'Password should contain at least one uppercase character',type: 'error' });
+      setButtonState(true);
+    }
+    else if (!event.target.value.match(/[a-z]/)) {
+      alert({ message: 'Password should contain at least one lowercase character', type: 'error' });
+      setButtonState(true);
+    }
+
+    else {
+      setButtonState(false);
+    }
+  }
 
 
 
@@ -226,6 +249,7 @@ export default function SignUp({ mode, setMode }) {
                   type={passwordType}
                   id="password"
                   autoComplete="new-password"
+                  onBlur={validatepassword}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
